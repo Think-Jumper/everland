@@ -49,7 +49,10 @@
     <Compile Include="Hex.cs" />
     <Compile Include="HexType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="queries\Hex.hbm.cs" />
+    <Compile Include="queries\HexType.hbm.cs" />
     <Compile Include="queries\QueryBuilder.cs" />
+    <Compile Include="queries\World.hbm.cs" />
     <Compile Include="World.cs" />
   </ItemGroup>
   <ItemGroup>
