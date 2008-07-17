@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:nhibernate-mapping-2.2">
+ 
+  <class name="eland.model.Hex, eland.model" table="Hex">
+    
+    <id	name="Id" access="property"	column="Id"	type="Guid">
+      <generator class="guid" />
+    </id>
+    
+    <property name="X" access="property">
+      <column name="X" />
+    </property>
+
+    <property name="Y" access="property">
+      <column name="Y" />
+    </property>
+
+    <many-to-one name="world" class="eland.model.World, eland.model" unique="true" column="WorldId"/>
+    
+  </class>
+  
+</hibernate-mapping>
+

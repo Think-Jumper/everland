@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eland.web", "eland\eland.web.csproj", "{58EBEA67-2538-4660-874F-0EB942C88D32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eland.model", "eland.model\eland.model.csproj", "{507A57AA-FF8A-4885-868E-0CDBB0F40D72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eland.api", "eland.api\eland.api.csproj", "{B55FE561-CD49-49C8-B4D6-FD63E7A45816}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58EBEA67-2538-4660-874F-0EB942C88D32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58EBEA67-2538-4660-874F-0EB942C88D32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58EBEA67-2538-4660-874F-0EB942C88D32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58EBEA67-2538-4660-874F-0EB942C88D32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{507A57AA-FF8A-4885-868E-0CDBB0F40D72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{507A57AA-FF8A-4885-868E-0CDBB0F40D72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{507A57AA-FF8A-4885-868E-0CDBB0F40D72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{507A57AA-FF8A-4885-868E-0CDBB0F40D72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B55FE561-CD49-49C8-B4D6-FD63E7A45816}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B55FE561-CD49-49C8-B4D6-FD63E7A45816}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B55FE561-CD49-49C8-B4D6-FD63E7A45816}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B55FE561-CD49-49C8-B4D6-FD63E7A45816}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = 
+	EndGlobalSection
+EndGlobal
