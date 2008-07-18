@@ -14,7 +14,7 @@
     <property name="Y" access="property">
       <column name="Y" />
     </property>
-
+    
     <many-to-one name="world" class="eland.model.World, eland.model" unique="true" column="WorldId"/>
     
   </class>
