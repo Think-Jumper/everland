@@ -13,6 +13,8 @@ namespace eland.tests.UnitTests
    [TestFixture]
    public class WorldTests
    {
+      private List<Guid> _createdIds;
+
       [Test]
       public void World_Create() 
       {
@@ -25,6 +27,11 @@ namespace eland.tests.UnitTests
          world = worldRep.Save(world);
 
          Assert.AreNotEqual(Guid.Empty, world.Id);
+      }
+
+      public void World_Delete()
+      {
+
       }
    }
 }
