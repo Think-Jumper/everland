@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("eland.api")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("ATOS Origin")]
+[assembly: AssemblyCompany("Jamie Fraser")]
 [assembly: AssemblyProduct("eland.api")]
-[assembly: AssemblyCopyright("Copyright © ATOS Origin 2008")]
+[assembly: AssemblyCopyright("Copyright © Jamie Fraser 2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

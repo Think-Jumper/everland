@@ -20,14 +20,15 @@ namespace eland.api
 
       public static ISession GetCurrentSession()
       {
-         ISession currentSession = HttpContext.Current.Items[CurrentSessionKey] as ISession;
+         return sessionFactory.OpenSession();
+         //ISession currentSession = HttpContext.Current.Items[CurrentSessionKey] as ISession;
 
-         if (currentSession == null)
-         {
-            currentSession = sessionFactory.OpenSession();
-            HttpContext.Current.Items[CurrentSessionKey] = currentSession;
-         }
-         return currentSession;
+         //if (currentSession == null)
+         //{
+         //   currentSession = sessionFactory.OpenSession();
+         //   HttpContext.Current.Items[CurrentSessionKey] = currentSession;
+         //}
+         //return currentSession;
       }
 
       public static void CloseSession()
