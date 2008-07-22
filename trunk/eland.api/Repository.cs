@@ -9,16 +9,23 @@ using NHibernate.Criterion;
 
 namespace eland.api
 {
-   public class Repository<T> : IRepository<T> where T : class
+   public class Repository<T> : IRepository<T>, IDisposable where T : class
    {
-      protected virtual ISession Session
+      private ISession _session;
+
+      public Repository()
       {
-         get { return NHibHelper.GetCurrentSession(); }
+         _session = NHibHelper.GetCurrentSession();      
       }
+
+      //protected virtual ISession Session
+      //{
+      //   get { return NHibHelper.GetCurrentSession(); }
+      //}
 
       public T Get(object id)
       {
-         return Session.Get<T>(id) as T;
+         return _session.Get<T>(id) as T;
       }
 
       public IList GetAll() 
@@ -28,7 +35,7 @@ namespace eland.api
       
       protected IList GetByCriteria(params ICriterion[] criterion) 
       { 
-         ICriteria criteria = Session.CreateCriteria(typeof(T)); 
+         ICriteria criteria = _session.CreateCriteria(typeof(T)); 
          
          foreach (ICriterion criterium in criterion) { 
             criteria.Add(criterium); 
@@ -39,9 +46,9 @@ namespace eland.api
 
       public T Save(T entity)
       {
-         using (ITransaction tran = Session.BeginTransaction())
+         using (ITransaction tran = _session.BeginTransaction())
          {
-            Session.Save(entity);
+            _session.Save(entity);
             tran.Commit();
          }
    
@@ -50,7 +57,22 @@ namespace eland.api
 
       public void Delete(T entity)
       {
-         Session.Delete(entity);
+         using (ITransaction tran = _session.BeginTransaction())
+         {
+            _session.Delete(entity);
+            tran.Commit();
+         }
       }
+
+      #region IDisposable Members
+
+      public void Dispose()
+      {
+         if (_session != null) {
+            _session.Close();
+         }
+      }
+
+      #endregion
    }
 }
