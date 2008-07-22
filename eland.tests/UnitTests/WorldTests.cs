@@ -14,24 +14,89 @@ namespace eland.tests.UnitTests
    public class WorldTests
    {
       private List<Guid> _createdIds;
+      private Repository<World> _worldRep;
+
+      [SetUp]
+      public void Setup_Tests()
+      {
+         _createdIds = new List<Guid>();
+         _worldRep = new Repository<World>();
+      }
+
+      [TearDown]
+      public void Cleanup_Tests()
+      {
+         foreach (Guid id in _createdIds)
+         {
+            _worldRep.Delete(_worldRep.Get(id));
+         }
+      }
 
       [Test]
-      public void World_Create() 
+      public void Create_World_And_Hexes()
+      {
+         World world = new World();
+         world.Name = "default";
+         world.Height = 10;
+         world.Width = 30;
+
+         _worldRep.Save(world);
+
+         HexType hexType = new HexType();
+         using (Repository<HexType> hexTypeRep = new Repository<HexType>())
+         {
+            hexType.Name = "Grassland";
+            hexTypeRep.Save(hexType);
+         }
+
+         using (Repository<Hex> hexRep = new Repository<Hex>())
+         {
+            for (int y = 1; y <= 10; y++)
+            {
+               for (int x = 1; x <= 30; x++)
+               {
+                  Hex hex = new Hex();
+                  hex.World = world;
+                  hex.HexType = hexType;
+                  hex.X = x;
+                  hex.Y = y;
+
+                  hexRep.Save(hex);
+               }
+            }
+         }
+
+
+
+      }
+
+      [Test]
+      public void World_Create()
       {
          World world = new World();
          world.Height = 1000;
          world.Width = 1000;
          world.Name = "unit_test_world";
 
-         Repository<World> worldRep = new Repository<World>();
-         world = worldRep.Save(world);
+         _worldRep.Save(world);
+         _createdIds.Add(world.Id);
 
          Assert.AreNotEqual(Guid.Empty, world.Id);
       }
 
+      [Test]
       public void World_Delete()
       {
+         World world = new World();
+         world.Height = 1000;
+         world.Width = 1000;
+         world.Name = "unit_test_world";
 
+         world = _worldRep.Save(world);
+
+         _worldRep.Delete(world);
+
+         Assert.IsNull(_worldRep.Get(world.Id));
       }
    }
 }

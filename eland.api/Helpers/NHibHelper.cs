@@ -31,18 +31,18 @@ namespace eland.api
          //return currentSession;
       }
 
-      public static void CloseSession()
-      {
-         ISession currentSession = HttpContext.Current.Items[CurrentSessionKey] as ISession;
+      //public static void CloseSession()
+      //{
+      //   ISession currentSession = HttpContext.Current.Items[CurrentSessionKey] as ISession;
 
-         if (currentSession == null)
-         {
-            // No current session
-            return;
-         }
-         currentSession.Close();
-         HttpContext.Current.Items.Remove(CurrentSessionKey);
-      }
+      //   if (currentSession == null)
+      //   {
+      //      // No current session
+      //      return;
+      //   }
+      //   currentSession.Close();
+      //   HttpContext.Current.Items.Remove(CurrentSessionKey);
+      //}
 
       public static void CloseSessionFactory()
       {
