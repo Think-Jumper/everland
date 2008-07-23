@@ -16,14 +16,14 @@ namespace eland.tests.UnitTests
       private List<Guid> _createdIds;
       private Repository<World> _worldRep;
 
-      [SetUp]
+      [TestFixtureSetUp]
       public void Setup_Tests()
       {
          _createdIds = new List<Guid>();
          _worldRep = new Repository<World>();
       }
 
-      [TearDown]
+      [TestFixtureTearDown]
       public void Cleanup_Tests()
       {
          foreach (Guid id in _createdIds)
@@ -33,6 +33,7 @@ namespace eland.tests.UnitTests
       }
 
       [Test]
+      [Ignore]
       public void Create_World_And_Hexes()
       {
          World world = new World();

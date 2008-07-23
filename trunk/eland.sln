@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eland.api", "eland.api\elan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eland.tests", "eland.tests\eland.tests.csproj", "{C94AE473-A578-43F4-90D2-B6B2CBA44874}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eland.admin", "eland.admin\eland.admin.csproj", "{0B0EBF8F-612B-4B5E-9660-D1922B8C9806}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{C94AE473-A578-43F4-90D2-B6B2CBA44874}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C94AE473-A578-43F4-90D2-B6B2CBA44874}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C94AE473-A578-43F4-90D2-B6B2CBA44874}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B0EBF8F-612B-4B5E-9660-D1922B8C9806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B0EBF8F-612B-4B5E-9660-D1922B8C9806}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B0EBF8F-612B-4B5E-9660-D1922B8C9806}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B0EBF8F-612B-4B5E-9660-D1922B8C9806}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
