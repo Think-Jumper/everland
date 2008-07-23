@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MbUnit.Framework, Version=2.4.2.130, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -49,7 +50,19 @@
     <Compile Include="UnitTests\WorldTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="hibernate.cfg.xml" />
+    <Content Include="hibernate.cfg.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\eland.api\eland.api.csproj">
+      <Project>{B55FE561-CD49-49C8-B4D6-FD63E7A45816}</Project>
+      <Name>eland.api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eland.model\eland.model.csproj">
+      <Project>{507A57AA-FF8A-4885-868E-0CDBB0F40D72}</Project>
+      <Name>eland.model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
