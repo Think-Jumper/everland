@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eland.admin", "eland.admin\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eland.unittests", "eland.unittests\eland.unittests.csproj", "{3C613DB0-0931-40E7-8DB0-0802E3BC311A}"
 EndProject
-Project("{4F174C21-8C12-11D0-8340-0000F80270F8}") = "eland.db", "eland.db\eland.db.dbp", "{B5AB6C70-CAD4-4546-9AF9-8C7E45F96BB1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
