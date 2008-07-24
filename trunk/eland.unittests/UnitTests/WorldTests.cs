@@ -86,6 +86,17 @@ namespace eland.tests.UnitTests
       }
 
       [Test]
+      public void World_Iterate_Hexes()
+      {
+         World world = _worldRep.Get(new Guid("2AFE80D8-089D-4075-8231-D56199B49EFE"));
+
+         foreach (Hex h in world.Hexes)
+         {
+            Assert.AreNotEqual(Guid.Empty, h.Id);
+         }
+      }
+
+      [Test]
       public void World_Delete()
       {
          World world = new World();
