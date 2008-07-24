@@ -5,12 +5,12 @@ using System.Text;
 
 namespace eland.model
 {
-   public class World
+   public class Game
    {
       public virtual Guid Id { get; set; }
       public virtual string Name { get; set; }
-      public virtual int Width { get; set; }
-      public virtual int Height { get; set; }
-      public virtual IList<Hex> Hexes { get; set; }
+      public virtual DateTime Started { get; set; }
+      public virtual DateTime Finished { get; set; }
+      public virtual World GameWorld { get; set; }
    }
 }

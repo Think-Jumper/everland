@@ -19,6 +19,11 @@
       <column name="Width" />
     </property>
 
+    <bag name="Hexes" lazy="true">
+      <key column="WorldId" />
+      <one-to-many class="eland.model.Hex, eland.model"/>
+    </bag>
+
   </class>
   
 </hibernate-mapping>

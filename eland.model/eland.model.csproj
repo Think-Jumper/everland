@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game.cs" />
     <Compile Include="Hex.cs" />
     <Compile Include="HexType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

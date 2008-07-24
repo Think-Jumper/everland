@@ -14,11 +14,10 @@
     <property name="Y" access="property">
       <column name="Y" />
     </property>
-    
+
     <many-to-one name="World" class="eland.model.World, eland.model" unique="true" column="WorldId"/>
     <many-to-one name="HexType" class="eland.model.HexType, eland.model" unique="true" column="HexTypeId"/>
     
   </class>
   
 </hibernate-mapping>
-
