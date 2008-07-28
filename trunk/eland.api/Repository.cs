@@ -6,6 +6,7 @@ using System.Text;
 
 using NHibernate;
 using NHibernate.Criterion;
+using NHibernate.SqlCommand;
 
 namespace eland.api
 {
@@ -28,12 +29,12 @@ namespace eland.api
          return _session.Get<T>(id) as T;
       }
 
-      public IList GetAll() 
+      public IList FindAll() 
       { 
-         return GetByCriteria(); 
+         return FindByCriteria(); 
       }   
       
-      protected IList GetByCriteria(params ICriterion[] criterion) 
+      public IList FindByCriteria(params ICriterion[] criterion) 
       { 
          ICriteria criteria = _session.CreateCriteria(typeof(T)); 
          

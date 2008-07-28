@@ -7,6 +7,8 @@ using eland.model;
 using eland.api;
 
 using MbUnit.Framework;
+using System.Collections;
+using Query;
 
 namespace eland.tests.UnitTests
 {
@@ -33,6 +35,7 @@ namespace eland.tests.UnitTests
       }
 
       [Test]
+      [Ignore]
       public void Create_World_And_Hexes()
       {
          Game game = new Game();
@@ -43,8 +46,6 @@ namespace eland.tests.UnitTests
             game.Started = DateTime.Now;
             gameRep.Save(game);
          }
-
-         
 
          World world = new World();
          world.Name = "default";
@@ -76,9 +77,6 @@ namespace eland.tests.UnitTests
                }
             }
          }
-
-
-
       }
 
       [Test]
@@ -98,9 +96,10 @@ namespace eland.tests.UnitTests
       [Test]
       public void World_Iterate_Hexes()
       {
-         World world = _worldRep.Get(new Guid("2AFE80D8-089D-4075-8231-D56199B49EFE"));
+         this.World_Create();
+         IList world = _worldRep.FindAll();
 
-         foreach (Hex h in world.Hexes)
+         foreach (Hex h in ((World)world[0]).Hexes)
          {
             Assert.AreNotEqual(Guid.Empty, h.Id);
          }

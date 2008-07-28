@@ -12,9 +12,6 @@
     <div class="page">
 
         <div id="header">
-            <p id="logo">
-                <a href="">My Sample MVC Application</a>
-            </p>
             <ul id="menu">
                 <li>
                     <%= Html.ActionLink("Home", "Index", "Home")%>
@@ -33,7 +30,7 @@
             </div>
             <div id="footer">
                 <p>
-                    My Sample MVC Application &copy; Copyright 2008
+                    &copy; Copyright 2008
                 </p>
             </div>
         </div>
