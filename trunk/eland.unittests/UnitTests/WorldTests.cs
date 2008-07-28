@@ -33,9 +33,19 @@ namespace eland.tests.UnitTests
       }
 
       [Test]
-      [Ignore]
       public void Create_World_And_Hexes()
       {
+         Game game = new Game();
+
+         using (Repository<Game> gameRep = new Repository<Game>())
+         {
+            game.Name = "main";
+            game.Started = DateTime.Now;
+            gameRep.Save(game);
+         }
+
+         
+
          World world = new World();
          world.Name = "default";
          world.Height = 10;
