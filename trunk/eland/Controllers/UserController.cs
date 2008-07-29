@@ -4,72 +4,51 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-using DotNetOpenId.RelyingParty;
-using DotNetOpenId.Extensions.SimpleRegistration;
-using System.Web.Security;
+using eland.api;
+using eland.model;
 
 namespace eland.Controllers
 {
    public class UserController : Controller
    {
-      public ActionResult Login()
+      public ActionResult Index()
       {
-         return View("Login");
-      }
-
-      public ActionResult Logout()
-      {
-         FormsAuthentication.SignOut();
-         return RedirectToAction("Index", "Home");
-      }
-
-      public ActionResult Authenticate()
-      {
-         var openid = new OpenIdRelyingParty();
-         if (openid.Response == null)
+         if (HttpContext.User.Identity.IsAuthenticated)
          {
-            try
-            {
-               var req = openid.CreateRequest(Request.Form["openid_identifier"]);
-               var fields = new ClaimsRequest { Email = DemandLevel.Require, Nickname = DemandLevel.Require };
+            String openId = HttpContext.User.Identity.Name;
 
-               req.AddExtension(fields);
-               req.RedirectToProvider();
-            }
-            catch (Exception e)
+            UserRepository userRep = new UserRepository();
+
+            if (userRep.Exists(openId))
             {
-               ViewData["Message"] = e.Message;
-               return View("Login");
+               this.ViewUser(openId);
             }
+            else
+            {
+               this.Create(openId);
+            }
+
+            return View();
          }
          else
          {
-            switch (openid.Response.Status)
-            {
-               case AuthenticationStatus.Authenticated:
-
-                  ClaimsResponse fields = openid.Response.GetExtension(typeof(ClaimsResponse)) as ClaimsResponse;
-
-                  if (fields != null)
-                  {
-                     string email = fields.Email;
-                     string nickname = fields.Nickname;
-                  }
-
-                  FormsAuthentication.RedirectFromLoginPage(openid.Response.ClaimedIdentifier, true);
-
-                  break;
-               case AuthenticationStatus.Canceled:
-                  ViewData["Message"] = "Canceled at provider";
-                  return View("Login");
-               case AuthenticationStatus.Failed:
-                  ViewData["Message"] = openid.Response.Exception.Message;
-                  return View("Login");
-            }
+            return RedirectToAction("Index", "Home");
          }
+      }
 
-         // need this rather than returning an ActionResult.
-         return null;
+      public ActionResult Create(String openId)
+      {
+         return View();
+      }
+
+      public ActionResult Edit()
+      {
+         return View();
+      }
+
+      public ActionResult ViewUser(String openId)
+      {
+         return View();
       }
    }
 }

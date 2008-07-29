@@ -94,6 +94,7 @@ namespace eland.tests.UnitTests
       }
 
       [Test]
+      [Ignore]
       public void World_Iterate_Hexes()
       {
          this.World_Create();
