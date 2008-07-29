@@ -14,10 +14,7 @@
         <div id="header">
             <ul id="menu">
                 <li>
-                    <%= Html.ActionLink("Home", "Index", "Home")%>
-                </li>
-                <li>
-                    <%= Html.ActionLink("About Us", "About", "Home")%>
+                    <%= Html.ActionLink("Start", "Index", "User")%>
                 </li>
             </ul>
         </div>

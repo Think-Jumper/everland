@@ -19,14 +19,27 @@ namespace eland.api
          _session = NHibHelper.GetCurrentSession();      
       }
 
-      //protected virtual ISession Session
-      //{
-      //   get { return NHibHelper.GetCurrentSession(); }
-      //}
+      protected virtual ISession Session
+      {
+         get { return _session; }
+      }
+
+      public bool Exists(object id)
+      {
+         return this.Exists(id, "Id");
+      }
+
+      public bool Exists(object id, String ColumnName)
+      {
+         ICriteria criteria = Session.CreateCriteria(typeof(T));
+         criteria.SetProjection(Projections.RowCount()).Add(Expression.Eq(ColumnName, id));
+
+         return 0 != Convert.ToInt32(criteria.UniqueResult());
+      }
 
       public T Get(object id)
       {
-         return _session.Get<T>(id) as T;
+         return Session.Get<T>(id) as T;
       }
 
       public IList FindAll() 
@@ -36,7 +49,7 @@ namespace eland.api
       
       public IList FindByCriteria(params ICriterion[] criterion) 
       { 
-         ICriteria criteria = _session.CreateCriteria(typeof(T)); 
+         ICriteria criteria = Session.CreateCriteria(typeof(T)); 
          
          foreach (ICriterion criterium in criterion) { 
             criteria.Add(criterium); 
@@ -45,9 +58,10 @@ namespace eland.api
          return criteria.List(); 
       }
 
+      //TODO: check is Session.Transaction.IsActive 
       public T Save(T entity)
       {
-         using (ITransaction tran = _session.BeginTransaction())
+         using (ITransaction tran = Session.BeginTransaction())
          {
             _session.Save(entity);
             tran.Commit();
@@ -58,7 +72,7 @@ namespace eland.api
 
       public void Delete(T entity)
       {
-         using (ITransaction tran = _session.BeginTransaction())
+         using (ITransaction tran = Session.BeginTransaction())
          {
             _session.Delete(entity);
             tran.Commit();
