@@ -21,14 +21,12 @@ namespace eland.Controllers
 
             if (userRep.Exists(openId))
             {
-               this.ViewUser(openId);
+               return this.ViewUser(openId);
             }
             else
             {
-               this.Create(openId);
+               return this.New(openId);
             }
-
-            return View();
          }
          else
          {
@@ -36,19 +34,19 @@ namespace eland.Controllers
          }
       }
 
-      public ActionResult Create(String openId)
+      public ActionResult New(String openId)
       {
-         return View();
+         return this.ViewUser(openId);
       }
 
-      public ActionResult Edit()
+      public ActionResult Edit(String openId)
       {
-         return View();
+         return View("Edit");
       }
 
       public ActionResult ViewUser(String openId)
       {
-         return View();
+         return View("ViewUser");
       }
    }
 }

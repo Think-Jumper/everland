@@ -18,13 +18,11 @@ namespace eland.unittests.UnitTests
       private const string LAST_NAME = "Fraser";
 
       private List<Guid> createdUsers;
-      private UserController userController;
       private UserRepository userRepository;
 
       [TestFixtureSetUp]
       public void Setup_Tests()
       {
-         userController = new UserController();
          userRepository = new UserRepository();
          createdUsers = new List<Guid>();
       }
@@ -44,14 +42,6 @@ namespace eland.unittests.UnitTests
       {
          Assert.IsTrue(userRepository.Exists(new Guid("D3ECE5C4-7F66-4114-BB02-98B270523BA5")));
          Assert.IsFalse(userRepository.Exists(new Guid("D3ECE5C9-7F66-4114-BB02-98B270523BA5")));
-      }
-
-      [Test]
-      [Ignore]
-      public void Index_Correct_View()
-      {
-         var result = userController.Index() as RedirectToRouteResult;
-         Assert.AreEqual("Index", result.RouteName);
       }
 
       [Test]
