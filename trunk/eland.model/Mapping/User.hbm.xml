@@ -19,6 +19,10 @@
       <column name="LastName" />
     </property>
 
+    <property name="Email" access="property">
+      <column name="Email" />
+    </property>
+
   </class>
 
 </hibernate-mapping>

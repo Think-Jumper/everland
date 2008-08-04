@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Castle\IoC.cs" />
     <Compile Include="Helpers\NHibHelper.cs" />
+    <Compile Include="Interfaces\IDataContext.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />

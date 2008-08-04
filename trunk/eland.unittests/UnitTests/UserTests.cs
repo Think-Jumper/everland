@@ -16,6 +16,7 @@ namespace eland.unittests.UnitTests
       private const string OPEN_ID = "http://jamie.shortbet.org";
       private const string FIRST_NAME = "Jamie";
       private const string LAST_NAME = "Fraser";
+      private const string EMAIL = "jamie.fraser@gmail.com";
 
       private List<Guid> createdUsers;
       private UserRepository userRepository;
@@ -37,14 +38,6 @@ namespace eland.unittests.UnitTests
       }
 
       [Test]
-      [Ignore]
-      public void User_exists()
-      {
-         Assert.IsTrue(userRepository.Exists(new Guid("D3ECE5C4-7F66-4114-BB02-98B270523BA5")));
-         Assert.IsFalse(userRepository.Exists(new Guid("D3ECE5C9-7F66-4114-BB02-98B270523BA5")));
-      }
-
-      [Test]
       public void Get_Null_User_By_OpenId()
       {
          User user = userRepository.FindByOpenId(OPEN_ID + "abcdef");
@@ -60,6 +53,7 @@ namespace eland.unittests.UnitTests
          user.OpenId = OPEN_ID;
          user.FirstName = FIRST_NAME;
          user.LastName = LAST_NAME;
+         user.Email = EMAIL;
 
          userRepository.Save(user);
 

@@ -4,11 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Castle.Windsor;
+using Castle.Windsor.Configuration.Interpreters;
+using Castle.Core.Resource;
 
 namespace eland
 {
-   public class GlobalApplication : System.Web.HttpApplication
+   public class GlobalApplication : System.Web.HttpApplication, IContainerAccessor
    {
+      private static WindsorContainer _container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
+
       public static void RegisterRoutes(RouteCollection routes)
       {
          routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
@@ -24,6 +29,12 @@ namespace eland
       protected void Application_Start()
       {
          RegisterRoutes(RouteTable.Routes);
+         ControllerBuilder.Current.SetControllerFactory(typeof(ControllerFactory));
+      }
+
+      public IWindsorContainer Container
+      {
+         get { return (IWindsorContainer)_container; }
       }
    }
 }
