@@ -17,39 +17,69 @@ namespace eland.unittests.UnitTests.Controllers
    {
       private const string OPEN_ID = "http://jamie.shortbet.org";
       private UserController userController;
+      private MockRepository mocks;
 
       [TestFixtureSetUp]
       public void Setup_Tests()
       {
+         mocks = new MockRepository();
          userController = new UserController();
       }
 
-      [Test]
-      public void Index_Correct_View()
+      private void SetupMocks(out HttpContextBase mockedhttpContext, bool isAuthenticated, string IdentityName)
       {
-         var mocks = new MockRepository();
-         var mockedhttpContext = mocks.DynamicMock<HttpContextBase>();
+         mockedhttpContext = mocks.DynamicMock<HttpContextBase>();
          var mockedUser = mocks.DynamicMock<IPrincipal>();
          var mockedIdentity = mocks.DynamicMock<IIdentity>();
 
          SetupResult.For(mockedhttpContext.User).Return(mockedUser);
          SetupResult.For(mockedUser.Identity).Return(mockedIdentity);
-         SetupResult.For(mockedIdentity.IsAuthenticated).Return(true);
+         SetupResult.For(mockedIdentity.IsAuthenticated).Return(isAuthenticated);
+         SetupResult.For(mockedIdentity.Name).Return(IdentityName);
 
+      }
+
+      [Test]
+      public void Index_Correct_View_New_User()
+      {
+         HttpContextBase mockedhttpContext;
+         this.SetupMocks(out mockedhttpContext, true, OPEN_ID);
          userController.ControllerContext = new ControllerContext(mockedhttpContext, new RouteData(), userController);
 
          mocks.ReplayAll();
          var result = userController.Index() as ViewResult;
          mocks.VerifyAll();
 
-         Assert.AreEqual("Index", result.ViewName);
+         Assert.AreEqual("New", result.ViewName);
       }
 
+      [Test]
+      public void Index_Correct_View_Not_Authenticated()
+      {
+         HttpContextBase mockedhttpContext;
+         this.SetupMocks(out mockedhttpContext, false, string.Empty);
+         userController.ControllerContext = new ControllerContext(mockedhttpContext, new RouteData(), userController);
+
+         mocks.ReplayAll();
+         var result = userController.Index() as RedirectToRouteResult;
+         mocks.VerifyAll();
+
+         Assert.AreEqual("Home", result.Values["Controller"]);
+         Assert.AreEqual("Index", result.Values["Action"]);
+      }
+      
       [Test]
       public void New_Correct_View()
       {
          var result = userController.New(OPEN_ID) as ViewResult;
-         Assert.AreEqual("ViewUser", result.ViewName);
+         Assert.AreEqual("New", result.ViewName);
+      }
+
+      [Test]
+      public void Create_Correct_View()
+      {
+         //var result = userController.Create() as ViewResult;
+         //Assert.AreEqual("ViewUser", result.ViewName);
       }
 
       [Test]

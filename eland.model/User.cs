@@ -11,5 +11,6 @@ namespace eland.model
       public virtual string OpenId { get; set; }
       public virtual string FirstName { get; set; }
       public virtual string LastName { get; set; }
+      public virtual string Email { get; set; }
    }
 }

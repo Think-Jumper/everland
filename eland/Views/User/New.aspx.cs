@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace eland.Views.User
+{
+   public partial class New : ViewPage
+   {
+
+   }
+}

@@ -50,7 +50,12 @@ namespace eland.Controllers
 
                   ClaimsResponse fields = openid.Response.GetExtension(typeof(ClaimsResponse)) as ClaimsResponse;
 
-                  FormsAuthentication.RedirectFromLoginPage(openid.Response.ClaimedIdentifier, true);
+                  if(fields != null) {
+                     this.TempData["Email"] = fields.Email;
+                     this.TempData["Nickname"] = fields.Nickname;
+                  }
+
+                  FormsAuthentication.RedirectFromLoginPage(openid.Response.ClaimedIdentifier, false);
 
                   break;
                case AuthenticationStatus.Canceled:
