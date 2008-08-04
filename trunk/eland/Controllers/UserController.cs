@@ -20,9 +20,7 @@ namespace eland.Controllers
          {
             String openId = HttpContext.User.Identity.Name;
 
-            UserRepository userRep = new UserRepository();
-
-            if (userRep.Exists(openId))
+            if (((UserRepository)DataContext.UserRepository).Exists(openId))
             {
                return this.ViewUser(openId);
             }
