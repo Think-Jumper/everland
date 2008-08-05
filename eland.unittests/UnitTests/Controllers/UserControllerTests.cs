@@ -1,29 +1,29 @@
-﻿using System;
+﻿using System.Security.Principal;
+using System.Web;
 using System.Web.Mvc;
-
+using System.Web.Routing;
 using eland.Controllers;
-
 using MbUnit.Framework;
 using Rhino.Mocks;
-using System.Web;
-using System.Collections.Specialized;
-using System.Web.Routing;
-using System.Security.Principal;
+using Castle.Windsor;
+using Castle.Windsor.Configuration.Interpreters;
+using Castle.Core.Resource;
 
 namespace eland.unittests.UnitTests.Controllers
 {
    [TestFixture]
    public class UserControllerTests
    {
-      private const string OPEN_ID = "http://jamie.shortbet.org";
+      private const string OPEN_ID = "http://jamie.shortbet.org/";
       private UserController userController;
       private MockRepository mocks;
+      private WindsorContainer container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
 
       [TestFixtureSetUp]
       public void Setup_Tests()
       {
          mocks = new MockRepository();
-         userController = new UserController();
+         userController = container.Resolve<UserController>();
       }
 
       private void SetupMocks(out HttpContextBase mockedhttpContext, bool isAuthenticated, string IdentityName)

@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using eland.ViewData;
 
-namespace eland.Views.User
+namespace eland.UserControls.User
 {
-   public partial class ViewUser : ViewPage<ViewUserData>
+   public partial class UserDetails : System.Web.Mvc.ViewUserControl<eland.model.User>
    {
    }
 }

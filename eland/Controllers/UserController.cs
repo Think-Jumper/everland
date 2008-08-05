@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using eland.api;
 using eland.model;
 using eland.api.Interfaces;
+using eland.ViewData;
 
 namespace eland.Controllers
 {
@@ -26,7 +27,6 @@ namespace eland.Controllers
             }
             else
             {
-               // don't like having to do it this way.
                ViewData["Email"] = TempData["Email"];
                ViewData["FirstName"] = TempData["Nickname"];
                return this.New(openId);
@@ -63,7 +63,9 @@ namespace eland.Controllers
 
       public ActionResult ViewUser(String openId)
       {
-         return View("ViewUser");
+         ViewUserData viewUserData = new ViewUserData();
+         viewUserData.UserData = ((UserRepository)DataContext.UserRepository).FindByOpenId(openId);
+         return View("ViewUser", viewUserData );
       }
    }
 }
