@@ -27,8 +27,11 @@ namespace eland.Controllers
             }
             else
             {
-               ViewData["Email"] = TempData["Email"];
-               ViewData["FirstName"] = TempData["Nickname"];
+               if (TempData != null)
+               {
+                  ViewData["Email"] = TempData["Email"];
+                  ViewData["FirstName"] = TempData["Nickname"];
+               }
                return this.New(openId);
             }
          }
@@ -65,6 +68,7 @@ namespace eland.Controllers
       {
          ViewUserData viewUserData = new ViewUserData();
          viewUserData.UserData = ((UserRepository)DataContext.UserRepository).FindByOpenId(openId);
+
          return View("ViewUser", viewUserData );
       }
    }

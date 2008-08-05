@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:nhibernate-mapping-2.2">
+
+  <class name="eland.model.GameSession, eland.model" table="GameSession">
+
+    <id	name="Id" access="property"	column="Id"	type="Guid">
+      <generator class="guid" />
+    </id>
+
+    <property name="EnteredGame" type="DateTime" access="property">
+      <column name="EnteredGame" />
+    </property>
+
+    <property name="LeftGame" type="DateTime" access="property">
+      <column name="LeftGame" />
+    </property>
+
+    <many-to-one name="Game" class="eland.model.Game, eland.model" unique="true" column="GameId"/>
+    <many-to-one name="User" class="eland.model.User, eland.model" unique="true" column="UserId"/>
+    <many-to-one name="Nation" class="eland.model.Nation, eland.model" unique="true" column="NationId"/>
+
+
+  </class>
+
+  <!--public virtual Guid Id { get; set; }
+  public virtual DateTime EnteredGame { get; set; }
+  public virtual DateTime? LeftGame { get; set; }
+  public virtual Game Game { get; set; }
+  public virtual User User { get; set; }
+  public virtual Nation Nation { get; set; }-->
+
+</hibernate-mapping>
