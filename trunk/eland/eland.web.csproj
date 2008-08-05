@@ -84,8 +84,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\User\UserDetails.ascx.cs">
+      <DependentUpon>UserDetails.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\User\UserDetails.ascx.designer.cs">
+      <DependentUpon>UserDetails.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\ControllerFactory.cs" />
     <Compile Include="Utilities\DataContext.cs" />
+    <Compile Include="ViewData\User\ViewUserData.cs" />
     <Compile Include="Views\Home\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -139,6 +147,7 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="UserControls\User\UserDetails.ascx" />
     <Content Include="Views\Login\Login.aspx" />
     <Content Include="Views\User\Index.aspx" />
     <Content Include="Views\User\New.aspx" />
