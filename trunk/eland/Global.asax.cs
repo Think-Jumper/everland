@@ -34,7 +34,7 @@ namespace eland
 
       public IWindsorContainer Container
       {
-         get { return (IWindsorContainer)_container; }
+         get { return _container as IWindsorContainer; }
       }
    }
 }
