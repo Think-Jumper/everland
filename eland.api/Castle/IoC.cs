@@ -9,14 +9,13 @@ using Castle.Core.Resource;
 
 namespace eland.api
 {
-   class IoC
+   public sealed class IoC
    {
-      private static WindsorContainer _container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
+      private static WindsorContainer container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
 
       public static T Resolve<T>() 
       {
-         return _container.Resolve<T>();
-      
+         return container.Resolve<T>();
       }
    }
 }

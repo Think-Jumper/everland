@@ -8,6 +8,8 @@ using eland.api;
 using eland.model;
 using eland.api.Interfaces;
 using eland.ViewData;
+using NHibernate;
+using NHibernate.Criterion;
 
 namespace eland.Controllers
 {
@@ -49,12 +51,16 @@ namespace eland.Controllers
       public ActionResult Create(string FirstName, string LastName, string Email)
       {
          User user = new User();
-         user.OpenId = HttpContext.User.Identity.Name;
-         user.FirstName = FirstName;
-         user.LastName = LastName;
-         user.Email = Email;
 
-         DataContext.UserRepository.Save(user);
+         using (ITransaction tran = DataContext.UserRepository.Session.BeginTransaction())
+         {
+            user.OpenId = HttpContext.User.Identity.Name;
+            user.FirstName = FirstName;
+            user.LastName = LastName;
+            user.Email = Email;
+
+            DataContext.UserRepository.Save(user);
+         }
 
          return this.ViewUser(string.Empty);
       }
@@ -67,9 +73,16 @@ namespace eland.Controllers
       public ActionResult ViewUser(String openId)
       {
          ViewUserData viewUserData = new ViewUserData();
-         viewUserData.UserData = ((UserRepository)DataContext.UserRepository).FindByOpenId(openId);
 
-         return View("ViewUser", viewUserData );
+         viewUserData.UserData = ((UserRepository)DataContext.UserRepository).FindByOpenId(openId);
+         viewUserData.GameSessionData = ((GameSessionRepository)DataContext.GameSessionRepository).FindByUser(viewUserData.UserData);
+
+         if (viewUserData.UserData == null)
+         {
+            return RedirectToAction("Index", "Home");
+         }
+
+         return View("ViewUser", viewUserData);
       }
    }
 }

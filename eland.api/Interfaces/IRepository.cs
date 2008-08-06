@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using NHibernate.Criterion;
+using NHibernate;
 
 namespace eland.api
 {
@@ -16,7 +17,7 @@ namespace eland.api
       IList FindByCriteria(params ICriterion[] criterion);
       T Save(T entity);
       void Delete(T entity);
-     
-
+      void Delete(object id);
+      ISession Session { get; }
    }
 }
