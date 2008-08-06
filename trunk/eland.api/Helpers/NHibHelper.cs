@@ -12,6 +12,7 @@ namespace eland.api
    {
       private const string CurrentSessionKey = "nhibernate.current_session";
       private static readonly ISessionFactory sessionFactory;
+      private static ISession currentSession;
 
       static NHibHelper()
       {
@@ -20,7 +21,12 @@ namespace eland.api
 
       public static ISession GetCurrentSession()
       {
-         return sessionFactory.OpenSession();
+         if (currentSession == null)
+         {
+            currentSession = sessionFactory.OpenSession();
+         }
+
+         return currentSession;
          //ISession currentSession = HttpContext.Current.Items[CurrentSessionKey] as ISession;
 
          //if (currentSession == null)
@@ -31,18 +37,22 @@ namespace eland.api
          //return currentSession;
       }
 
-      //public static void CloseSession()
-      //{
-      //   ISession currentSession = HttpContext.Current.Items[CurrentSessionKey] as ISession;
+      public static void CloseSession()
+      {
+         if (currentSession != null)
+         {
+            currentSession.Close();
+         }
+         //ISession currentSession = HttpContext.Current.Items[CurrentSessionKey] as ISession;
 
-      //   if (currentSession == null)
-      //   {
-      //      // No current session
-      //      return;
-      //   }
-      //   currentSession.Close();
-      //   HttpContext.Current.Items.Remove(CurrentSessionKey);
-      //}
+         //if (currentSession == null)
+         //{
+         //   // No current session
+         //   return;
+         //}
+         //currentSession.Close();
+         //HttpContext.Current.Items.Remove(CurrentSessionKey);
+      }
 
       public static void CloseSessionFactory()
       {

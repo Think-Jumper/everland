@@ -1,20 +1,21 @@
-﻿using System.Security.Principal;
+﻿using System;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using eland.Controllers;
-using MbUnit.Framework;
-using Rhino.Mocks;
+using Castle.Core.Resource;
 using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
-using Castle.Core.Resource;
+using eland.Controllers;
+using eland.ViewData;
+using MbUnit.Framework;
+using Rhino.Mocks;
 
 namespace eland.unittests.UnitTests.Controllers
 {
    [TestFixture]
    public class UserControllerTests
    {
-      private const string OPEN_ID = "http://jamie.shortbet.org/";
       private UserController userController;
       private MockRepository mocks;
       private WindsorContainer container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
@@ -40,17 +41,21 @@ namespace eland.unittests.UnitTests.Controllers
       }
 
       [Test]
-      public void Index_Correct_View_New_User()
+      public void Index_Correct_View_Existing_User()
       {
          HttpContextBase mockedhttpContext;
-         this.SetupMocks(out mockedhttpContext, true, OPEN_ID);
+         this.SetupMocks(out mockedhttpContext, true, TestDataHelper.OPEN_ID);
          userController.ControllerContext = new ControllerContext(mockedhttpContext, new RouteData(), userController);
 
          mocks.ReplayAll();
          var result = userController.Index() as ViewResult;
          mocks.VerifyAll();
 
-         Assert.AreEqual("New", result.ViewName);
+         Assert.AreEqual("ViewUser", result.ViewName);
+         Assert.AreEqual(TestDataHelper.OPEN_ID, ((ViewUserData)result.ViewData.Model).UserData.OpenId);
+         Assert.AreEqual(TestDataHelper.EMAIL, ((ViewUserData)result.ViewData.Model).UserData.Email);
+         Assert.AreEqual(TestDataHelper.FIRST_NAME, ((ViewUserData)result.ViewData.Model).UserData.FirstName);
+         Assert.AreEqual(TestDataHelper.LAST_NAME, ((ViewUserData)result.ViewData.Model).UserData.LastName);
       }
 
       [Test]
@@ -71,29 +76,45 @@ namespace eland.unittests.UnitTests.Controllers
       [Test]
       public void New_Correct_View()
       {
-         var result = userController.New(OPEN_ID) as ViewResult;
+         var result = userController.New(TestDataHelper.OPEN_ID) as ViewResult;
          Assert.AreEqual("New", result.ViewName);
-      }
-
-      [Test]
-      public void Create_Correct_View()
-      {
-         //var result = userController.Create() as ViewResult;
-         //Assert.AreEqual("ViewUser", result.ViewName);
       }
 
       [Test]
       public void Edit_Correct_View()
       {
-         var result = userController.Edit(OPEN_ID) as ViewResult;
+         var result = userController.Edit(TestDataHelper.OPEN_ID) as ViewResult;
          Assert.AreEqual("Edit", result.ViewName);
       }
 
       [Test]
       public void ViewUser_Correct_View()
       {
-         var result = userController.ViewUser(OPEN_ID) as ViewResult;
+         var result = userController.ViewUser(TestDataHelper.OPEN_ID) as ViewResult;
          Assert.AreEqual("ViewUser", result.ViewName);
+      }
+
+      [Test]
+      public void ViewUser_Correct_Data()
+      {
+         var result = userController.ViewUser(TestDataHelper.OPEN_ID) as ViewResult;
+
+         Assert.AreNotEqual(null, ((ViewUserData)result.ViewData.Model).UserData);
+         Assert.AreNotEqual(null, ((ViewUserData)result.ViewData.Model).GameSessionData);
+
+         Assert.AreEqual(TestDataHelper.OPEN_ID, ((ViewUserData)result.ViewData.Model).UserData.OpenId);
+         Assert.AreEqual(TestDataHelper.EMAIL, ((ViewUserData)result.ViewData.Model).UserData.Email);
+         Assert.AreEqual(TestDataHelper.FIRST_NAME, ((ViewUserData)result.ViewData.Model).UserData.FirstName);
+         Assert.AreEqual(TestDataHelper.LAST_NAME, ((ViewUserData)result.ViewData.Model).UserData.LastName);
+      }
+
+      [Test]
+      public void ViewUser_Non_Existent_User()
+      {
+         var result = userController.ViewUser(TestDataHelper.OPEN_ID + Guid.NewGuid().ToString()) as RedirectToRouteResult;
+
+         Assert.AreEqual("Home", result.Values["Controller"]);
+         Assert.AreEqual("Index", result.Values["Action"]);
       }
 
    }

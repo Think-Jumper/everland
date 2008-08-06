@@ -19,7 +19,7 @@ namespace eland.api
          _session = NHibHelper.GetCurrentSession();      
       }
 
-      protected virtual ISession Session
+      public virtual ISession Session
       {
          get { return _session; }
       }
@@ -58,25 +58,33 @@ namespace eland.api
          return criteria.List(); 
       }
 
-      //TODO: check is Session.Transaction.IsActive 
       public T Save(T entity)
       {
-         using (ITransaction tran = Session.BeginTransaction())
-         {
-            _session.Save(entity);
-            tran.Commit();
+         if (!Session.Transaction.IsActive) {
+            throw new InvalidOperationException("Must be within a transaction to call this method.");
          }
+
+         _session.Save(entity);
    
          return entity;
       }
 
       public void Delete(T entity)
       {
-         using (ITransaction tran = Session.BeginTransaction())
-         {
-            _session.Delete(entity);
-            tran.Commit();
+         if (!Session.Transaction.IsActive) {
+            throw new InvalidOperationException("Must be within a transaction to call this method.");
          }
+         
+         _session.Delete(entity);
+      }
+
+      public void Delete(object id)
+      {
+         if (!Session.Transaction.IsActive) {
+            throw new InvalidOperationException("Must be within a transaction to call this method.");
+         }
+
+         _session.Delete(_session.Get<T>(id));
       }
 
       #region IDisposable Members
