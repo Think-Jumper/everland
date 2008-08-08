@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace eland.unittests.UnitTests
 {
    [TestFixture]
-   public class LoginTests
+   public class LoginControllerTests
    {
       [Test]
       public void Login_Correct_View()
