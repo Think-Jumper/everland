@@ -77,7 +77,7 @@
     <Compile Include="UnitTests\Controllers\UserControllerTests.cs" />
     <Compile Include="UnitTests\GameSessionTests.cs" />
     <Compile Include="UnitTests\NHMappingTests.cs" />
-    <Compile Include="UnitTests\LoginTests.cs" />
+    <Compile Include="UnitTests\Controllers\LoginControllerTests.cs" />
     <Compile Include="UnitTests\UserTests.cs" />
     <Compile Include="UnitTests\WorldTests.cs" />
   </ItemGroup>
