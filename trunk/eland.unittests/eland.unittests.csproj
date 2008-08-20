@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Helpers\TestDataHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTests\Controllers\GameControllerTests.cs" />
     <Compile Include="UnitTests\Controllers\UserControllerTests.cs" />
     <Compile Include="UnitTests\GameSessionTests.cs" />
     <Compile Include="UnitTests\NHMappingTests.cs" />
@@ -101,7 +102,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utilities\" />

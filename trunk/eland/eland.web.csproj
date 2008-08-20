@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="Utilities\ControllerFactory.cs" />
     <Compile Include="Utilities\DataContext.cs" />
+    <Compile Include="ViewData\Game\GameIndexData.cs" />
     <Compile Include="ViewData\User\ViewUserData.cs" />
     <Compile Include="Views\Home\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
