@@ -17,5 +17,12 @@ namespace eland.api
          return gameSession;
       }
 
+      public GameSession FindByUserId(String openId)
+      {
+         return base.Session.CreateCriteria(typeof(GameSession))
+          .CreateCriteria("User").Add(Expression.Eq("OpenId", openId))
+          .UniqueResult<GameSession>();
+      }
+
    }
 }

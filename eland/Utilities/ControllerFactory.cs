@@ -23,7 +23,7 @@ namespace eland
       public IController CreateController(RequestContext context, string controllerName)
       {
          IContainerAccessor accessor = HttpContext.Current.ApplicationInstance as IContainerAccessor;
-         return accessor.Container.Resolve<IController>(controllerName + "Controller");
+         return accessor.Container.Resolve<IController>(controllerName);
       }
    }
 }

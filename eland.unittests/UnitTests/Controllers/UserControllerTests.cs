@@ -27,24 +27,23 @@ namespace eland.unittests.UnitTests.Controllers
          userController = container.Resolve<UserController>();
       }
 
-      private void SetupMocks(out HttpContextBase mockedhttpContext, bool isAuthenticated, string IdentityName)
-      {
-         mockedhttpContext = mocks.DynamicMock<HttpContextBase>();
-         var mockedUser = mocks.DynamicMock<IPrincipal>();
-         var mockedIdentity = mocks.DynamicMock<IIdentity>();
+      //private void SetupMocks(out HttpContextBase mockedhttpContext, bool isAuthenticated, string IdentityName)
+      //{
+      //   mockedhttpContext = mocks.DynamicMock<HttpContextBase>();
+      //   var mockedUser = mocks.DynamicMock<IPrincipal>();
+      //   var mockedIdentity = mocks.DynamicMock<IIdentity>();
 
-         SetupResult.For(mockedhttpContext.User).Return(mockedUser);
-         SetupResult.For(mockedUser.Identity).Return(mockedIdentity);
-         SetupResult.For(mockedIdentity.IsAuthenticated).Return(isAuthenticated);
-         SetupResult.For(mockedIdentity.Name).Return(IdentityName);
+      //   SetupResult.For(mockedhttpContext.User).Return(mockedUser);
+      //   SetupResult.For(mockedUser.Identity).Return(mockedIdentity);
+      //   SetupResult.For(mockedIdentity.IsAuthenticated).Return(isAuthenticated);
+      //   SetupResult.For(mockedIdentity.Name).Return(IdentityName);
 
-      }
+      //}
 
       [Test]
       public void Index_Correct_View_Existing_User()
       {
-         HttpContextBase mockedhttpContext;
-         this.SetupMocks(out mockedhttpContext, true, TestDataHelper.OPEN_ID);
+         HttpContextBase mockedhttpContext = TestDataHelper.SetupHttpContextMocks(mocks, true, TestDataHelper.OPEN_ID);
          userController.ControllerContext = new ControllerContext(mockedhttpContext, new RouteData(), userController);
 
          mocks.ReplayAll();
@@ -61,8 +60,7 @@ namespace eland.unittests.UnitTests.Controllers
       [Test]
       public void Index_Correct_View_Not_Authenticated()
       {
-         HttpContextBase mockedhttpContext;
-         this.SetupMocks(out mockedhttpContext, false, string.Empty);
+         HttpContextBase mockedhttpContext = TestDataHelper.SetupHttpContextMocks(mocks, false, string.Empty);
          userController.ControllerContext = new ControllerContext(mockedhttpContext, new RouteData(), userController);
 
          mocks.ReplayAll();
