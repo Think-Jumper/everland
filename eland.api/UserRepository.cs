@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using eland.model;
 using NHibernate.Criterion;
@@ -12,15 +9,15 @@ namespace eland.api
    {
       public User FindByOpenId(String openId)
       {
-         User user = base.Session.CreateCriteria(typeof(User))
-            .Add(Expression.Eq("OpenId", openId)).UniqueResult<User>();
+         var user = base.Session.CreateCriteria(typeof(User))
+            .Add(Restrictions.Eq("OpenId", openId)).UniqueResult<User>();
 
          return user;
       }
 
       public bool Exists(String openId)
       {
-         return base.Exists(openId, "OpenId");
+         return Exists(openId, "OpenId");
       }
    }
 }

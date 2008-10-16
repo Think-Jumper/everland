@@ -12,7 +12,7 @@ namespace eland.unittests.UnitTests
       [Test]
       public void Login_Correct_View()
       {
-         LoginController loginController = new LoginController();
+         var loginController = new LoginController();
          var result = loginController.Login() as ViewResult;
 
          Assert.AreEqual("Login", result.ViewName);        

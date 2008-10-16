@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
-namespace eland.Views.User
+namespace eland.Views.Login
 {
-   public partial class Login : ViewPage
-   {
-   }
+    public partial class Login : ViewPage
+    {
+    }
 }

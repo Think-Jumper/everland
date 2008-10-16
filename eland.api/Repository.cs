@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections;
-using System.Linq;
-using System.Text;
 
 using NHibernate;
 using NHibernate.Criterion;
-using NHibernate.SqlCommand;
 
 namespace eland.api
 {
    public class Repository<T> : IRepository<T>, IDisposable where T : class
    {
-      private ISession _session;
+      private readonly ISession _session;
 
       public Repository()
       {
@@ -26,20 +22,20 @@ namespace eland.api
 
       public bool Exists(object id)
       {
-         return this.Exists(id, "Id");
+         return Exists(id, "Id");
       }
 
       public bool Exists(object id, String ColumnName)
       {
          ICriteria criteria = Session.CreateCriteria(typeof(T));
-         criteria.SetProjection(Projections.RowCount()).Add(Expression.Eq(ColumnName, id));
+         criteria.SetProjection(Projections.RowCount()).Add(Restrictions.Eq(ColumnName, id));
 
          return 0 != Convert.ToInt32(criteria.UniqueResult());
       }
 
       public T Get(object id)
       {
-         return Session.Get<T>(id) as T;
+         return Session.Get<T>(id);
       }
 
       public IList FindAll() 

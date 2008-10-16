@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using eland.model;
 using NHibernate.Criterion;
 
@@ -11,8 +8,8 @@ namespace eland.api
    {
       public GameSession FindByUser(User user)
       {
-         GameSession gameSession = base.Session.CreateCriteria(typeof(GameSession))
-              .Add(Expression.Eq("User", user)).UniqueResult<GameSession>();
+         var gameSession = base.Session.CreateCriteria(typeof(GameSession))
+              .Add(Restrictions.Eq("User", user)).UniqueResult<GameSession>();
 
          return gameSession;
       }
@@ -20,7 +17,7 @@ namespace eland.api
       public GameSession FindByUserId(String openId)
       {
          return base.Session.CreateCriteria(typeof(GameSession))
-          .CreateCriteria("User").Add(Expression.Eq("OpenId", openId))
+          .CreateCriteria("User").Add(Restrictions.Eq("OpenId", openId))
           .UniqueResult<GameSession>();
       }
 

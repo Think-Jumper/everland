@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
@@ -12,7 +8,7 @@ namespace eland
 {
    public class GlobalApplication : System.Web.HttpApplication, IContainerAccessor
    {
-      private static WindsorContainer _container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
+      private static readonly WindsorContainer _container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
 
       public static void RegisterRoutes(RouteCollection routes)
       {
@@ -34,7 +30,7 @@ namespace eland
 
       public IWindsorContainer Container
       {
-         get { return _container as IWindsorContainer; }
+         get { return _container; }
       }
    }
 }

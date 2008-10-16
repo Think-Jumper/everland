@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using MbUnit.Framework;
-using eland.Controllers;
-using System.Web.Mvc;
-using eland.api;
-using eland.model;
-using eland.api.Interfaces;
 using NHibernate;
+
+using eland.api;
+using eland.api.Interfaces;
 
 namespace eland.unittests.UnitTests
 {
@@ -42,7 +39,7 @@ namespace eland.unittests.UnitTests
       [Test]
       public void Get_Null_User_By_OpenId()
       {
-         User user = (dataContext.UserRepository as UserRepository).FindByOpenId(TestDataHelper.OPEN_ID + "abcdef");
+         var user = ((UserRepository) dataContext.UserRepository).FindByOpenId(TestDataHelper.OPEN_ID + "abcdef");
 
          Assert.AreEqual(null, user);
       }
@@ -50,7 +47,7 @@ namespace eland.unittests.UnitTests
       [Test]
       public void Get_User_By_OpenId()
       {
-         User user = (dataContext.UserRepository as UserRepository).FindByOpenId(TestDataHelper.OPEN_ID);
+         var user = ((UserRepository) dataContext.UserRepository).FindByOpenId(TestDataHelper.OPEN_ID);
 
          Assert.AreEqual(user.OpenId, TestDataHelper.OPEN_ID);
          Assert.AreEqual(user.FirstName, TestDataHelper.FIRST_NAME);
