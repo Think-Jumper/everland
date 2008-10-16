@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -18,7 +17,7 @@ namespace eland.unittests.UnitTests.Controllers
    {
       private UserController userController;
       private MockRepository mocks;
-      private WindsorContainer container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
+      private readonly WindsorContainer container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
 
       [TestFixtureSetUp]
       public void Setup_Tests()

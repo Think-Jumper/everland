@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 using DotNetOpenId.RelyingParty;
@@ -48,11 +45,11 @@ namespace eland.Controllers
             {
                case AuthenticationStatus.Authenticated:
 
-                  ClaimsResponse fields = openid.Response.GetExtension(typeof(ClaimsResponse)) as ClaimsResponse;
+                  var fields = openid.Response.GetExtension(typeof(ClaimsResponse)) as ClaimsResponse;
 
                   if(fields != null) {
-                     this.TempData["Email"] = fields.Email;
-                     this.TempData["Nickname"] = fields.Nickname;
+                     TempData["Email"] = fields.Email;
+                     TempData["Nickname"] = fields.Nickname;
                   }
 
                   FormsAuthentication.RedirectFromLoginPage(openid.Response.ClaimedIdentifier, false);

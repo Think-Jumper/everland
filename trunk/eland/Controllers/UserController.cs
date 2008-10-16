@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 using eland.api;
 using eland.model;
 using eland.api.Interfaces;
 using eland.ViewData;
-using NHibernate;
-using NHibernate.Criterion;
 
 namespace eland.Controllers
 {
@@ -19,40 +14,34 @@ namespace eland.Controllers
 
       public ActionResult Index()
       {
-         if (HttpContext.User.Identity.IsAuthenticated)
-         {
-            String openId = HttpContext.User.Identity.Name;
+          if (!HttpContext.User.Identity.IsAuthenticated)
+          {
+              return RedirectToAction("Index", "Home");
+          }
+          var openId = HttpContext.User.Identity.Name;
 
-            if (((UserRepository)DataContext.UserRepository).Exists(openId))
-            {
-               return this.ViewUser(openId);
-            }
-            else
-            {
-               if (TempData != null)
-               {
-                  ViewData["Email"] = TempData["Email"];
-                  ViewData["FirstName"] = TempData["Nickname"];
-               }
-               return this.New(openId);
-            }
-         }
-         else
-         {
-            return RedirectToAction("Index", "Home");
-         }
+          if (((UserRepository) DataContext.UserRepository).Exists(openId))
+          {
+              return ViewUser(openId);
+          }
+          if (TempData != null)
+          {
+              ViewData["Email"] = TempData["Email"];
+              ViewData["FirstName"] = TempData["Nickname"];
+          }
+          return New(openId);
       }
 
-      public ActionResult New(String openId)
+       public ActionResult New(String openId)
       {
          return View("New");
       }
 
       public ActionResult Create(string FirstName, string LastName, string Email)
       {
-         User user = new User();
+         var user = new User();
 
-         using (ITransaction tran = DataContext.UserRepository.Session.BeginTransaction())
+         using (var tran = DataContext.UserRepository.Session.BeginTransaction())
          {
             user.OpenId = HttpContext.User.Identity.Name;
             user.FirstName = FirstName;
@@ -60,9 +49,11 @@ namespace eland.Controllers
             user.Email = Email;
 
             DataContext.UserRepository.Save(user);
+
+             tran.Commit();
          }
 
-         return this.ViewUser(string.Empty);
+         return ViewUser(string.Empty);
       }
 
       public ActionResult Edit(String openId)
@@ -72,10 +63,12 @@ namespace eland.Controllers
 
       public ActionResult ViewUser(String openId)
       {
-         ViewUserData viewUserData = new ViewUserData();
+         var viewUserData = new ViewUserData
+                                {
+                                    UserData = ((UserRepository) DataContext.UserRepository).FindByOpenId(openId)
+                                };
 
-         viewUserData.UserData = ((UserRepository)DataContext.UserRepository).FindByOpenId(openId);
-         viewUserData.GameSessionData = ((GameSessionRepository)DataContext.GameSessionRepository).FindByUser(viewUserData.UserData);
+          viewUserData.GameSessionData = ((GameSessionRepository)DataContext.GameSessionRepository).FindByUser(viewUserData.UserData);
 
          if (viewUserData.UserData == null)
          {
