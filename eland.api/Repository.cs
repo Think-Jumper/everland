@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
-
+using eland.api.Helpers;
+using eland.api.Interfaces;
 using NHibernate;
 using NHibernate.Criterion;
 
@@ -27,7 +28,7 @@ namespace eland.api
 
       public bool Exists(object id, String ColumnName)
       {
-         ICriteria criteria = Session.CreateCriteria(typeof(T));
+         var criteria = Session.CreateCriteria(typeof(T));
          criteria.SetProjection(Projections.RowCount()).Add(Restrictions.Eq(ColumnName, id));
 
          return 0 != Convert.ToInt32(criteria.UniqueResult());
@@ -45,9 +46,9 @@ namespace eland.api
       
       public IList FindByCriteria(params ICriterion[] criterion) 
       { 
-         ICriteria criteria = Session.CreateCriteria(typeof(T)); 
+         var criteria = Session.CreateCriteria(typeof(T)); 
          
-         foreach (ICriterion criterium in criterion) { 
+         foreach (var criterium in criterion) { 
             criteria.Add(criterium); 
          } 
          

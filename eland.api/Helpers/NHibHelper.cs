@@ -1,65 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
-using NHibernate.Cfg;
+﻿using NHibernate.Cfg;
 using NHibernate;
 
-namespace eland.api
+namespace eland.api.Helpers
 {
-   public sealed class NHibHelper
-   {
-      private const string CurrentSessionKey = "nhibernate.current_session";
-      private static readonly ISessionFactory sessionFactory;
-      private static ISession currentSession;
+    public sealed class NHibHelper
+    {
+        private static readonly ISessionFactory sessionFactory;
+        private static ISession currentSession;
 
-      static NHibHelper()
-      {
-         sessionFactory = new Configuration().Configure().BuildSessionFactory();
-      }
+        static NHibHelper()
+        {
+            sessionFactory = new Configuration().Configure().BuildSessionFactory();
+        }
 
-      public static ISession GetCurrentSession()
-      {
-         if (currentSession == null)
-         {
-            currentSession = sessionFactory.OpenSession();
-         }
+        public static ISession GetCurrentSession()
+        {
+            if (currentSession == null)
+            {
+                currentSession = sessionFactory.OpenSession();
+            }
 
-         return currentSession;
-         //ISession currentSession = HttpContext.Current.Items[CurrentSessionKey] as ISession;
+            return currentSession;
+            //ISession currentSession = HttpContext.Current.Items[CurrentSessionKey] as ISession;
 
-         //if (currentSession == null)
-         //{
-         //   currentSession = sessionFactory.OpenSession();
-         //   HttpContext.Current.Items[CurrentSessionKey] = currentSession;
-         //}
-         //return currentSession;
-      }
+            //if (currentSession == null)
+            //{
+            //   currentSession = sessionFactory.OpenSession();
+            //   HttpContext.Current.Items[CurrentSessionKey] = currentSession;
+            //}
+            //return currentSession;
+        }
 
-      public static void CloseSession()
-      {
-         if (currentSession != null)
-         {
-            currentSession.Close();
-         }
-         //ISession currentSession = HttpContext.Current.Items[CurrentSessionKey] as ISession;
+        public static void CloseSession()
+        {
+            if (currentSession != null)
+            {
+                currentSession.Close();
+            }
+            //ISession currentSession = HttpContext.Current.Items[CurrentSessionKey] as ISession;
 
-         //if (currentSession == null)
-         //{
-         //   // No current session
-         //   return;
-         //}
-         //currentSession.Close();
-         //HttpContext.Current.Items.Remove(CurrentSessionKey);
-      }
+            //if (currentSession == null)
+            //{
+            //   // No current session
+            //   return;
+            //}
+            //currentSession.Close();
+            //HttpContext.Current.Items.Remove(CurrentSessionKey);
+        }
 
-      public static void CloseSessionFactory()
-      {
-         if (sessionFactory != null)
-         {
-            sessionFactory.Close();
-         }
-      }
-   }
+        public static void CloseSessionFactory()
+        {
+            if (sessionFactory != null)
+            {
+                sessionFactory.Close();
+            }
+        }
+    }
 }
