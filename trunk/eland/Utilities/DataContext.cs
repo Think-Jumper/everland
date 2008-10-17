@@ -1,5 +1,4 @@
 ﻿using eland.api.Interfaces;
-using eland.api;
 using eland.model;
 
 namespace eland.Utilities
@@ -14,7 +13,5 @@ namespace eland.Utilities
       public IRepository<Nation> NationRepository { get; set; }
       public IRepository<Race> RaceRepository { get; set; }
       public IRepository<GameSession> GameSessionRepository { get; set; }
-
-
    }
 }
