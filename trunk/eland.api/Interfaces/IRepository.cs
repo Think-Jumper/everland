@@ -3,7 +3,7 @@ using System.Collections;
 using NHibernate;
 using NHibernate.Criterion;
 
-namespace eland.api.Interfaces
+namespace eland.api
 {
     public interface IRepository <T>
     {
