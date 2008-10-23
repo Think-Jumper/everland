@@ -1,98 +1,138 @@
 ﻿using System;
 using System.Collections;
-using eland.api.Helpers;
-using eland.api.Interfaces;
+using System.Collections.Generic;
+
 using NHibernate;
 using NHibernate.Criterion;
 
+using eland.api.Helpers;
+
 namespace eland.api
 {
-   public class Repository<T> : IRepository<T>, IDisposable where T : class
-   {
-      private readonly ISession _session;
+    public class Repository<T> : IRepository<T>, IDisposable where T : class
+    {
+        private readonly ISession _session;
 
-      public Repository()
-      {
-         _session = NHibHelper.GetCurrentSession();      
-      }
+        public Repository()
+        {
+            _session = NHibHelper.GetCurrentSession();
+        }
 
-      public virtual ISession Session
-      {
-         get { return _session; }
-      }
+        public virtual ISession Session
+        {
+            get { return _session; }
+        }
 
-      public bool Exists(object id)
-      {
-         return Exists(id, "Id");
-      }
+        public bool Exists(object id)
+        {
+            return Exists(id, "Id");
+        }
 
-      public bool Exists(object id, String ColumnName)
-      {
-         var criteria = Session.CreateCriteria(typeof(T));
-         criteria.SetProjection(Projections.RowCount()).Add(Restrictions.Eq(ColumnName, id));
+        public bool Exists(object id, String ColumnName)
+        {
+            var criteria = Session.CreateCriteria(typeof(T));
+            criteria.SetProjection(Projections.RowCount()).Add(Restrictions.Eq(ColumnName, id));
 
-         return 0 != Convert.ToInt32(criteria.UniqueResult());
-      }
+            return 0 != Convert.ToInt32(criteria.UniqueResult());
+        }
 
-      public T Get(object id)
-      {
-         return Session.Get<T>(id);
-      }
+        public T Load(object id)
+        {
+            return Session.Load<T>(id);
+        }
 
-      public IList FindAll() 
-      { 
-         return FindByCriteria(); 
-      }   
-      
-      public IList FindByCriteria(params ICriterion[] criterion) 
-      { 
-         var criteria = Session.CreateCriteria(typeof(T)); 
-         
-         foreach (var criterium in criterion) { 
-            criteria.Add(criterium); 
-         } 
-         
-         return criteria.List(); 
-      }
+        public T Get(object id)
+        {
+            return Session.Get<T>(id);
+        }
 
-      public T Save(T entity)
-      {
-         if (!Session.Transaction.IsActive) {
-            throw new InvalidOperationException("Must be within a transaction to call this method.");
-         }
+        public IList FindAll()
+        {
+            return FindByCriteria();
+        }
 
-         _session.Save(entity);
-   
-         return entity;
-      }
+        public IList FindByCriteria(params ICriterion[] criterion)
+        {
+            var criteria = Session.CreateCriteria(typeof(T));
 
-      public void Delete(T entity)
-      {
-         if (!Session.Transaction.IsActive) {
-            throw new InvalidOperationException("Must be within a transaction to call this method.");
-         }
-         
-         _session.Delete(entity);
-      }
+            foreach (var criterium in criterion)
+            {
+                criteria.Add(criterium);
+            }
 
-      public void Delete(object id)
-      {
-         if (!Session.Transaction.IsActive) {
-            throw new InvalidOperationException("Must be within a transaction to call this method.");
-         }
+            return criteria.List();
+        }
 
-         _session.Delete(_session.Get<T>(id));
-      }
+        public List<T> GetByExample(T exampleInstance, params string[] propertiesToExclude)
+        {
+            var criteria = Session.CreateCriteria(typeof(T));
+            var example = Example.Create(exampleInstance);
 
-      #region IDisposable Members
+            foreach (var propertyToExclude in propertiesToExclude)
+                example.ExcludeProperty(propertyToExclude);
 
-      public void Dispose()
-      {
-         if (_session != null) {
-            _session.Close();
-         }
-      }
+            criteria.Add(example);
 
-      #endregion
-   }
+            return criteria.List<T>() as List<T>;
+        }
+
+        public T GetUniqueByExample(T exampleInstance, params string[] propertiesToExclude)
+        {
+            var foundList = GetByExample(exampleInstance, propertiesToExclude);
+
+            if (foundList.Count > 1)
+                throw new NonUniqueResultException(foundList.Count);
+
+            return foundList.Count > 0 ? foundList[0] : default(T);
+        }
+
+        public T Save(T entity)
+        {
+            if (!Session.Transaction.IsActive)
+            {
+                throw new InvalidOperationException("Must be within a transaction to call this method.");
+            }
+
+            _session.Save(entity);
+
+            return entity;
+        }
+
+        public void Evict(T entity)
+        {
+            Session.Evict(entity);
+        }
+
+        public void Delete(T entity)
+        {
+            if (!Session.Transaction.IsActive)
+            {
+                throw new InvalidOperationException("Must be within a transaction to call this method.");
+            }
+
+            _session.Delete(entity);
+        }
+
+        public void Delete(object id)
+        {
+            if (!Session.Transaction.IsActive)
+            {
+                throw new InvalidOperationException("Must be within a transaction to call this method.");
+            }
+
+            _session.Delete(_session.Get<T>(id));
+        }
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            if (_session != null)
+            {
+                _session.Close();
+            }
+        }
+
+        #endregion
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using eland.api.Castle;
+using eland.api;
 using MbUnit.Framework;
 
 using eland.model;
@@ -27,9 +28,7 @@ namespace eland.unittests.UnitTests
             using (var tran = dataContext.WorldRepository.Session.BeginTransaction())
             {
                 foreach (var id in createdIds)
-                {
                     dataContext.WorldRepository.Delete(id);
-                }
 
                 tran.Commit();
             }
@@ -95,13 +94,16 @@ namespace eland.unittests.UnitTests
         [Ignore]
         public void World_Iterate_Hexes()
         {
-            World_Create();
-            var world = dataContext.WorldRepository.FindAll();
+            var world = getWorld();
 
             foreach (var h in ((World)world[0]).Hexes)
-            {
                 Assert.AreNotEqual(Guid.Empty, h.Id);
-            }
+        }
+
+        private IList getWorld()
+        {
+            World_Create();
+            return dataContext.WorldRepository.FindAll();
         }
 
         [Test]
@@ -122,6 +124,19 @@ namespace eland.unittests.UnitTests
             }
 
             Assert.IsNull(dataContext.WorldRepository.Get(world.Id));
+        }
+
+        [Test]
+        public void World_Iterate_Hex_Properties()
+        {
+            var world = getWorld();
+
+            foreach (var h in ((World)world[0]).Hexes)
+            {
+                Assert.AreNotEqual(null, h.HexType);
+                Assert.Between(h.X, 0, ((World)world[0]).Width);
+                Assert.Between(h.Y, 0, ((World)world[0]).Height);
+            }
         }
     }
 }
