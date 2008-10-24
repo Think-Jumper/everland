@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using eland.api;
-using eland.api.Interfaces;
-using eland.model;
-using eland.model.Interfaces;
+﻿using System.Collections.Generic;
+
 using MbUnit.Framework;
 
 namespace eland.unittests.UnitTests
@@ -13,62 +7,124 @@ namespace eland.unittests.UnitTests
     [TestFixture]
     public class UnitTests
     {
-        private IDataContext dataContext;
+        private IList<IUnit> units;
+
+        public UnitTests()
+        {
+            units = new List<IUnit>();
+        }
 
         [TestFixtureSetUp]
         public void Setup_Tests()
         {
-            dataContext = IoC.Resolve<IDataContext>();
-
-            for(var i = 0; i < 5; i++)
-            {
-                UnitType unitType;
-
-                ABC abc;
-
-
-            }
-
-            for(var i = 0; i < 100; i++)
-            {
-                IUnit unit = new Unit {Name = "test_unit"};
-                //unit.Type = 
-
-            }
-
+            units.Add(new Soldier());
+            units.Add(new Archer());
+            units.Add(new Clubman());
         }
-
 
         [Test]
         public void Check_Unit_Properties()
         {
-            var units = dataContext.UnitRepository.GetAll()[0];
 
-            foreach (IUnit unit in settlement.Units)
+            foreach (var unit in units)
             {
-                Assert.AreNotEqual(unit, null);
-                Assert.AreNotEqual(unit.Name, string.Empty);
-                Assert.AreNotEqual(unit.Type, null);
-                Assert.AreNotEqual(unit.Type.Name, string.Empty);
+                if (unit is Soldier)
+                {
+                    Assert.IsTrue(unit is IDefensiveUnit);
+                    Assert.IsTrue(unit is IOffensiveUnit);
+                    Assert.IsTrue(unit is IHandToHandUnit);
+                    Assert.IsTrue(unit is IRangedUnit);
+                }
+
+                if (unit is Archer)
+                {
+                    Assert.IsFalse(unit is IDefensiveUnit);
+                    Assert.IsTrue(unit is IOffensiveUnit);
+                    Assert.IsFalse(unit is IHandToHandUnit);
+                    Assert.IsTrue(unit is IRangedUnit);
+                }
+
+                if (unit is Clubman)
+                {
+                    Assert.IsTrue(unit is IDefensiveUnit);
+                    Assert.IsTrue(unit is IOffensiveUnit);
+                    Assert.IsTrue(unit is IHandToHandUnit);
+                    Assert.IsFalse(unit is IRangedUnit);
+                }
 
             }
         }
     }
 
-    internal class Unit : IUnit
+    internal class Clubman : ICombatUnit, IHandToHandUnit
     {
-        public string Name
+        public void Attack()
         {
-            get { throw new System.NotImplementedException(); }
-            set { throw new System.NotImplementedException(); }
+            throw new System.NotImplementedException();
         }
 
-        public IUnitType Type
+        public void Defend()
         {
-            get { throw new System.NotImplementedException(); }
-            set { throw new System.NotImplementedException(); }
+            throw new System.NotImplementedException();
         }
     }
 
+    internal class Archer : ICombatUnit, IRangedUnit
+    {
+        public int Range
+        {
+            get { return 0; }
+        }
+
+        public void Attack()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
+    internal interface IRangedUnit : IOffensiveUnit
+    {
+        int Range { get; }
+    }
+
+    internal class Soldier : ICombatUnit, IRangedUnit, IHandToHandUnit
+    {
+        public int Range
+        {
+            get { return 0; }
+        }
+
+        public void Attack()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Defend()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
+    internal interface IDefensiveUnit
+    {
+        void Defend();
+    }
+
+    internal interface IHandToHandUnit : IOffensiveUnit, IDefensiveUnit
+    {
+    }
+
+    internal interface IOffensiveUnit
+    {
+        void Attack();
+    }
+
+    internal interface ICombatUnit : IUnit
+    {
+    }
+
+    internal interface IUnit
+    {
+    }
 
 }
