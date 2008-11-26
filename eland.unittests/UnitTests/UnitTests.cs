@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 using MbUnit.Framework;
 
@@ -7,11 +9,11 @@ namespace eland.unittests.UnitTests
     [TestFixture]
     public class UnitTests
     {
-        private IList<IUnit> units;
+        private readonly IList<Unit> units;
 
         public UnitTests()
         {
-            units = new List<IUnit>();
+            units = new List<Unit>();
         }
 
         [TestFixtureSetUp]
@@ -23,7 +25,7 @@ namespace eland.unittests.UnitTests
         }
 
         [Test]
-        public void Check_Unit_Properties()
+        public void Check_Unit_Interfaces()
         {
 
             foreach (var unit in units)
@@ -54,9 +56,25 @@ namespace eland.unittests.UnitTests
 
             }
         }
+
+        [Test]
+        public void Check_Unit_Properties()
+        {
+            foreach(var unit in units)
+            {
+                Assert.IsTrue(unit.Health >= 0);
+                Assert.IsTrue(unit.Health <= unit.MaximumHealth);
+
+                foreach(var upgrade in unit.Upgrades)
+                {
+                    Assert.IsFalse(string.IsNullOrEmpty(upgrade.Name));
+                }
+            }
+        }
+
     }
 
-    internal class Clubman : ICombatUnit, IHandToHandUnit
+    internal class Clubman : Unit, IHandToHandUnit
     {
         public void Attack()
         {
@@ -69,7 +87,7 @@ namespace eland.unittests.UnitTests
         }
     }
 
-    internal class Archer : ICombatUnit, IRangedUnit
+    internal class Archer : Unit, IRangedUnit
     {
         public int Range
         {
@@ -87,7 +105,7 @@ namespace eland.unittests.UnitTests
         int Range { get; }
     }
 
-    internal class Soldier : ICombatUnit, IRangedUnit, IHandToHandUnit
+    internal class Soldier  : Unit, IRangedUnit, IHandToHandUnit
     {
         public int Range
         {
@@ -112,6 +130,7 @@ namespace eland.unittests.UnitTests
 
     internal interface IHandToHandUnit : IOffensiveUnit, IDefensiveUnit
     {
+
     }
 
     internal interface IOffensiveUnit
@@ -119,12 +138,26 @@ namespace eland.unittests.UnitTests
         void Attack();
     }
 
-    internal interface ICombatUnit : IUnit
+    public abstract class Unit
     {
+        protected Unit()
+        {
+            Health = 0;
+            MaximumHealth = 0;
+            Upgrades = new List<IUpgrade>();
+        }
+
+        public int Health { get; protected set; }
+        public int MaximumHealth { get; protected set; }
+
+        public IList<IUpgrade> Upgrades { get; set; }
     }
 
-    internal interface IUnit
+    public class IUpgrade
     {
+        public string Name
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
-
 }
