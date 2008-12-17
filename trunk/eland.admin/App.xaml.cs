@@ -12,5 +12,6 @@ namespace eland.admin
    /// </summary>
    public partial class App : Application
    {
+
    }
 }
