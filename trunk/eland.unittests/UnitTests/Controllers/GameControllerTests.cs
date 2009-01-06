@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.Core.Resource;
 using Castle.Windsor;
@@ -16,7 +15,7 @@ namespace eland.unittests.UnitTests.Controllers
    public class GameControllerTests
    {
       private GameController gameController;
-      private WindsorContainer container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
+      private readonly WindsorContainer container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
       private MockRepository mocks;
 
       [TestFixtureSetUp]
@@ -29,7 +28,7 @@ namespace eland.unittests.UnitTests.Controllers
       [Test]
       public void Index_Correct_View()
       {
-         HttpContextBase mockedhttpContext = TestDataHelper.SetupHttpContextMocks(mocks, true, TestDataHelper.OPEN_ID);
+         var mockedhttpContext = TestDataHelper.SetupHttpContextMocks(mocks, true, TestDataHelper.OPEN_ID);
          gameController.ControllerContext = new ControllerContext(mockedhttpContext, new RouteData(), gameController);
 
          mocks.ReplayAll();
@@ -42,7 +41,7 @@ namespace eland.unittests.UnitTests.Controllers
       [Test]
       public void Index_Correct_Data()
       {
-         HttpContextBase mockedhttpContext = TestDataHelper.SetupHttpContextMocks(mocks, true, TestDataHelper.OPEN_ID);
+         var mockedhttpContext = TestDataHelper.SetupHttpContextMocks(mocks, true, TestDataHelper.OPEN_ID);
          gameController.ControllerContext = new ControllerContext(mockedhttpContext, new RouteData(), gameController);
 
          mocks.ReplayAll();
@@ -50,7 +49,7 @@ namespace eland.unittests.UnitTests.Controllers
          mocks.VerifyAll();
 
          Assert.AreEqual(typeof(GameIndexData), res.ViewData.Model.GetType());
-         Assert.AreEqual(typeof(GameSession), (res.ViewData.Model as GameIndexData).GameSessionData.GetType());
+         Assert.AreEqual(typeof(GameSession), ((GameIndexData) res.ViewData.Model).GameSessionData.GetType());
       }
 
       
