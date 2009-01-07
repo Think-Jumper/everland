@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eland.spike.ui.1", "eland.spike.ui.1\eland.spike.ui.1.csproj", "{2F242CE1-5179-4FD3-9C07-E8AC4AF342B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eland.spike.ui.1.Web", "eland.spike.ui.1.Web\eland.spike.ui.1.Web.csproj", "{2E902110-A04C-40F4-9A49-56A50B7A5A48}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F242CE1-5179-4FD3-9C07-E8AC4AF342B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F242CE1-5179-4FD3-9C07-E8AC4AF342B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F242CE1-5179-4FD3-9C07-E8AC4AF342B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F242CE1-5179-4FD3-9C07-E8AC4AF342B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E902110-A04C-40F4-9A49-56A50B7A5A48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E902110-A04C-40F4-9A49-56A50B7A5A48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E902110-A04C-40F4-9A49-56A50B7A5A48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E902110-A04C-40F4-9A49-56A50B7A5A48}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = 
+	EndGlobalSection
+EndGlobal
