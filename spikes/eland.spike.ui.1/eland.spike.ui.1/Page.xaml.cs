@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using SilverlightSpike1.Helpers;
 
 namespace eland.spike.ui._1
@@ -14,7 +16,7 @@ namespace eland.spike.ui._1
 
         private void btnMain_Click(object sender, RoutedEventArgs e)
         {
-            var searchURL = string.Format("http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q={0}", txtSearchQuery.Text.Trim());
+            var searchURL = string.Format("http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q={0}&rsz=large", txtSearchQuery.Text.Trim());
 
             var googleService = new WebClient();
             googleService.OpenReadCompleted += googleService_OpenReadCompleted;
@@ -33,12 +35,18 @@ namespace eland.spike.ui._1
 
         public void DisplaySearchResults(GoogleSearchResults results)
         {
-            grResults.SelectedIndex = -1;
-            grResults.ItemsSource = results.results;
+            listSearch.SelectedIndex = -1;
+            listSearch.ItemsSource = results.results;
         }
 
+        private void listSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedResult = listSearch.SelectedItem;
+            ResultDisplay.DataContext = selectedResult;
+            ResultDisplay.Visibility = System.Windows.Visibility.Visible;
+        }
 
-    }
+ }
 
     public class GoogleResponseWrapper
     {

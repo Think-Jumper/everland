@@ -1,6 +1,7 @@
 ﻿<UserControl xmlns:my="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data"  x:Class="eland.spike.ui._1.Page"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" >
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:_1="clr-namespace:eland.spike.ui._1" >
 
     <Grid x:Name="LayoutRoot" Background="Gray" ShowGridLines="False">
 
@@ -17,17 +18,25 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="0" CornerRadius="10" Background="LightGray" Margin="1,1,1,1">
-                <TextBlock Text="Search" Margin="10,3,0,0"></TextBlock>
+            <Border Grid.Column="0" Style="{StaticResource TitleBorder}">
+                <TextBlock Text="Search" Style="{StaticResource TitleText}"></TextBlock>
             </Border>
             <TextBox x:Name="txtSearchQuery" Grid.Column="1" Margin="3,0,3,0" ></TextBox>
             <Button Grid.Column="2" Content="Search" Click="btnMain_Click"></Button>
         </Grid>
 
-        <my:DataGrid x:Name="grResults" Grid.Row="1"></my:DataGrid>
+        <ListBox x:Name="listSearch" Grid.Row="1" Background="White" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="listSearch_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <HyperlinkButton NavigateUri="{Binding url}" ToolTipService.ToolTip="{Binding visibleUrl}" Content="{Binding titleNoFormatting}" ></HyperlinkButton>
+                        <TextBlock Text="{Binding content}" TextWrapping="Wrap" Width="Auto"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
-
-
+        <_1:SearchResultDisplay x:Name="ResultDisplay" Grid.RowSpan="2" Visibility="Collapsed" />
     </Grid>
 
 </UserControl>
