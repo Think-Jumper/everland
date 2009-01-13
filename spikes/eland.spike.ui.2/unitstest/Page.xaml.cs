@@ -53,14 +53,19 @@ namespace unitstest
 
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (selectedRectangle == null || LayoutRoot.Resources.Contains("stb_move"))
+                return;
+
             if (mouseDown)
             {
                 mouseDown = false;
                 return;
             }
 
-            var xPos = e.GetPosition(null).X;
-            var yPos = e.GetPosition(null).Y;
+            var speed = slSpeed.Value;
+
+            var xPos = e.GetPosition(cnvMain).X;
+            var yPos = e.GetPosition(cnvMain).Y;
 
             var stb = new Storyboard();
             LayoutRoot.Resources.Add("stb_move", stb);
@@ -69,14 +74,14 @@ namespace unitstest
                           {
                               From = ((double)selectedRectangle.GetValue(Canvas.LeftProperty)),
                               To = xPos,
-                              Duration = new Duration(TimeSpan.FromSeconds(1.5))
+                              Duration = new Duration(TimeSpan.FromSeconds(speed))
                           };
 
             var daY = new DoubleAnimation
                           {
                               From = ((double)selectedRectangle.GetValue(Canvas.TopProperty)),
                               To = yPos,
-                              Duration = new Duration(TimeSpan.FromSeconds(1.5))
+                              Duration = new Duration(TimeSpan.FromSeconds(speed))
                           };
             stb.Children.Add(daX);
             stb.Children.Add(daY);
@@ -96,5 +101,6 @@ namespace unitstest
         {
             LayoutRoot.Resources.Remove("stb_move");
         }
-    }
+
+   }
 }
