@@ -29,20 +29,20 @@ namespace unitstest
         {
             for(var x = 0; x < cnvMain.ActualWidth; x+=10)
             {
-                var l = new Line { X1 = x, Y1 = 0, X2 = x, Y2 = cnvMain.ActualHeight, Stroke = new SolidColorBrush(Colors.Blue), StrokeThickness = stroke_width };
+                var l = new Line { X1 = x, Y1 = 0, X2 = x, Y2 = cnvMain.ActualHeight, Stroke = new SolidColorBrush(Colors.DarkGray), StrokeThickness = stroke_width };
                 cnvMain.Children.Add(l);
             }
 
             for(var y=0; y<cnvMain.ActualHeight; y+=10)
             {
-                var l = new Line { X1 = 0, Y1 = y, X2 = cnvMain.ActualWidth, Y2 = y, Stroke = new SolidColorBrush(Colors.Blue), StrokeThickness = stroke_width };
+                var l = new Line { X1 = 0, Y1 = y, X2 = cnvMain.ActualWidth, Y2 = y, Stroke = new SolidColorBrush(Colors.DarkGray), StrokeThickness = stroke_width };
                 cnvMain.Children.Add(l);
             }
         }
 
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DrawGrid();
+            //DrawGrid();
 
             if (selectedRectangle == null || LayoutRoot.Resources.Contains("stb_move"))
                 return;
@@ -96,6 +96,12 @@ namespace unitstest
         private void Animation_Completed(object sender, EventArgs e)
         {
             LayoutRoot.Resources.Remove("stb_move");
+        }
+
+        private void cnvMain_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            DrawGrid();
+
         }
 
    }
