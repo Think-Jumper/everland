@@ -22,7 +22,7 @@
             
         </Grid>
 
-        <Canvas Grid.Row="2" Margin="10" x:Name="cnvMain"  MouseLeftButtonDown="Canvas_MouseLeftButtonDown" Background="LightGray">
+        <Canvas Grid.Row="2" Margin="10" x:Name="cnvMain"  MouseLeftButtonDown="Canvas_MouseLeftButtonDown" Background="LightGray" SizeChanged="cnvMain_SizeChanged" >
             <Rectangle x:Name="rect1" Width="8" Height="8" Fill="Blue" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
             <Rectangle x:Name="rect2" Width="8" Height="8" Fill="Red" Canvas.Left="50" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
             <Rectangle x:Name="rectObstruction" Width="15" Height="75" Canvas.Left="100" Canvas.Top="90" />
