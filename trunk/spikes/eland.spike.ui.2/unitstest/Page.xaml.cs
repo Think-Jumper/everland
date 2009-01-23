@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -105,4 +106,38 @@ namespace unitstest
         }
 
    }
+
+    public class GridSquare
+    {
+        public int X1 { get; set; }
+        public int Y1 { get; set; }
+        public int X2 { get; set; }
+        public int Y2 { get; set; }
+        public bool Visited { get; set; }
+
+        public bool Intersects(Point point)
+        {
+            return false;
+        }
+        
+    }
+
+    public class GridManager
+    {
+        private List<GridSquare> grid;
+        public GridManager()
+        {
+            grid = new List<GridSquare>();
+        }
+
+        public GridManager(int CanvasWidth, int CanvasHeight, int GridSize)
+        {
+            var numSquaresX = Math.Round((double)CanvasWidth/GridSize);
+            var numSquaresY = Math.Round((double)CanvasHeight / GridSize);
+
+            for(var x = 0; x < numSquaresX; )
+
+        }
+        
+    }
 }
