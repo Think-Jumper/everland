@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,6 +12,7 @@ namespace unitstest
 {
     public partial class Page
     {
+        private GridManager gMan;
         private bool mouseDown;
         private Rectangle selectedRectangle;
         private const double stroke_width = 0.5;
@@ -18,6 +20,7 @@ namespace unitstest
         public Page()
         {
             InitializeComponent();
+            gMan = new GridManager();
         }
 
         private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -26,25 +29,8 @@ namespace unitstest
             mouseDown = true;
         }
 
-        private void DrawGrid()
+   private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            for(var x = 0; x < cnvMain.ActualWidth; x+=10)
-            {
-                var l = new Line { X1 = x, Y1 = 0, X2 = x, Y2 = cnvMain.ActualHeight, Stroke = new SolidColorBrush(Colors.DarkGray), StrokeThickness = stroke_width };
-                cnvMain.Children.Add(l);
-            }
-
-            for(var y=0; y<cnvMain.ActualHeight; y+=10)
-            {
-                var l = new Line { X1 = 0, Y1 = y, X2 = cnvMain.ActualWidth, Y2 = y, Stroke = new SolidColorBrush(Colors.DarkGray), StrokeThickness = stroke_width };
-                cnvMain.Children.Add(l);
-            }
-        }
-
-        private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            //DrawGrid();
-
             if (selectedRectangle == null || LayoutRoot.Resources.Contains("stb_move"))
                 return;
 
@@ -101,7 +87,8 @@ namespace unitstest
 
         private void cnvMain_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            DrawGrid();
+            var gm = new GridManager();
+            gm.Draw(cnvMain, 10, 0.5);
 
         }
 
@@ -114,10 +101,19 @@ namespace unitstest
         public int X2 { get; set; }
         public int Y2 { get; set; }
         public bool Visited { get; set; }
+        public bool Blocked { get; set; }
 
         public bool Intersects(Point point)
         {
-            return false;
+            return ((X1 < point.X && point.X < X2) && (Y1 < point.Y && point.Y < Y2));
+        }
+
+        public GridSquare(int X, int Y, int Size)
+        {
+            X1 = (Size*X);
+            X2 = (Size*(X + 1));
+            Y1 = (Size*Y);
+            Y2 = (Size*(Y + 1));
         }
         
     }
@@ -125,18 +121,45 @@ namespace unitstest
     public class GridManager
     {
         private List<GridSquare> grid;
-        public GridManager()
+        private double numSquaresX;
+        private double numSquaresY;
+        private int GridSquareSize;
+
+        public void Draw(Canvas surface, int gridSize, double strokeWidth)
         {
+            numSquaresX = Math.Round(surface.ActualWidth / gridSize);
+            numSquaresY = Math.Round(surface.ActualHeight / gridSize);
+
+            GridSquareSize = gridSize;
+
             grid = new List<GridSquare>();
+
+            for (var x = 0; x < numSquaresX; x++)
+            {
+                for (var y = 0; y < numSquaresY; y++)
+                {
+                    var g = new GridSquare(x, y, gridSize);
+                          
+                    grid.Add(g);
+                }
+            }
+
+            DrawGridLines(surface, strokeWidth);
         }
 
-        public GridManager(int CanvasWidth, int CanvasHeight, int GridSize)
+        private void DrawGridLines(Canvas surface, double StrokeWidth)
         {
-            var numSquaresX = Math.Round((double)CanvasWidth/GridSize);
-            var numSquaresY = Math.Round((double)CanvasHeight / GridSize);
+            for (var x = 0; x < (numSquaresX * GridSquareSize); x += GridSquareSize)
+            {
+                var l = new Line { X1 = x, Y1 = 0, X2 = x, Y2 = GridSquareSize * numSquaresY, Stroke = new SolidColorBrush(Colors.DarkGray), StrokeThickness = StrokeWidth };
+                surface.Children.Add(l);
+            }
 
-            for(var x = 0; x < numSquaresX; )
-
+            for (var y = 0; y < (numSquaresY * GridSquareSize); y += GridSquareSize)
+            {
+                var l = new Line { X1 = 0, Y1 = y, X2 = GridSquareSize * numSquaresX, Y2 = y, Stroke = new SolidColorBrush(Colors.DarkGray), StrokeThickness = StrokeWidth };
+                surface.Children.Add(l);
+            }
         }
         
     }
