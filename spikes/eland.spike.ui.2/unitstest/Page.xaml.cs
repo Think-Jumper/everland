@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,7 +11,7 @@ namespace unitstest
 {
     public partial class Page
     {
-        private GridManager gMan;
+        private readonly GridManager gridManager;
         private bool mouseDown;
         private Rectangle selectedRectangle;
         private const double stroke_width = 0.5;
@@ -20,7 +19,7 @@ namespace unitstest
         public Page()
         {
             InitializeComponent();
-            gMan = new GridManager();
+            gridManager = new GridManager();
         }
 
         private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -31,11 +30,14 @@ namespace unitstest
 
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var xPos = (int)e.GetPosition(cnvMain).X;
-            var yPos = (int)e.GetPosition(cnvMain).Y;
+            var xPos = e.GetPosition(cnvMain).X;
+            var yPos = e.GetPosition(cnvMain).Y;
 
-            if (selectedRectangle == null || !LayoutRoot.Resources.Contains("stb_move"))
-                gMan.HighlightGridSquare(cnvMain, xPos, yPos);
+            if (selectedRectangle == null || LayoutRoot.Resources.Contains("stb_move"))
+            {
+                gridManager.HighlightGridSquare(cnvMain, (int) xPos, (int) yPos);
+                return;
+            }
 
             if (mouseDown)
             {
@@ -45,8 +47,9 @@ namespace unitstest
 
             var speed = slSpeed.Value;
 
-            xPos = ((Math.Round(xPos / 10)) * 10) + stroke_width * 2;
-            yPos = ((Math.Round(yPos / 10)) * 10) + stroke_width * 2;
+
+            xPos = (Math.Round((xPos / 10)) * 10) + (stroke_width * 2);
+            yPos = (Math.Round((yPos / 10)) * 10) + (stroke_width * 2);
 
             var stb = new Storyboard();
             LayoutRoot.Resources.Add("stb_move", stb);
@@ -86,8 +89,7 @@ namespace unitstest
 
         private void cnvMain_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            gMan.Draw(cnvMain, 10, 0.5);
-
+            gridManager.Draw(cnvMain, 10, 0.5);
         }
 
     }
@@ -112,17 +114,6 @@ namespace unitstest
             X2 = (Size * (X + 1));
             Y1 = (Size * Y);
             Y2 = (Size * (Y + 1));
-        }
-
-        public void HighLight(Canvas surface)
-        {
-            var highlight = new Rectangle {Fill = new SolidColorBrush(Colors.Green)};
-            highlight.SetValue(Canvas.TopProperty, (double)Y1);
-            highlight.SetValue(Canvas.LeftProperty, (double)X1);
-            highlight.Width = X2 - X1;
-            highlight.Height = Y2 - Y1;
-
-            surface.Children.Add(highlight);
         }
 
     }
@@ -161,12 +152,25 @@ namespace unitstest
             foreach (var g in grid)
             {
                 if (g.Intersects(new Point(X, Y)))
-                    g.HighLight(surface);
+                    HighLight(surface, g);
 
             }
         }
 
-        private void DrawGridLines(Canvas surface, double StrokeWidth)
+        private static void HighLight(Panel surface, GridSquare rect)
+        {
+            var highlight = new Rectangle { Fill = new SolidColorBrush(Colors.Green) };
+            highlight.SetValue(Canvas.TopProperty, (double)rect.Y1);
+            highlight.SetValue(Canvas.LeftProperty, (double)rect.X1);
+            highlight.Width = rect.X2 - rect.X1;
+            highlight.Height = rect.Y2 - rect.Y1;
+
+            rect.Blocked = true;
+
+            surface.Children.Add(highlight);
+        }
+
+        private void DrawGridLines(Panel surface, double StrokeWidth)
         {
             for (var x = 0; x < (numSquaresX * GridSquareSize); x += GridSquareSize)
             {
@@ -181,5 +185,18 @@ namespace unitstest
             }
         }
 
+    }
+
+    public interface IPathCalculator
+    {
+        void Calculate(Point start, Point end);
+    }
+
+    public class AStarPathCalculator : IPathCalculator
+    {
+        public void Calculate(Point start, Point end)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
