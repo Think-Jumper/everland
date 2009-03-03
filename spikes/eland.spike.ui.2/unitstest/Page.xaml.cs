@@ -273,7 +273,7 @@ namespace unitstest
             var text = new TextBlock();
             text.SetValue(Canvas.TopProperty, (double)rect.Position.Y1);
             text.SetValue(Canvas.LeftProperty, (double)rect.Position.X1);
-            text.Text = string.Format("{0}", counter);
+            text.Text = string.Format("{0} {1}", counter, rect.G);
           
             text.FontSize = 6;
             
@@ -371,14 +371,9 @@ namespace unitstest
 
             while (true)
             {
-                if(_openList.Count == 0)
-                {
-                    MessageBox.Show("Error");
-                    return _closedList;
-                }
+                _openList.Sort();
 
-                var lowest = _openList.Min(x => x.F);
-                var current = _openList.Where(x => x.F == lowest).FirstOrDefault();
+                var current = _openList[0]; 
 
                 if (current.Position == end)
                 {
@@ -422,7 +417,7 @@ namespace unitstest
 
         }
 
-        public class PathNode
+        public class PathNode : IComparable<PathNode>
         {
             public GridSquare Position { get; set; }
             public PathNode Parent { get; set; }
@@ -433,6 +428,11 @@ namespace unitstest
             public int F
             {
                 get { return G + H; }
+            }
+
+            public int CompareTo(PathNode other)
+            {
+                return F != other.F ? F.CompareTo(other.F) : G.CompareTo(other.G);
             }
         }
 
