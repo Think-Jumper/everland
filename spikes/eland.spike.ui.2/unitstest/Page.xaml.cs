@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,6 +16,9 @@ namespace unitstest
         private bool mouseDown;
         private Rectangle selectedRectangle;
         private const double stroke_width = 0.5;
+
+        private GridSquare start;
+        private GridSquare end;
 
         public Page()
         {
@@ -33,54 +37,88 @@ namespace unitstest
             var xPos = e.GetPosition(cnvMain).X;
             var yPos = e.GetPosition(cnvMain).Y;
 
-            if (selectedRectangle == null || LayoutRoot.Resources.Contains("stb_move"))
+            var keys = Keyboard.Modifiers;
+            var controlKey = (keys & ModifierKeys.Control) != 0;
+
+            if (controlKey)
             {
-                gridManager.HighlightGridSquare(cnvMain, (int) xPos, (int) yPos);
+                gridManager.Block(cnvMain, (int)xPos, (int)yPos);
                 return;
             }
 
-            if (mouseDown)
+            if(start == null)
             {
-                mouseDown = false;
+                start = gridManager.HighlightGridSquare(cnvMain, (int)xPos, (int)yPos);
                 return;
             }
 
-            var speed = slSpeed.Value;
+            end = gridManager.HighlightGridSquare(cnvMain, (int)xPos, (int)yPos);
+
+            var path = gridManager.CalculatePath(start, end);
+
+            gridManager.HighlightGridSquares(cnvMain, path);
 
 
-            xPos = (Math.Round((xPos / 10)) * 10) + (stroke_width * 2);
-            yPos = (Math.Round((yPos / 10)) * 10) + (stroke_width * 2);
-
-            var stb = new Storyboard();
-            LayoutRoot.Resources.Add("stb_move", stb);
-
-            var daX = new DoubleAnimation
-                          {
-                              From = ((double)selectedRectangle.GetValue(Canvas.LeftProperty)),
-                              To = xPos,
-                              Duration = new Duration(TimeSpan.FromSeconds(speed)),
-                              By = 10
-                          };
-
-            var daY = new DoubleAnimation
-                          {
-                              From = ((double)selectedRectangle.GetValue(Canvas.TopProperty)),
-                              To = yPos,
-                              Duration = new Duration(TimeSpan.FromSeconds(speed)),
-                              By = 10
-                          };
-            stb.Children.Add(daX);
-            stb.Children.Add(daY);
-
-            Storyboard.SetTarget(daX, selectedRectangle);
-            Storyboard.SetTargetProperty(daX, new PropertyPath("(Canvas.Left)"));
-
-            Storyboard.SetTarget(daY, selectedRectangle);
-            Storyboard.SetTargetProperty(daY, new PropertyPath("(Canvas.Top)"));
-
-            stb.Completed += Animation_Completed;
-            stb.Begin();
+         
         }
+
+
+        //private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    var xPos = e.GetPosition(cnvMain).X;
+        //    var yPos = e.GetPosition(cnvMain).Y;
+
+        //    if (selectedRectangle == null || LayoutRoot.Resources.Contains("stb_move"))
+        //    {
+        //        var square = gridManager.HighlightGridSquare(cnvMain, (int)xPos, (int)yPos);
+
+        //        var ne = gridManager.GetNeighbours(square);
+        //        gridManager.HighlightGridSquares(cnvMain, ne);
+        //        return;
+        //    }
+
+        //    if (mouseDown)
+        //    {
+        //        mouseDown = false;
+        //        return;
+        //    }
+
+        //    var speed = slSpeed.Value;
+
+
+        //    xPos = (Math.Round((xPos / 10)) * 10) + (stroke_width * 2);
+        //    yPos = (Math.Round((yPos / 10)) * 10) + (stroke_width * 2);
+
+        //    var stb = new Storyboard();
+        //    LayoutRoot.Resources.Add("stb_move", stb);
+
+        //    var daX = new DoubleAnimation
+        //                  {
+        //                      From = ((double)selectedRectangle.GetValue(Canvas.LeftProperty)),
+        //                      To = xPos,
+        //                      Duration = new Duration(TimeSpan.FromSeconds(speed)),
+        //                      By = 10
+        //                  };
+
+        //    var daY = new DoubleAnimation
+        //                  {
+        //                      From = ((double)selectedRectangle.GetValue(Canvas.TopProperty)),
+        //                      To = yPos,
+        //                      Duration = new Duration(TimeSpan.FromSeconds(speed)),
+        //                      By = 10
+        //                  };
+        //    stb.Children.Add(daX);
+        //    stb.Children.Add(daY);
+
+        //    Storyboard.SetTarget(daX, selectedRectangle);
+        //    Storyboard.SetTargetProperty(daX, new PropertyPath("(Canvas.Left)"));
+
+        //    Storyboard.SetTarget(daY, selectedRectangle);
+        //    Storyboard.SetTargetProperty(daY, new PropertyPath("(Canvas.Top)"));
+
+        //    stb.Completed += Animation_Completed;
+        //    stb.Begin();
+        //}
 
         private void Animation_Completed(object sender, EventArgs e)
         {
@@ -89,31 +127,45 @@ namespace unitstest
 
         private void cnvMain_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            gridManager.Draw(cnvMain, 10, 0.5);
+            gridManager.Draw(cnvMain, 20, 0.5);
         }
 
     }
 
     public class GridSquare
     {
+        public int Id { get; set; }
         public int X1 { get; set; }
         public int Y1 { get; set; }
         public int X2 { get; set; }
         public int Y2 { get; set; }
+        public int Size { get; set; }
         public bool Visited { get; set; }
         public bool Blocked { get; set; }
+        
+        public Point Center
+        {
+            get
+            {
+                return new Point((X2 - X1) / 2, (Y2 - Y1) / 2);
+            }
+        }
+
 
         public bool Intersects(Point point)
         {
             return ((X1 < point.X && point.X < X2) && (Y1 < point.Y && point.Y < Y2));
         }
 
-        public GridSquare(int X, int Y, int Size)
+        public GridSquare(int x, int y, int size, int id, bool blocked)
         {
-            X1 = (Size * X);
-            X2 = (Size * (X + 1));
-            Y1 = (Size * Y);
-            Y2 = (Size * (Y + 1));
+            X1 = (size * x);
+            X2 = (size * (x + 1));
+            Y1 = (size * y);
+            Y2 = (size * (y + 1));
+            Id = id;
+            Size = size;
+            Blocked = blocked;
         }
 
     }
@@ -134,11 +186,13 @@ namespace unitstest
 
             grid = new List<GridSquare>();
 
-            for (var x = 0; x < numSquaresX; x++)
+            var id = 0;
+
+            for (var y = 0; y < numSquaresY; y++)
             {
-                for (var y = 0; y < numSquaresY; y++)
+                for (var x = 0; x < numSquaresX; x++)
                 {
-                    var g = new GridSquare(x, y, gridSize);
+                    var g = new GridSquare(x, y, gridSize, id++, false);
 
                     grid.Add(g);
                 }
@@ -147,27 +201,77 @@ namespace unitstest
             DrawGridLines(surface, strokeWidth);
         }
 
-        public void HighlightGridSquare(Canvas surface, int X, int Y)
+        public void Block(Canvas surface, int X, int Y)
         {
             foreach (var g in grid)
             {
-                if (g.Intersects(new Point(X, Y)))
-                    HighLight(surface, g);
-
+                if (!g.Intersects(new Point(X, Y))) continue;
+                g.Blocked = true;
+                HighLight(surface, g, Colors.Blue);
+                return;
             }
         }
 
-        private static void HighLight(Panel surface, GridSquare rect)
+        public GridSquare HighlightGridSquare(Canvas surface, int X, int Y)
         {
-            var highlight = new Rectangle { Fill = new SolidColorBrush(Colors.Green) };
+            foreach (var g in grid)
+            {
+                if (!g.Intersects(new Point(X, Y))) continue;
+                HighLight(surface, g, Colors.Green);
+                return g;
+            }
+
+            return null;
+        }
+
+        public void HighlightGridSquares(Canvas surface, List<GridSquare> squares)
+        {
+            foreach (var g in squares)
+            {
+                HighLight(surface, g, Colors.Red);
+            }
+        }
+
+
+        public void HighlightGridSquares(Canvas surface, List<AStarPathCalculator.PathNode> squares)
+        {
+            var counter = 0;
+            foreach (var g in squares)
+            {
+                HighLight(surface, g, Colors.Red, counter++);
+            }
+        }
+
+
+
+        private static void HighLight(Panel surface, GridSquare rect, Color colour)
+        {
+            var highlight = new Rectangle { Fill = new SolidColorBrush(colour) };
             highlight.SetValue(Canvas.TopProperty, (double)rect.Y1);
             highlight.SetValue(Canvas.LeftProperty, (double)rect.X1);
             highlight.Width = rect.X2 - rect.X1;
             highlight.Height = rect.Y2 - rect.Y1;
 
-            rect.Blocked = true;
-
             surface.Children.Add(highlight);
+        }
+
+        private static void HighLight(Panel surface, AStarPathCalculator.PathNode rect, Color colour, int counter)
+        {
+            var highlight = new Rectangle { Fill = new SolidColorBrush(colour) };
+            highlight.SetValue(Canvas.TopProperty, (double)rect.Position.Y1);
+            highlight.SetValue(Canvas.LeftProperty, (double)rect.Position.X1);
+            highlight.Width = rect.Position.X2 - rect.Position.X1;
+            highlight.Height = rect.Position.Y2 - rect.Position.Y1;
+
+            var text = new TextBlock();
+            text.SetValue(Canvas.TopProperty, (double)rect.Position.Y1);
+            text.SetValue(Canvas.LeftProperty, (double)rect.Position.X1);
+            text.Text = string.Format("{0} ({1})", counter, rect.F);
+          
+            text.FontSize = 6;
+            
+            surface.Children.Add(highlight);
+            surface.Children.Add(text);
         }
 
         private void DrawGridLines(Panel surface, double StrokeWidth)
@@ -185,18 +289,138 @@ namespace unitstest
             }
         }
 
+        public List<GridSquare> GetNeighbours(GridSquare centreGridSquare)
+        {
+            var neighbours = new List<GridSquare>();
+            var currentId = centreGridSquare.Id;
+
+            neighbours.Add(grid.Where(g => g.Id == currentId - 1).SingleOrDefault());
+            neighbours.Add(grid.Where(g => g.Id == currentId + 1).SingleOrDefault());
+            neighbours.Add(grid.Where(g => g.Id == currentId - 1 - numSquaresX).SingleOrDefault());
+            neighbours.Add(grid.Where(g => g.Id == currentId - numSquaresX).SingleOrDefault());
+            neighbours.Add(grid.Where(g => g.Id == currentId + 1 - numSquaresX).SingleOrDefault());
+            neighbours.Add(grid.Where(g => g.Id == currentId + numSquaresX).SingleOrDefault());
+            neighbours.Add(grid.Where(g => g.Id == currentId + numSquaresX - 1).SingleOrDefault());
+            neighbours.Add(grid.Where(g => g.Id == currentId + numSquaresX + 1).SingleOrDefault());
+
+            return neighbours;
+        }
+
+        public List<AStarPathCalculator.PathNode> CalculatePath(GridSquare start, GridSquare end)
+        {
+            var aStar = new AStarPathCalculator {NumberSquaresWidth = ((int) numSquaresX)};
+            return aStar.Calculate(start, end, this);
+        }
+
     }
 
     public interface IPathCalculator
     {
-        void Calculate(Point start, Point end);
+        List<AStarPathCalculator.PathNode> Calculate(GridSquare start, GridSquare end, GridManager gridManager);
     }
 
     public class AStarPathCalculator : IPathCalculator
     {
-        public void Calculate(Point start, Point end)
+        private readonly List<PathNode> _closedList;
+        private readonly List<PathNode> _openList;
+        public int NumberSquaresWidth { get; set; }
+
+        public AStarPathCalculator()
         {
-            throw new System.NotImplementedException();
+            _openList = new List<PathNode>();
+            _closedList = new List<PathNode>();
         }
+
+        private PathNode CalculateFGH(PathNode currentNode, PathNode proposedNode, GridSquare endNode)
+        {
+            proposedNode.G = currentNode.G + CalculateCost(currentNode, proposedNode);
+            proposedNode.H = CalculateDistance(endNode.Y2 , proposedNode.Position.Y2 ) +
+                             CalculateDistance(endNode.X2 , proposedNode.Position.X2 );
+            return proposedNode;
+        }
+
+        private static int CalculateDistance(int a, int b)
+        {
+            return Math.Abs(a/20 - b/20);
+        }
+
+        private int CalculateCost(PathNode currentNode, PathNode proposedNode)
+        {
+            var idCost = Math.Abs(proposedNode.Position.Id - currentNode.Position.Id);
+            if(idCost == 1 || idCost == NumberSquaresWidth)
+            {
+                return 1;
+            }
+            return 2;
+        }
+
+
+        public List<PathNode> Calculate(GridSquare start, GridSquare end, GridManager gridManager)
+        {
+            var startNode = new PathNode {Position = start};
+            startNode = CalculateFGH(startNode, startNode, end);
+            
+            _openList.Add(startNode);
+
+            while (true)
+            {
+                var lowest = _openList.Min(x => x.F);
+                var current = _openList.Where(x => x.F == lowest).FirstOrDefault();
+
+                if (current.Position == end)
+                {
+                    return _closedList;
+                }
+
+                _closedList.Add(current);
+                _openList.Remove(current);
+
+                var neighbours = gridManager.GetNeighbours(current.Position);
+
+                foreach (var g in neighbours)
+                {
+                    if (g == null) continue;
+
+                    var c1 = _closedList.Where(x => x.Position == g).FirstOrDefault();
+
+                    if (!g.Blocked && (c1 == null))
+                    {
+                        var newNode = new PathNode() { Position = g, Parent = current };
+                        newNode = CalculateFGH(current, newNode, end);
+
+                        _openList.Add(newNode);
+                    }
+
+                    if (!g.Blocked && (c1 != null))
+                    {
+                        var newNode = new PathNode() { Position = g, Parent = current };
+                        newNode = CalculateFGH(current, newNode, end);
+
+                        if (newNode.F < c1.F)
+                        {
+                            _openList.Remove(c1);
+                            _openList.Add(newNode);
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+        public class PathNode
+        {
+            public GridSquare Position { get; set; }
+            public PathNode Parent { get; set; }
+
+            public int G { get; set; }
+            public int H { get; set; }
+
+            public int F
+            {
+                get { return G + H; }
+            }
+        }
+
     }
 }
