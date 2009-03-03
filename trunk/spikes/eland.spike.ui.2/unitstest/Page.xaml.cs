@@ -396,7 +396,8 @@ namespace unitstest
                         var newNode = new PathNode() { Position = g, Parent = current };
                         newNode = CalculateFGH(current, newNode, end);
 
-                        _openList.Add(newNode);
+                        if(!_openList.Contains(newNode))
+                            _openList.Add(newNode);
                     }
 
                     if (!g.Blocked && (c1 != null))
@@ -424,7 +425,6 @@ namespace unitstest
 
             public int G { get; set; }
             public int H { get; set; }
-
             public int F
             {
                 get { return G + H; }
@@ -434,7 +434,15 @@ namespace unitstest
             {
                 return F != other.F ? F.CompareTo(other.F) : G.CompareTo(other.G);
             }
+
+            public override bool Equals(object obj)
+            {
+                return (Position.Id == ((PathNode) obj).Position.Id);
+            }
         }
+
+      
+
 
     }
 }
