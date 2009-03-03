@@ -39,10 +39,19 @@ namespace unitstest
 
             var keys = Keyboard.Modifiers;
             var controlKey = (keys & ModifierKeys.Control) != 0;
+            var shiftKey = (keys & ModifierKeys.Shift) != 0;
 
             if (controlKey)
             {
                 gridManager.Block(cnvMain, (int)xPos, (int)yPos);
+                return;
+            }
+
+            if (shiftKey)
+            {
+                var square = gridManager.HighlightGridSquare(cnvMain, (int) xPos, (int) yPos);
+                var neighbours = gridManager.GetNeighbours(square);
+                gridManager.HighlightGridSquares(cnvMain, neighbours);
                 return;
             }
 
@@ -127,7 +136,7 @@ namespace unitstest
 
         private void cnvMain_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            gridManager.Draw(cnvMain, 20, 0.5);
+            gridManager.Draw(cnvMain, 15, 0.5);
         }
 
     }
@@ -242,8 +251,6 @@ namespace unitstest
             }
         }
 
-
-
         private static void HighLight(Panel surface, GridSquare rect, Color colour)
         {
             var highlight = new Rectangle { Fill = new SolidColorBrush(colour) };
@@ -266,7 +273,7 @@ namespace unitstest
             var text = new TextBlock();
             text.SetValue(Canvas.TopProperty, (double)rect.Position.Y1);
             text.SetValue(Canvas.LeftProperty, (double)rect.Position.X1);
-            text.Text = string.Format("{0} ({1})", counter, rect.F);
+            text.Text = string.Format("{0}", counter);
           
             text.FontSize = 6;
             
@@ -341,7 +348,7 @@ namespace unitstest
 
         private static int CalculateDistance(int a, int b)
         {
-            return Math.Abs(a/20 - b/20);
+            return Math.Abs(a/15 - b/15);
         }
 
         private int CalculateCost(PathNode currentNode, PathNode proposedNode)
@@ -349,9 +356,9 @@ namespace unitstest
             var idCost = Math.Abs(proposedNode.Position.Id - currentNode.Position.Id);
             if(idCost == 1 || idCost == NumberSquaresWidth)
             {
-                return 1;
+                return 10;
             }
-            return 2;
+            return 14;
         }
 
 
@@ -364,6 +371,12 @@ namespace unitstest
 
             while (true)
             {
+                if(_openList.Count == 0)
+                {
+                    MessageBox.Show("Error");
+                    return _closedList;
+                }
+
                 var lowest = _openList.Min(x => x.F);
                 var current = _openList.Where(x => x.F == lowest).FirstOrDefault();
 
@@ -373,7 +386,7 @@ namespace unitstest
                 }
 
                 _closedList.Add(current);
-                _openList.Remove(current);
+                _openList.Clear();
 
                 var neighbours = gridManager.GetNeighbours(current.Position);
 
@@ -403,6 +416,7 @@ namespace unitstest
                         }
                     }
                 }
+
 
             }
 
