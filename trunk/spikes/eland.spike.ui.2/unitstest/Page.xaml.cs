@@ -13,9 +13,8 @@ namespace unitstest
     public partial class Page
     {
         private readonly GridManager gridManager;
-        private bool mouseDown;
-        private Rectangle selectedRectangle;
         private const double stroke_width = 0.5;
+        public static int grid_size = 15;
 
         private GridSquare start;
         private GridSquare end;
@@ -26,11 +25,17 @@ namespace unitstest
             gridManager = new GridManager();
         }
 
-        private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public static void Log(String text)
         {
-            selectedRectangle = (Rectangle)sender;
-            mouseDown = true;
+            txtLog.Text += text;
+            txtLog.Text += Environment.NewLine;
         }
+
+        //private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    selectedRectangle = (Rectangle)sender;
+        //    mouseDown = true;
+        //}
 
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -129,14 +134,14 @@ namespace unitstest
         //    stb.Begin();
         //}
 
-        private void Animation_Completed(object sender, EventArgs e)
-        {
-            LayoutRoot.Resources.Remove("stb_move");
-        }
+        //private void Animation_Completed(object sender, EventArgs e)
+        //{
+        //    LayoutRoot.Resources.Remove("stb_move");
+        //}
 
         private void cnvMain_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            gridManager.Draw(cnvMain, 15, 0.5);
+            gridManager.Draw(cnvMain, grid_size, stroke_width);
         }
 
     }
@@ -149,24 +154,16 @@ namespace unitstest
         public int X2 { get; set; }
         public int Y2 { get; set; }
         public int Size { get; set; }
-        public bool Visited { get; set; }
         public bool Blocked { get; set; }
-        
-        public Point Center
-        {
-            get
-            {
-                return new Point((X2 - X1) / 2, (Y2 - Y1) / 2);
-            }
-        }
-
+        public int Row { get; set; }
+        public int Column { get; set; }
 
         public bool Intersects(Point point)
         {
             return ((X1 < point.X && point.X < X2) && (Y1 < point.Y && point.Y < Y2));
         }
 
-        public GridSquare(int x, int y, int size, int id, bool blocked)
+        public GridSquare(int x, int y, int size, int id, bool blocked, int row, int column)
         {
             X1 = (size * x);
             X2 = (size * (x + 1));
@@ -175,6 +172,8 @@ namespace unitstest
             Id = id;
             Size = size;
             Blocked = blocked;
+            Row = row;
+            Column = column;
         }
 
     }
@@ -201,7 +200,7 @@ namespace unitstest
             {
                 for (var x = 0; x < numSquaresX; x++)
                 {
-                    var g = new GridSquare(x, y, gridSize, id++, false);
+                    var g = new GridSquare(x, y, gridSize, id++, false, y, x);
 
                     grid.Add(g);
                 }
@@ -241,18 +240,17 @@ namespace unitstest
             }
         }
 
-
         public void HighlightGridSquares(Canvas surface, List<AStarPathCalculator.PathNode> squares)
         {
             var counter = 0;
+
             foreach (var g in squares)
-            {
                 HighLight(surface, g, Colors.Red, counter++);
-            }
         }
 
         private static void HighLight(Panel surface, GridSquare rect, Color colour)
         {
+            if (rect == null) return;
             var highlight = new Rectangle { Fill = new SolidColorBrush(colour) };
             highlight.SetValue(Canvas.TopProperty, (double)rect.Y1);
             highlight.SetValue(Canvas.LeftProperty, (double)rect.X1);
@@ -264,21 +262,15 @@ namespace unitstest
 
         private static void HighLight(Panel surface, AStarPathCalculator.PathNode rect, Color colour, int counter)
         {
+            if (rect.Position == null) return;
+
             var highlight = new Rectangle { Fill = new SolidColorBrush(colour) };
             highlight.SetValue(Canvas.TopProperty, (double)rect.Position.Y1);
             highlight.SetValue(Canvas.LeftProperty, (double)rect.Position.X1);
             highlight.Width = rect.Position.X2 - rect.Position.X1;
             highlight.Height = rect.Position.Y2 - rect.Position.Y1;
 
-            var text = new TextBlock();
-            text.SetValue(Canvas.TopProperty, (double)rect.Position.Y1);
-            text.SetValue(Canvas.LeftProperty, (double)rect.Position.X1);
-            text.Text = string.Format("{0} {1}", counter, rect.G);
-          
-            text.FontSize = 6;
-            
             surface.Children.Add(highlight);
-            surface.Children.Add(text);
         }
 
         private void DrawGridLines(Panel surface, double StrokeWidth)
@@ -299,16 +291,17 @@ namespace unitstest
         public List<GridSquare> GetNeighbours(GridSquare centreGridSquare)
         {
             var neighbours = new List<GridSquare>();
-            var currentId = centreGridSquare.Id;
+            var currentColumn = centreGridSquare.Column;
+            var currentRow = centreGridSquare.Row;
 
-            neighbours.Add(grid.Where(g => g.Id == currentId - 1).SingleOrDefault());
-            neighbours.Add(grid.Where(g => g.Id == currentId + 1).SingleOrDefault());
-            neighbours.Add(grid.Where(g => g.Id == currentId - 1 - numSquaresX).SingleOrDefault());
-            neighbours.Add(grid.Where(g => g.Id == currentId - numSquaresX).SingleOrDefault());
-            neighbours.Add(grid.Where(g => g.Id == currentId + 1 - numSquaresX).SingleOrDefault());
-            neighbours.Add(grid.Where(g => g.Id == currentId + numSquaresX).SingleOrDefault());
-            neighbours.Add(grid.Where(g => g.Id == currentId + numSquaresX - 1).SingleOrDefault());
-            neighbours.Add(grid.Where(g => g.Id == currentId + numSquaresX + 1).SingleOrDefault());
+            neighbours.Add(grid.Where(g => (g.Row == currentRow - 1) && (g.Column == currentColumn-1)).SingleOrDefault());
+            neighbours.Add(grid.Where(g => (g.Row == currentRow - 1) && (g.Column == currentColumn)).SingleOrDefault());
+            neighbours.Add(grid.Where(g => (g.Row == currentRow - 1) && (g.Column == currentColumn + 1)).SingleOrDefault());
+            neighbours.Add(grid.Where(g => (g.Row == currentRow) && (g.Column == currentColumn - 1)).SingleOrDefault());
+            neighbours.Add(grid.Where(g => (g.Row == currentRow) && (g.Column == currentColumn + 1)).SingleOrDefault());
+            neighbours.Add(grid.Where(g => (g.Row == currentRow + 1) && (g.Column == currentColumn - 1)).SingleOrDefault());
+            neighbours.Add(grid.Where(g => (g.Row == currentRow + 1) && (g.Column == currentColumn)).SingleOrDefault());
+            neighbours.Add(grid.Where(g => (g.Row == currentRow + 1) && (g.Column == currentColumn + 1)).SingleOrDefault());
 
             return neighbours;
         }
@@ -341,14 +334,14 @@ namespace unitstest
         private PathNode CalculateFGH(PathNode currentNode, PathNode proposedNode, GridSquare endNode)
         {
             proposedNode.G = currentNode.G + CalculateCost(currentNode, proposedNode);
-            proposedNode.H = CalculateDistance(endNode.Y2 , proposedNode.Position.Y2 ) +
-                             CalculateDistance(endNode.X2 , proposedNode.Position.X2 );
+            proposedNode.H = 10 * (CalculateDistance(endNode.Y2 , proposedNode.Position.Y2 ) +
+                             CalculateDistance(endNode.X2 , proposedNode.Position.X2 ));
             return proposedNode;
         }
 
         private static int CalculateDistance(int a, int b)
         {
-            return Math.Abs(a/15 - b/15);
+            return Math.Abs(a/Page.grid_size - b/Page.grid_size);
         }
 
         private int CalculateCost(PathNode currentNode, PathNode proposedNode)
@@ -373,12 +366,13 @@ namespace unitstest
             {
                 _openList.Sort();
 
+                if (_openList.Count == 0)
+                    return _closedList;
+
                 var current = _openList[0]; 
 
                 if (current.Position == end)
-                {
                     return _closedList;
-                }
 
                 _closedList.Add(current);
                 _openList.Clear();
@@ -405,7 +399,7 @@ namespace unitstest
                         var newNode = new PathNode() { Position = g, Parent = current };
                         newNode = CalculateFGH(current, newNode, end);
 
-                        if (newNode.F < c1.F)
+                        if (newNode.G < c1.G)
                         {
                             _openList.Remove(c1);
                             _openList.Add(newNode);
@@ -438,6 +432,11 @@ namespace unitstest
             public override bool Equals(object obj)
             {
                 return (Position.Id == ((PathNode) obj).Position.Id);
+            }
+
+            public override int GetHashCode()
+            {
+                return base.GetHashCode();
             }
         }
 
