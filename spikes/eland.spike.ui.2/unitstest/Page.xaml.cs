@@ -25,7 +25,7 @@ namespace unitstest
             gridManager = new GridManager();
         }
 
-        public static void Log(String text)
+        public void Log(String text)
         {
             txtLog.Text += text;
             txtLog.Text += Environment.NewLine;
@@ -68,11 +68,18 @@ namespace unitstest
 
             end = gridManager.HighlightGridSquare(cnvMain, (int)xPos, (int)yPos);
 
+            // rough calculation of time spent
+            // can't use Diagnostics.Stopwatch in SL2.0 :(
+
+            var startTime = DateTime.Now;
             var path = gridManager.CalculatePath(start, end);
+            var endTime = DateTime.Now;
+            var span = new TimeSpan(endTime.Ticks - startTime.Ticks);
+
+            txtLog.Text += Environment.NewLine;
+            txtLog.Text += String.Format("Seconds taken : {0}", span.TotalSeconds);
 
             gridManager.HighlightGridSquares(cnvMain, path);
-
-
          
         }
 
