@@ -9,7 +9,7 @@ namespace unitstest
     {
         private IGridManager gridManager;
         private const double stroke_width = 0.5;
-        public static int grid_size = 15;
+        public static int grid_size = 8;
 
         private IGridShape start;
         private IGridShape end;
@@ -76,6 +76,8 @@ namespace unitstest
             var span = new TimeSpan(endTime.Ticks - startTime.Ticks);
 
             Log(String.Format("Seconds taken : {0}", span.TotalSeconds));
+
+            //TODO: reverse iterate from end of list to draw actual path
 
             gridManager.HighlightGridSquares(cnvMain, path);
          
