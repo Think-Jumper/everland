@@ -52,8 +52,10 @@ namespace unitstest
             while (true)
             {
                 _openList.Sort();
+                _closedList.Sort();
 
                 if (_openList.Count == 0)
+                    //_openList.Add(_closedList[0]);
                     return _closedList;
 
                 var current = _openList[0]; 
@@ -74,7 +76,7 @@ namespace unitstest
 
                     if (!g.Blocked && (c1 == null))
                     {
-                        var newNode = new PathNode() { Position = g, Parent = current };
+                        var newNode = new PathNode { Position = g, Parent = current };
                         newNode = CalculateFGH(current, newNode, end);
 
                         if(!_openList.Contains(newNode))
@@ -83,7 +85,7 @@ namespace unitstest
 
                     if (!g.Blocked && (c1 != null))
                     {
-                        var newNode = new PathNode() { Position = g, Parent = current };
+                        var newNode = new PathNode { Position = g, Parent = current };
                         newNode = CalculateFGH(current, newNode, end);
 
                         if (newNode.G < c1.G)
