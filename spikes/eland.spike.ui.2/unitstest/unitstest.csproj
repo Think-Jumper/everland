@@ -58,9 +58,18 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AStarPathCalculator.cs" />
+    <Compile Include="GridManager.cs" />
+    <Compile Include="GridSquare.cs" />
+    <Compile Include="Interfaces\IGridCalculation.cs" />
+    <Compile Include="Interfaces\IGridShapeFactory.cs" />
+    <Compile Include="Interfaces\IGridManager.cs" />
+    <Compile Include="Interfaces\IGridShape.cs" />
+    <Compile Include="Interfaces\IPathCalculator.cs" />
     <Compile Include="Page.xaml.cs">
       <DependentUpon>Page.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PathNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
