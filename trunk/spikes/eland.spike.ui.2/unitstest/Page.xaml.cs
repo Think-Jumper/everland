@@ -14,10 +14,13 @@ namespace unitstest
         private IGridShape start;
         private IGridShape end;
 
+        private bool initialised;
+
         public Page()
         {
             InitializeComponent();
             Initialise();
+            initialised = true;
         }
 
         private void Initialise()
@@ -33,7 +36,9 @@ namespace unitstest
 
         private void Redraw()
         {
-            gridManager.Draw(cnvMain, grid_size, stroke_width, true);
+            var randomise = false;
+            randomise = (chkRandomise == null) ? randomise = true : chkRandomise.IsChecked.Value;
+            gridManager.Draw(cnvMain, grid_size, stroke_width, randomise);
         }
 
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -79,6 +84,8 @@ namespace unitstest
 
             //TODO: reverse iterate from end of list to draw actual path
 
+
+
             gridManager.HighlightGridSquares(cnvMain, path);
          
         }
@@ -86,6 +93,12 @@ namespace unitstest
         private void cnvMain_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             Redraw();
+        }
+
+        private void CheckBox_CheckedChanged(object sender, RoutedEventArgs e)
+        {
+            if(initialised)
+                Redraw();
         }
 
 
