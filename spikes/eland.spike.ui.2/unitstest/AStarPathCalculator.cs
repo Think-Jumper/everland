@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using unitstest.Interfaces;
 
 namespace unitstest
@@ -52,7 +53,6 @@ namespace unitstest
             while (true)
             {
                 _openList.Sort();
-                _closedList.Sort();
 
                 if (_openList.Count == 0)
                     //_openList.Add(_closedList[0]);
@@ -64,7 +64,7 @@ namespace unitstest
                     return _closedList;
 
                 _closedList.Add(current);
-                _openList.Clear();
+                _openList.Remove(current);
 
                 var neighbours = gridManager.GetNeighbours(current.Position);
 
@@ -81,19 +81,32 @@ namespace unitstest
 
                         if(!_openList.Contains(newNode))
                             _openList.Add(newNode);
-                    }
 
-                    if (!g.Blocked && (c1 != null))
-                    {
-                        var newNode = new PathNode { Position = g, Parent = current };
-                        newNode = CalculateFGH(current, newNode, end);
-
-                        if (newNode.G < c1.G)
+                        if (_openList.Contains(newNode))
                         {
-                            _openList.Remove(c1);
-                            _openList.Add(newNode);
+                            var existingNode = _openList.First(x => x.Position.Id == newNode.Position.Id);
+                            if (newNode.G < existingNode.G)
+                            {
+                                existingNode.Parent = current;
+                                existingNode = CalculateFGH(current, existingNode, end);
+                            }
+                                
+
+
                         }
                     }
+
+                    //if (!g.Blocked && (c1 != null))
+                    //{
+                    //    var newNode = new PathNode { Position = g, Parent = current };
+                    //    newNode = CalculateFGH(current, newNode, end);
+
+                    //    if (newNode.G < c1.G)
+                    //    {
+                    //        _openList.Remove(c1);
+                    //        _openList.Add(newNode);
+                    //    }
+                    //}
                 }
 
 

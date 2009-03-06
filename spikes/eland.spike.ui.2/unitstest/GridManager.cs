@@ -109,8 +109,21 @@ namespace unitstest
 
         public void HighlightGridSquares(Canvas surface, List<PathNode> squares)
         {
-            foreach (PathNode g in squares)
-                HighLight(surface, g, Colors.Red);
+            var currentNode = squares[squares.Count - 1];
+
+            while(true)
+            {
+                HighLight(surface, currentNode, Colors.Red);
+
+                if (currentNode.Parent != null)
+                {
+                    currentNode = currentNode.Parent;
+                }else
+                {
+                    break;
+                }
+            }
+                
         }
 
         private static void HighLight(Panel surface, IGridShape rect, Color colour)

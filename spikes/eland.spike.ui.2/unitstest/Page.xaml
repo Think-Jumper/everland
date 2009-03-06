@@ -12,10 +12,13 @@
 
         <Grid Grid.Row="0" Margin="3" ShowGridLines="False" >
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15"/>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            
+            <CheckBox Grid.Column="0" x:Name="chkRandomise" Checked="CheckBox_CheckedChanged" Unchecked="CheckBox_CheckedChanged" IsChecked="true"></CheckBox>
 
-            <Border Grid.Column="0" Style="{StaticResource TitleBorder}">
+            <Border Grid.Column="1" Style="{StaticResource TitleBorder}">
                 <TextBlock Text="Ctrl+Click to place obstacles, Left-Click to place start/end points" Style="{StaticResource TitleText}"></TextBlock>
             </Border>
             
