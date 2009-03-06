@@ -10,11 +10,14 @@ namespace unitstest
     {
         private readonly List<PathNode> _closedList;
         private readonly List<PathNode> _openList;
+        private readonly int _gridSize;
 
-        public AStarPathCalculator()
+        public AStarPathCalculator(int gridSize)
         {
             _openList = new List<PathNode>();
             _closedList = new List<PathNode>();
+            _gridSize = gridSize;
+            
         }
 
         private static PathNode CalculateFGH(PathNode currentNode, PathNode proposedNode, IGridShape endNode)
@@ -87,8 +90,11 @@ namespace unitstest
                             var existingNode = _openList.First(x => x.Position.Id == newNode.Position.Id);
                             if (newNode.G < existingNode.G)
                             {
+                                _openList.Remove(existingNode);
                                 existingNode.Parent = current;
                                 existingNode = CalculateFGH(current, existingNode, end);
+                                _openList.Add(existingNode);
+                               
                             }
                                 
 
