@@ -56,9 +56,9 @@ namespace eland.unittests.UnitTests
 
                 if (unit is Peasant)
                 {
-                    Assert.IsTrue(unit is IOffensiveUnit);
+                    Assert.IsFalse(unit is IOffensiveUnit);
                     Assert.IsTrue(unit is IDefensiveUnit);
-                    Assert.IsTrue(unit is IHandToHandUnit);
+                    Assert.IsFalse(unit is IHandToHandUnit);
                     Assert.IsFalse(unit is IRangedUnit);
                 }
 

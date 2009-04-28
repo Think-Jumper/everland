@@ -4,6 +4,6 @@ namespace eland.model.Interfaces
 {
     public interface IRangedUnit : IOffensiveUnit
     {
-        int Range { get; }
+        int Range { get; set; }
     }
 }

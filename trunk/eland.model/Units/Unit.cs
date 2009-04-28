@@ -12,8 +12,8 @@ namespace eland.model.Units
             Upgrades = new List<IUpgrade>();
         }
 
-        public int Health { get; protected set; }
-        public int MaximumHealth { get; protected set; }
+        public int Health { get; internal set; }
+        public int MaximumHealth { get; internal set; }
 
         public IList<IUpgrade> Upgrades { get; set; }
     }
