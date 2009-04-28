@@ -9,6 +9,12 @@ namespace eland.model.Units
             throw new System.NotImplementedException();
         }
 
+        public int AttackStrength
+        {
+            get { throw new System.NotImplementedException(); }
+            set { throw new System.NotImplementedException(); }
+        }
+
         public void Defend()
         {
             throw new System.NotImplementedException();
