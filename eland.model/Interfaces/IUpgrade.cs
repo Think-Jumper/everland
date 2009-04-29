@@ -6,7 +6,9 @@ namespace eland.model.Interfaces
     public interface IUpgrade
     {
         string Name { get; }
+        string Description { get; }
         void Apply(Unit target);
+        bool IsValid(Unit target);
     }
 
     public class OffensiveUpgrade1 : IUpgrade
@@ -14,6 +16,16 @@ namespace eland.model.Interfaces
         public string Name
         {
             get { return "Base Upgrade 1"; }
+        }
+
+        public string Description
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public bool IsValid(Unit target)
+        {
+            return (target is IOffensiveUnit);
         }
 
         public void Apply(Unit target)
@@ -25,5 +37,6 @@ namespace eland.model.Interfaces
             ((IOffensiveUnit) target).AttackStrength += 2;
 
         }
+
     }
 }

@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consts\UnitConsts.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameSession.cs" />
     <Compile Include="Hex.cs" />

@@ -4,12 +4,19 @@ namespace eland.model.Units
 {
     public class Peasant : Unit, IDefensiveUnit
     {
-        public void Attack()
+
+        public Peasant()
+        {
+            MaximumHealth = Consts.UnitConsts.HEALTH_NONCOMBAT_PEASANT_MAX;
+            Health = MaximumHealth;
+        }
+
+        public void Defend()
         {
             throw new System.NotImplementedException();
         }
 
-        public void Defend()
+        public void Move(Hex hex)
         {
             throw new System.NotImplementedException();
         }

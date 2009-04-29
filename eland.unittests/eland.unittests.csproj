@@ -82,6 +82,7 @@
     <Compile Include="UnitTests\GameSessionTests.cs" />
     <Compile Include="UnitTests\NHMappingTests.cs" />
     <Compile Include="UnitTests\Controllers\LoginControllerTests.cs" />
+    <Compile Include="UnitTests\Units\PeasantTests.cs" />
     <Compile Include="UnitTests\UnitTests.cs" />
     <Compile Include="UnitTests\UpgradeTests.cs" />
     <Compile Include="UnitTests\UserTests.cs" />

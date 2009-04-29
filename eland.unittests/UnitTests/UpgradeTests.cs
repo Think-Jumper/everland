@@ -29,6 +29,9 @@ namespace eland.unittests.UnitTests
         public void Upgrade_Offensive_Unit_Valid_Target()
         {
             var offensiveUpgrade = new OffensiveUpgrade1();
+
+            Assert.IsTrue(offensiveUpgrade.IsValid(new Soldier()));
+
             offensiveUpgrade.Apply(new Soldier());
         }
 
@@ -51,6 +54,7 @@ namespace eland.unittests.UnitTests
         public void Upgrade_Offensive_Unit_Invalid_Target()
         {
             var offensiveUpgrade = new OffensiveUpgrade1();
+            Assert.IsFalse(offensiveUpgrade.IsValid(new Peasant()));
             offensiveUpgrade.Apply(new Peasant());
         }
 

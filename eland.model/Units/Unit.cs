@@ -7,11 +7,10 @@ namespace eland.model.Units
     {
         protected Unit()
         {
-            Health = 0;
-            MaximumHealth = 0;
             Upgrades = new List<IUpgrade>();
         }
 
+        public Hex Location;
         public int Health { get; internal set; }
         public int MaximumHealth { get; internal set; }
 
