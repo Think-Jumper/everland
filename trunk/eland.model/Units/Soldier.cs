@@ -1,3 +1,4 @@
+using eland.model.Consts;
 using eland.model.Interfaces;
 
 namespace eland.model.Units
@@ -6,10 +7,10 @@ namespace eland.model.Units
     {
         public Soldier()
         {
-            MaximumHealth = 100;
-            Health = 100;
-            AttackStrength = 10;
-            Range = 0;
+            MaximumHealth = UnitConsts.ATTACK_OFFENSIVE_SOLDIER_MAX;
+            Health = MaximumHealth;
+            AttackStrength = UnitConsts.ATTACK_OFFENSIVE_SOLDIER_MAX;
+            Range = UnitConsts.RANGE_OFFENSIVE_SOLDIER_MAX;
         }
 
         public int Range { get; set; }
