@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <hibernate-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:nhibernate-mapping-2.2">
- 
-  <class name="eland.model.World, eland.model" table="World">
-    
-    <id	name="Id" access="property"	column="Id"	type="Guid">
-      <generator class="guid" />
-    </id>
-    
-    <property	name="Name"	access="property"	type="String" length="50">
-      <column	name="Name" />
-    </property>
 
-    <property name="Height" access="property">
-      <column name="Height" />
-    </property>
+    <class name="eland.model.World, eland.model" table="World">
 
-    <property name="Width" access="property">
-      <column name="Width" />
-    </property>
+        <id	name="Id" access="property"	column="Id"	type="Guid">
+            <generator class="guid" />
+        </id>
 
-    <bag name="Hexes" lazy="true">
-      <key column="WorldId" />
-      <one-to-many class="eland.model.Hex, eland.model"/>
-    </bag>
+        <property name="Name"	access="property" type="String" length="50">
+            <column	name="Name" />
+        </property>
 
-    <many-to-one name="Game" class="eland.model.Game, eland.model" unique="true" column="GameId"/>
+        <property name="Height" access="property">
+            <column name="Height" />
+        </property>
 
-  </class>
-  
+        <property name="Width" access="property">
+            <column name="Width" />
+        </property>
+        
+        <bag name="Hexes" lazy="true" inverse="true" cascade="all">
+            <key column="WorldId" />
+            <one-to-many class="eland.model.Hex, eland.model"/>
+        </bag>
+
+        <many-to-one name="Game" class="eland.model.Game, eland.model" unique="true" column="GameId"/>
+
+    </class>
+
 </hibernate-mapping>

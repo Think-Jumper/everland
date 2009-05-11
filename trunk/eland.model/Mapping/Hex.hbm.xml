@@ -15,8 +15,8 @@
       <column name="Y" />
     </property>
 
-    <many-to-one name="World" class="eland.model.World, eland.model" unique="true" column="WorldId"/>
-    <many-to-one name="HexType" class="eland.model.HexType, eland.model" unique="true" column="HexTypeId"/>
+    <many-to-one name="World" class="eland.model.World, eland.model" unique="true" column="WorldId" not-null="true" />
+    <many-to-one name="HexType" class="eland.model.HexType, eland.model" unique="true" column="HexTypeId" cascade="save-update" />
     
   </class>
   
