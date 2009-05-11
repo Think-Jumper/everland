@@ -8,8 +8,8 @@
     <ProjectGuid>{90706B11-92D9-431C-9494-E4F9AE6B3C1C}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>utilities</RootNamespace>
-    <AssemblyName>utilities</AssemblyName>
+    <RootNamespace>eland.utilities</RootNamespace>
+    <AssemblyName>eland.utilities</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -35,6 +35,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>

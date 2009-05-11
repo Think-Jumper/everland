@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eland.unittests", "eland.un
 EndProject
 Project("{4F174C21-8C12-11D0-8340-0000F80270F8}") = "eland.database", "eland.database\eland.database.dbp", "{6BD330D8-592E-4DBA-94AD-5291F9147DA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "utilities", "utilities\utilities.csproj", "{90706B11-92D9-431C-9494-E4F9AE6B3C1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eland.utilities", "utilities\eland.utilities.csproj", "{90706B11-92D9-431C-9494-E4F9AE6B3C1C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{CFD5B8FF-C2CD-448A-BC97-F78524FC67DE}"
 	ProjectSection(SolutionItems) = preProject
