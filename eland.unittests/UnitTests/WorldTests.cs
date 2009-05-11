@@ -12,14 +12,42 @@ namespace eland.unittests.UnitTests
     [TestFixture]
     public class WorldTests
     {
-        private List<Guid> createdIds;
+        private Guid worldId;
+        private Guid hextTypeId;
         private IDataContext dataContext;
 
         [TestFixtureSetUp]
         public void Setup_Tests()
         {
-            createdIds = new List<Guid>();
+            HibernatingRhinos.NHibernate.Profiler.Appender.NHibernateProfiler.Initialize();
             dataContext = IoC.Resolve<IDataContext>();
+
+            var world = new World();
+            var hexType = new HexType { Name = "Default HexType" };
+
+            using (var tran = dataContext.WorldRepository.Session.BeginTransaction())
+            {
+                world.Height = 5;
+                world.Width = 5;
+                world.Hexes = new List<Hex>();
+                world.Name = "unit_test_world";
+
+
+                for (var y = 1; y <= world.Width; y++)
+                {
+                    for (var x = 1; x <= world.Height; x++)
+                    {
+                        var hex = new Hex { World = world, HexType = hexType, X = x, Y = y };
+                        world.AddHex(hex);
+                    }
+                }
+
+                dataContext.WorldRepository.Save(world);
+                tran.Commit();
+            }
+
+            worldId = world.Id;
+            hextTypeId = hexType.Id;
         }
 
         [TestFixtureTearDown]
@@ -27,12 +55,50 @@ namespace eland.unittests.UnitTests
         {
             using (var tran = dataContext.WorldRepository.Session.BeginTransaction())
             {
-                foreach (var id in createdIds)
-                    dataContext.WorldRepository.Delete(id);
+                dataContext.WorldRepository.Delete(worldId);
+                dataContext.HexTypeRepository.Delete(hextTypeId);
 
                 tran.Commit();
             }
         }
+
+        [Test]
+        public void World_Iterate_Hexes()
+        {
+            var world = getWorld();
+
+            foreach (var h in (world).Hexes)
+                Assert.AreNotEqual(Guid.Empty, h.Id);
+        }
+
+        [Test]
+        public void World_Iterate_Properties()
+        {
+            var world = getWorld();
+
+            Assert.IsTrue(world.Height > 0);
+            Assert.IsTrue(world.Width > 0);
+        }
+
+        [Test]
+        public void World_Iterate_Hex_Properties()
+        {
+            var world = getWorld();
+
+            foreach (var h in (world).Hexes)
+            {
+                Assert.AreNotEqual(null, h.HexType);
+                Assert.Between(h.X, 0, world.Width);
+                Assert.Between(h.Y, 0, world.Height);
+            }
+        }
+
+        private World getWorld()
+        {
+            return dataContext.WorldRepository.Get(worldId);
+        }
+
+        # region Ignored Tests
 
         [Test]
         [Ignore]
@@ -60,7 +126,7 @@ namespace eland.unittests.UnitTests
                 {
                     for (var x = 1; x <= world.Height; x++)
                     {
-                        var hex = new Hex {World = world, HexType = hexType, X = x, Y = y};
+                        var hex = new Hex { World = world, HexType = hexType, X = x, Y = y };
 
                         dataContext.HexRepository.Save(hex);
                     }
@@ -71,42 +137,7 @@ namespace eland.unittests.UnitTests
         }
 
         [Test]
-        public void World_Create()
-        {  
-            var world = new World();
-
-            using (var tran = dataContext.WorldRepository.Session.BeginTransaction())
-            {
-                world.Height = 1000;
-                world.Width = 1000;
-                world.Name = "unit_test_world";
-
-                dataContext.WorldRepository.Save(world);
-
-                tran.Commit();
-            }
-
-            createdIds.Add(world.Id);
-            Assert.AreNotEqual(Guid.Empty, world.Id);
-        }
-
-        [Test]
         [Ignore]
-        public void World_Iterate_Hexes()
-        {
-            var world = getWorld();
-
-            foreach (var h in ((World)world[0]).Hexes)
-                Assert.AreNotEqual(Guid.Empty, h.Id);
-        }
-
-        private IList getWorld()
-        {
-            World_Create();
-            return dataContext.WorldRepository.FindAll();
-        }
-
-        [Test]
         public void World_Delete()
         {
             var world = new World();
@@ -116,7 +147,7 @@ namespace eland.unittests.UnitTests
                 world.Height = 1000;
                 world.Width = 1000;
                 world.Name = "unit_test_world";
-            
+
                 dataContext.WorldRepository.Save(world);
                 dataContext.WorldRepository.Delete(world);
 
@@ -126,17 +157,10 @@ namespace eland.unittests.UnitTests
             Assert.IsNull(dataContext.WorldRepository.Get(world.Id));
         }
 
-        [Test]
-        public void World_Iterate_Hex_Properties()
-        {
-            var world = getWorld();
 
-            foreach (var h in ((World)world[0]).Hexes)
-            {
-                Assert.AreNotEqual(null, h.HexType);
-                Assert.Between(h.X, 0, ((World)world[0]).Width);
-                Assert.Between(h.Y, 0, ((World)world[0]).Height);
-            }
-        }
+
+
+        #endregion
+
     }
 }

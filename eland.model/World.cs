@@ -11,5 +11,11 @@ namespace eland.model
       public virtual int Height { get; set; }
       public virtual IList<Hex> Hexes { get; set; }
       public virtual Game Game { get; set; }
+
+      public virtual void AddHex(Hex child)
+      {
+         child.World = this;
+         Hexes.Add(child);
+      }
    }
 }

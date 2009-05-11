@@ -12,12 +12,13 @@ namespace eland.unittests.UnitTests.Units
         [TestFixtureSetUp]
         public void Setup_Tests()
         {
-            peasant = new Peasant(new Hex());
+            peasant = new Peasant();
         }
 
         [Test]
         public void Peasant_Has_Location()
         {
+            peasant.Location = new Hex();
             Assert.IsTrue(peasant.Location != null);
         }
 
