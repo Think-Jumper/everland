@@ -10,40 +10,87 @@ namespace eland.utilities
     {
         static void Main(string[] args)
         {
-            ParseImage();
+            Run();
         }
 
-        private static void ParseImage()
+        private static float[] input;
+        private const string inputFile = @"c:\WorldMapColoured.png";
+        private const string outputFileName = @"c:\Output.png";
+        private static readonly Bitmap outputImage = new Bitmap(1420, 655);
+
+        private static void Run()
         {
-            var inputFile = @"c:\WorldMap.png";
-            var worldImage = new Bitmap(Image.FromFile(inputFile));
+            ParseInputImage();
+            OutputUniqueValues(CreateOutputImage(CalculateNormalValues(input)));
 
-            for (var y=0; y<worldImage.Height; y++)
+            Console.WriteLine("Press 1 to create Hexes.");
+            if Console.ReadKey().Key
+
+        }
+
+        private static void OutputUniqueValues(IList<float> uniqueValues)
+        {
+            uniqueValues = Normalisation.GetDistinctValues(uniqueValues);
+            foreach(var value in uniqueValues)
+                Console.WriteLine(value);
+
+        }
+
+        private static Normalisation.NormalisationValues CalculateNormalValues(float[] values)
+        {
+            return Normalisation.CalculateInitialValues(values, 0, 255);
+        }
+
+        private static void ParseInputImage()
+        {
+            var inputImage = new Bitmap(Image.FromFile(inputFile));
+            var outputCount = 0;
+            input = new float[inputImage.Width * inputImage.Height];
+
+            for (var y = 0; y < inputImage.Height; y++)
             {
-                for(var x=0; x<worldImage.Width; x++)
+                for (var x = 0; x < inputImage.Width; x++)
                 {
-                    var argb = worldImage.GetPixel(x, y).ToArgb();
-
-                    ParsePixel(argb);
+                    input[outputCount++] = (float)(inputImage.GetPixel(x, y).R + inputImage.GetPixel(x, y).G + inputImage.GetPixel(x, y).B) / 3;
                 }
             }
 
-            InsertHexes();
 
-            Console.ReadKey();
 
         }
 
-        private static void ParsePixel(int argb)
+        private static IList<float> CreateOutputImage(Normalisation.NormalisationValues initialValues)
         {
-            //TODO: parse the image into a hextype
+            var x = 0;
+            var y = 0;
+            var normalisedValues = new List<float>();
+
+            foreach(var value in input)
+            {
+                var normalisedValue = Normalisation.Normalise(initialValues, value);
+
+                normalisedValues.Add(normalisedValue);
+
+                outputImage.SetPixel(x++, y, Color.FromArgb((int)normalisedValue, (int)normalisedValue, (int)normalisedValue));
+
+                if (x != 1420) continue;
+                y++;
+                x = 0;
+            }
+
+            outputImage.Save(outputFileName);
+
+            return normalisedValues;
         }
 
-        private static void InsertHexes()
+        private static void CreateHexes()
         {
-
             
         }
+
+
+
+
 
         //public byte[] Render()
         //{
@@ -137,5 +184,6 @@ namespace eland.utilities
         {
             return value % 2 == 0;
         }
+
     }
 }
