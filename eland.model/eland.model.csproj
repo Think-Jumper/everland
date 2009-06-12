@@ -31,7 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NHibernate, Version=1.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -61,7 +60,6 @@
     <Compile Include="queries\Game.hbm.cs" />
     <Compile Include="queries\Hex.hbm.cs" />
     <Compile Include="queries\HexType.hbm.cs" />
-    <Compile Include="queries\QueryBuilder.cs" />
     <Compile Include="queries\World.hbm.cs" />
     <Compile Include="Race.cs" />
     <Compile Include="Settlement.cs" />
