@@ -60,8 +60,8 @@ namespace eland.unittests.UnitTests.Controllers
 
             var result = userController.Index() as RedirectToRouteResult;
 
-            Assert.AreEqual("Home", result.Values["Controller"]);
-            Assert.AreEqual("Index", result.Values["Action"]);
+            Assert.AreEqual("Home", result.RouteValues["Controller"]);
+            Assert.AreEqual( "Index", result.RouteValues[ "Action" ] );
         }
 
         [Test]
@@ -104,8 +104,8 @@ namespace eland.unittests.UnitTests.Controllers
         {
             var result = userController.ViewUser(TestDataHelper.OPEN_ID + Guid.NewGuid().ToString()) as RedirectToRouteResult;
 
-            Assert.AreEqual("Home", result.Values["Controller"]);
-            Assert.AreEqual("Index", result.Values["Action"]);
+            Assert.AreEqual( "Home", result.RouteValues[ "Controller" ] );
+            Assert.AreEqual( "Index", result.RouteValues[ "Action" ] );
         }
 
     }

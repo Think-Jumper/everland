@@ -24,7 +24,7 @@ namespace eland.utilities
             OutputUniqueValues(CreateOutputImage(CalculateNormalValues(input)));
 
             Console.WriteLine("Press 1 to create Hexes.");
-            if Console.ReadKey().Key
+           // if Console.ReadKey().Key
 
         }
 

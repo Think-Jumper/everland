@@ -19,7 +19,6 @@ namespace eland.unittests.UnitTests
         [TestFixtureSetUp]
         public void Setup_Tests()
         {
-            HibernatingRhinos.NHibernate.Profiler.Appender.NHibernateProfiler.Initialize();
             dataContext = IoC.Resolve<IDataContext>();
 
             var world = new World();
