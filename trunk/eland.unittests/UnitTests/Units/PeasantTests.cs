@@ -22,11 +22,11 @@ namespace eland.unittests.UnitTests.Units
             Assert.IsTrue(peasant.Location != null);
         }
 
-        [Test]
-        public void Peasant_Can_Move()
-        {
-            peasant.Move(new Hex());
-        }
+        //[Test]
+        //public void Peasant_Can_Move()
+        //{
+        //    peasant.Move(new Hex());
+        //}
 
 
 

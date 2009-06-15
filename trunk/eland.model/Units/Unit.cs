@@ -1,19 +1,15 @@
+using System;
 using System.Collections.Generic;
-using eland.model.Interfaces;
 
 namespace eland.model.Units
 {
     public abstract class Unit
     {
-        protected Unit()
-        {
-            Upgrades = new List<IUpgrade>();
-        }
-
-        public Hex Location;
-        public int Health { get; internal set; }
-        public int MaximumHealth { get; internal set; }
-
-        public IList<IUpgrade> Upgrades { get; set; }
+        public virtual Hex Location { get; set; }
+        public virtual Guid Id { get; set; }
+        public virtual int Health { get; set; }
+        public virtual int MaximumHealth { get; set; }
+        public virtual IList<IUpgrade> Upgrades { get; set; }
+        public virtual Nation Nation { get; set; }
     }
-}
+}  

@@ -1,7 +1,8 @@
 using System;
+using eland.model.Interfaces;
 using eland.model.Units;
 
-namespace eland.model.Interfaces
+namespace eland.model.Units
 {
     public interface IUpgrade
     {

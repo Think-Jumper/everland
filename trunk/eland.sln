@@ -30,6 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{CFD5B8FF-C2C
 		lib\Moq.Legacy.dll = lib\Moq.Legacy.dll
 		lib\Moq.Silverlight.dll = lib\Moq.Silverlight.dll
 		lib\MVCToolkit.dll = lib\MVCToolkit.dll
+		lib\NHibernate.ByteCode.Castle.dll = lib\NHibernate.ByteCode.Castle.dll
 		lib\NHibernate.dll = lib\NHibernate.dll
 		lib\Rhino.Mocks.dll = lib\Rhino.Mocks.dll
 	EndProjectSection

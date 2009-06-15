@@ -64,7 +64,7 @@ namespace eland.unittests.UnitTests
         [Test]
         public void World_Iterate_Hexes()
         {
-            var world = getWorld();
+            var world = GetWorld();
 
             foreach (var h in (world).Hexes)
                 Assert.AreNotEqual(Guid.Empty, h.Id);
@@ -73,7 +73,7 @@ namespace eland.unittests.UnitTests
         [Test]
         public void World_Iterate_Properties()
         {
-            var world = getWorld();
+            var world = GetWorld();
 
             Assert.IsTrue(world.Height > 0);
             Assert.IsTrue(world.Width > 0);
@@ -82,7 +82,7 @@ namespace eland.unittests.UnitTests
         [Test]
         public void World_Iterate_Hex_Properties()
         {
-            var world = getWorld();
+            var world = GetWorld();
 
             foreach (var h in (world).Hexes)
             {
@@ -92,7 +92,7 @@ namespace eland.unittests.UnitTests
             }
         }
 
-        private World getWorld()
+        private World GetWorld()
         {
             return dataContext.WorldRepository.Get(worldId);
         }
