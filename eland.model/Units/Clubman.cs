@@ -4,18 +4,18 @@ namespace eland.model.Units
 {
     public class Clubman : Unit, IHandToHandUnit
     {
-        public void Attack()
+        public virtual void Attack()
         {
             throw new System.NotImplementedException();
         }
 
-        public int AttackStrength
+        public virtual int AttackStrength
         {
             get { throw new System.NotImplementedException(); }
             set { throw new System.NotImplementedException(); }
         }
 
-        public void Defend()
+        public virtual void Defend()
         {
             throw new System.NotImplementedException();
         }

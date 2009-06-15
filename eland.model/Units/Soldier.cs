@@ -13,16 +13,16 @@ namespace eland.model.Units
             Range = UnitConsts.RANGE_OFFENSIVE_SOLDIER_MAX;
         }
 
-        public int Range { get; set; }
+        public virtual int Range { get; set; }
 
-        public void Attack()
+        public virtual void Attack()
         {
             throw new System.NotImplementedException();
         }
 
-        public int AttackStrength { get; set; }
+        public virtual int AttackStrength { get; set; }
 
-        public void Defend()
+        public virtual void Defend()
         {
             throw new System.NotImplementedException();
         }

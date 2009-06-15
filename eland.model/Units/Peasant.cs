@@ -11,12 +11,7 @@ namespace eland.model.Units
             Health = MaximumHealth;
         }
 
-        public void Defend()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Move(Hex hex)
+        public virtual void Defend()
         {
             throw new System.NotImplementedException();
         }
