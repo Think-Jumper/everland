@@ -33,7 +33,7 @@ namespace eland.unittests.UnitTests.Units
         }
 
         [Test]
-        public void Create_Peasant()
+        public void Create_Units()
         {
 
             using( var tran = _dataContext.UnitRepository.Session.BeginTransaction() )

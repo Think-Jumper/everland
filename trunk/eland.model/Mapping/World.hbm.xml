@@ -24,8 +24,6 @@
             <one-to-many class="eland.model.Hex, eland.model"/>
         </bag>
 
-        <many-to-one name="Game" class="eland.model.Game, eland.model" unique="true" column="GameId"/>
-
     </class>
 
 </hibernate-mapping>

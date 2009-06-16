@@ -72,11 +72,6 @@ namespace eland.unittests.UnitTests
             {
                 Assert.IsTrue(unit.Health >= 0);
                 Assert.IsTrue(unit.Health <= unit.MaximumHealth);
-
-                foreach(var upgrade in unit.Upgrades)
-                {
-                    Assert.IsFalse(string.IsNullOrEmpty(upgrade.Name));
-                }
             }
         }
 

@@ -46,10 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consts\UnitConsts.cs" />
+    <Compile Include="Enums\HexType.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameSession.cs" />
     <Compile Include="Hex.cs" />
-    <Compile Include="HexType.cs" />
     <Compile Include="Interfaces\IDefensiveUnit.cs" />
     <Compile Include="Interfaces\IHandToHandUnit.cs" />
     <Compile Include="Interfaces\IOffensiveUnit.cs" />
@@ -70,12 +70,6 @@
     <Compile Include="Units\Unit.cs" />
     <Compile Include="User.cs" />
     <Compile Include="World.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Mapping\HexType.hbm.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Generator>C:\Program Files\Rhino\NHibernate Query Generator\nhqg.exe</Generator>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mapping\World.hbm.xml">

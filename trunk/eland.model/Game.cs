@@ -8,5 +8,6 @@ namespace eland.model
       public virtual string Name { get; set; }
       public virtual DateTime Started { get; set; }
       public virtual DateTime? Finished { get; set; }
+      public virtual World GameWorld { get; set; }
    }
 }
