@@ -11,7 +11,6 @@ namespace eland.Utilities
         public IRepository<User> UserRepository { get; set; }
         public IRepository<Game> GameRepository { get; set; }
         public IRepository<Hex> HexRepository { get; set; }
-        public IRepository<HexType> HexTypeRepository { get; set; }
         public IRepository<World> WorldRepository { get; set; }
         public IRepository<Nation> NationRepository { get; set; }
         public IRepository<Race> RaceRepository { get; set; }

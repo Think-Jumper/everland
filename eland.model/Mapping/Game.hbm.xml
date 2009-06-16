@@ -19,6 +19,8 @@
       <column name="Finished" />
     </property>
 
+    <many-to-one name="GameWorld" class="eland.model.World, eland.model" unique="true" column="WorldId"/>
+
   </class>
 
 </hibernate-mapping>

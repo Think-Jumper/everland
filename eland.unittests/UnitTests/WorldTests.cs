@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using eland.api;
+using eland.model.Enums;
 using MbUnit.Framework;
 
 using eland.model;
@@ -12,50 +11,43 @@ namespace eland.unittests.UnitTests
     [TestFixture]
     public class WorldTests
     {
-        private Guid worldId;
-        private Guid hextTypeId;
-        private IDataContext dataContext;
+        private Guid _worldId;
+        private IDataContext _dataContext;
 
         [TestFixtureSetUp]
         public void Setup_Tests()
         {
-            dataContext = IoC.Resolve<IDataContext>();
+            _dataContext = IoC.Resolve<IDataContext>();
 
             var world = new World();
-            var hexType = new HexType { Name = "Default HexType" };
 
-            using (var tran = dataContext.WorldRepository.Session.BeginTransaction())
+            using (var tran = _dataContext.WorldRepository.Session.BeginTransaction())
             {
                 world.Height = 5;
                 world.Width = 5;
-                world.Hexes = new List<Hex>();
                 world.Name = "unit_test_world";
-
 
                 for (var y = 1; y <= world.Width; y++)
                 {
                     for (var x = 1; x <= world.Height; x++)
                     {
-                        var hex = new Hex { World = world, HexType = hexType, X = x, Y = y };
-                        world.AddHex(hex);
+                        world.AddHex(new Hex { World = world, HexType = HexType.Plain , X = x, Y = y });
                     }
                 }
 
-                dataContext.WorldRepository.Save(world);
+                _dataContext.WorldRepository.Save(world);
                 tran.Commit();
             }
 
-            worldId = world.Id;
-            hextTypeId = hexType.Id;
+            _worldId = world.Id;
         }
 
         [TestFixtureTearDown]
         public void Cleanup_Tests()
         {
-            using (var tran = dataContext.WorldRepository.Session.BeginTransaction())
+            using (var tran = _dataContext.WorldRepository.Session.BeginTransaction())
             {
-                dataContext.WorldRepository.Delete(worldId);
-                dataContext.HexTypeRepository.Delete(hextTypeId);
+                _dataContext.WorldRepository.Delete(_worldId);
 
                 tran.Commit();
             }
@@ -94,7 +86,7 @@ namespace eland.unittests.UnitTests
 
         private World GetWorld()
         {
-            return dataContext.WorldRepository.Get(worldId);
+            return _dataContext.WorldRepository.Get(_worldId);
         }
 
         # region Ignored Tests
@@ -106,28 +98,26 @@ namespace eland.unittests.UnitTests
             var race = new Race { Name = "Default Race" };
             var nation = new Nation { Name = "Default Nation", Race = race };
             var user = new User { Email = "jamie.fraser@gmail.com", FirstName = "Jamie", LastName = "Fraser", OpenId = "http://jamief00.myopenid.com/" };
-            var hexType = new HexType { Name = "Default HexType" };
-            var game = new Game { Name = "Default Game", Started = DateTime.Now };
-            var world = new World { Game = game, Height = 100, Width = 100, Name = "Default World" };
+            var world = new World { Height = 100, Width = 100, Name = "Default World" };
+            var game = new Game { Name = "Default Game", Started = DateTime.Now, GameWorld = world};
             var gameSession = new GameSession { EnteredGame = DateTime.Now, Nation = nation, Game = game, User = user };
 
-            using (var tran = dataContext.WorldRepository.Session.BeginTransaction())
+            using (var tran = _dataContext.WorldRepository.Session.BeginTransaction())
             {
-                dataContext.RaceRepository.Save(race);
-                dataContext.NationRepository.Save(nation);
-                dataContext.UserRepository.Save(user);
-                dataContext.HexTypeRepository.Save(hexType);
-                dataContext.GameRepository.Save(game);
-                dataContext.WorldRepository.Save(world);
-                dataContext.GameSessionRepository.Save(gameSession);
+                _dataContext.RaceRepository.Save(race);
+                _dataContext.NationRepository.Save(nation);
+                _dataContext.UserRepository.Save(user);
+                _dataContext.GameRepository.Save(game);
+                _dataContext.WorldRepository.Save(world);
+                _dataContext.GameSessionRepository.Save(gameSession);
 
                 for (var y = 1; y <= world.Width; y++)
                 {
                     for (var x = 1; x <= world.Height; x++)
                     {
-                        var hex = new Hex { World = world, HexType = hexType, X = x, Y = y };
+                        var hex = new Hex { World = world, HexType = HexType.Grass, X = x, Y = y };
 
-                        dataContext.HexRepository.Save(hex);
+                        _dataContext.HexRepository.Save(hex);
                     }
                 }
 
@@ -141,19 +131,19 @@ namespace eland.unittests.UnitTests
         {
             var world = new World();
 
-            using (var tran = dataContext.WorldRepository.Session.BeginTransaction())
+            using (var tran = _dataContext.WorldRepository.Session.BeginTransaction())
             {
                 world.Height = 1000;
                 world.Width = 1000;
                 world.Name = "unit_test_world";
 
-                dataContext.WorldRepository.Save(world);
-                dataContext.WorldRepository.Delete(world);
+                _dataContext.WorldRepository.Save(world);
+                _dataContext.WorldRepository.Delete(world);
 
                 tran.Commit();
             }
 
-            Assert.IsNull(dataContext.WorldRepository.Get(world.Id));
+            Assert.IsNull(_dataContext.WorldRepository.Get(world.Id));
         }
 
 
