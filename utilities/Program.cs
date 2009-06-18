@@ -14,9 +14,9 @@ namespace eland.utilities
         }
 
         private static float[] input;
-        private const string inputFile = @"c:\WorldMapColoured.png";
-        private const string outputFileName = @"c:\Output.png";
-        private static readonly Bitmap outputImage = new Bitmap(1420, 655);
+        private const string inputFile = @"c:\world_map2.gif";
+        private const string outputFileName = @"output.png";
+        private static Bitmap outputImage;
 
         private static void Run()
         {
@@ -47,6 +47,8 @@ namespace eland.utilities
             var outputCount = 0;
             input = new float[inputImage.Width * inputImage.Height];
 
+            outputImage = new Bitmap(inputImage.Width, inputImage.Height);
+
             for (var y = 0; y < inputImage.Height; y++)
             {
                 for (var x = 0; x < inputImage.Width; x++)
@@ -73,7 +75,7 @@ namespace eland.utilities
 
                 outputImage.SetPixel(x++, y, Color.FromArgb((int)normalisedValue, (int)normalisedValue, (int)normalisedValue));
 
-                if (x != 1420) continue;
+                if (x != outputImage.Width) continue;
                 y++;
                 x = 0;
             }

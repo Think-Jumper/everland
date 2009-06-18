@@ -13,7 +13,7 @@ namespace eland.Utilities
         {
             var accessor = HttpContext.Current.ApplicationInstance as IContainerAccessor;
             var controller = accessor.Container.Resolve<IController>(controllerName);
-            return controller == null ? controller : null;
+            return controller; // == null ? controller : null;
         }
 
         public void ReleaseController(IController controller)
