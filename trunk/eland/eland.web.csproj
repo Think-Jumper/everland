@@ -67,6 +67,8 @@
       <HintPath>..\..\..\Program Files\Microsoft ASP.NET\ASP.NET MVC Beta\Assemblies\System.Web.Abstractions.dll</HintPath>
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Extensions.Design, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Program Files\Microsoft ASP.NET\ASP.NET MVC Beta\Assemblies\System.Web.Mvc.dll</HintPath>
@@ -87,7 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\GameController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="UserControls\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Default.aspx.cs">
@@ -162,6 +164,7 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="UserControls\Game\GameDetails.ascx" />
     <Content Include="UserControls\User\UserDetails.ascx" />
     <Content Include="Views\Login\Login.aspx" />
     <Content Include="Views\User\Index.aspx" />

@@ -1,8 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" CodeBehind="New.aspx.cs" Inherits="eland.Views.User.New" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-
-<% using(Html.Form("User","Create")) { %>
+<% using(Html.BeginForm("Create", "User")) { %>
 
 
         <div>
@@ -22,7 +21,7 @@
             </table>
         </div>
         
-        <div><%= Html.SubmitButton() %></div>
+        <div><input type="submit" value="Submit" /></div>
 
 <% } %>
 
