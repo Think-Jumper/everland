@@ -7,8 +7,7 @@ namespace eland.api.Services
     {
 
         //TODO: inject repository / datacontext
-
-        // use service locator
+        //TODO: use service locator
 
         public static World Create()
         {

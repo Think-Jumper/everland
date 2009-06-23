@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace eland.model.Units
 {
@@ -9,7 +8,6 @@ namespace eland.model.Units
         public virtual Guid Id { get; set; }
         public virtual int Health { get; set; }
         public virtual int MaximumHealth { get; set; }
-        //public virtual IList<IUpgrade> Upgrades { get; set; }
         public virtual Nation Nation { get; set; }
     }
 }  

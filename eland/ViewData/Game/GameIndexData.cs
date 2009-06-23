@@ -2,8 +2,8 @@
 
 namespace eland.ViewData
 {
-   public class GameIndexData
-   {
-      public GameSession GameSessionData { get; set; }
-   }
+    public class GameIndexData
+    {
+        public GameSession GameSessionData { get; set; }
+    }
 }

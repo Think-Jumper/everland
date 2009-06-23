@@ -25,7 +25,7 @@ namespace eland.unittests.UnitTests
             units.Add(new Peasant());
         }
 
-        [Test]
+        [Test, Ignore]
         public void Upgrade_Offensive_Unit_Valid_Target()
         {
             var offensiveUpgrade = new OffensiveUpgrade1();
@@ -35,7 +35,7 @@ namespace eland.unittests.UnitTests
             offensiveUpgrade.Apply(new Soldier());
         }
 
-        [Test]
+        [Test, Ignore]
         public void Upgrade_Offensive_Unit_Verify_Properties()
         {
             var offensiveUpgrade = new OffensiveUpgrade1();
@@ -49,7 +49,7 @@ namespace eland.unittests.UnitTests
             Assert.AreEqual(unit.AttackStrength, initialAttack + 2);
         }
 
-        [Test]
+        [Test, Ignore]
         [ExpectedException(typeof(ArgumentException))]
         public void Upgrade_Offensive_Unit_Invalid_Target()
         {

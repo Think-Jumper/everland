@@ -15,18 +15,11 @@
       <column name="LeftGame" />
     </property>
 
-    <many-to-one name="Game" class="eland.model.Game, eland.model" unique="true" column="GameId"/>
-    <many-to-one name="User" class="eland.model.User, eland.model" unique="true" column="UserId"/>
-    <many-to-one name="Nation" class="eland.model.Nation, eland.model" unique="true" column="NationId"/>
+    <many-to-one name="Game" class="eland.model.Game, eland.model" unique="true" column="GameId" cascade="save-update" />
+    <many-to-one name="User" class="eland.model.User, eland.model" unique="true" column="UserId" cascade="save-update" />
+    <many-to-one name="Nation" class="eland.model.Nation, eland.model" unique="true" column="NationId" cascade="all" />
 
 
   </class>
-
-  <!--public virtual Guid Id { get; set; }
-  public virtual DateTime EnteredGame { get; set; }
-  public virtual DateTime? LeftGame { get; set; }
-  public virtual Game Game { get; set; }
-  public virtual User User { get; set; }
-  public virtual Nation Nation { get; set; }-->
 
 </hibernate-mapping>

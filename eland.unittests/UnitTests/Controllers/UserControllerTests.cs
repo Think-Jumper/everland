@@ -43,7 +43,7 @@ namespace eland.unittests.UnitTests.Controllers
             HttpContextBase mockedhttpContext = TestDataHelper.SetupHttpContextMocks(true, TestDataHelper.OPEN_ID);
             userController.ControllerContext = new ControllerContext(mockedhttpContext, new RouteData(), userController);
 
-            var result = userController.Index() as ViewResult;
+            var result = userController.Index(TestDataHelper.OPEN_ID) as ViewResult;
 
             Assert.AreEqual("ViewUser", result.ViewName);
             Assert.AreEqual(TestDataHelper.OPEN_ID, ((ViewUserData)result.ViewData.Model).UserData.OpenId);
@@ -58,7 +58,7 @@ namespace eland.unittests.UnitTests.Controllers
             HttpContextBase mockedhttpContext = TestDataHelper.SetupHttpContextMocks(false, string.Empty);
             userController.ControllerContext = new ControllerContext(mockedhttpContext, new RouteData(), userController);
 
-            var result = userController.Index() as RedirectToRouteResult;
+            var result = userController.Index(TestDataHelper.OPEN_ID) as RedirectToRouteResult;
 
             Assert.AreEqual("Home", result.RouteValues["Controller"]);
             Assert.AreEqual( "Index", result.RouteValues[ "Action" ] );

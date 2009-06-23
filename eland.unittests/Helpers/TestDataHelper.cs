@@ -3,6 +3,7 @@ using System.Web;
 using System.Security.Principal;
 using eland.model;
 using eland.model.Enums;
+using eland.model.Units;
 using Moq;
 
 namespace eland.unittests.Helpers
@@ -14,7 +15,7 @@ namespace eland.unittests.Helpers
         public const string LAST_NAME = "Fraser";
         public const string EMAIL = "jamie.fraser@gmail.com";
 
-        public static HttpContextBase SetupHttpContextMocks(bool isAuthenticated, string IdentityName)
+        public static HttpContextBase SetupHttpContextMocks(bool isAuthenticated, string identityName)
         {
             var mockedhttpContext = new Mock<HttpContextBase>();
             var mockedUser = new Mock<IPrincipal>();
@@ -23,7 +24,7 @@ namespace eland.unittests.Helpers
             mockedhttpContext.Setup(x => x.User).Returns(mockedUser.Object);
             mockedUser.Setup(x => x.Identity).Returns(mockedIdentity.Object);
             mockedIdentity.Setup(x => x.IsAuthenticated).Returns(isAuthenticated);
-            mockedIdentity.Setup(x => x.Name).Returns(IdentityName);
+            mockedIdentity.Setup(x => x.Name).Returns(identityName);
 
             return mockedhttpContext.Object;
         }
@@ -44,6 +45,11 @@ namespace eland.unittests.Helpers
                     world.AddHex(new Hex { World = world, HexType = HexType.Grass, X = x, Y = y });
                 }
             }
+
+            nation.AddUnit(new Archer());
+            nation.AddUnit(new Soldier());
+            nation.AddUnit(new Peasant());
+            nation.AddUnit(new Clubman());
 
             return gameSession;
 
