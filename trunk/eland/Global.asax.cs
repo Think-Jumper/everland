@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Security.Principal;
+using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
@@ -26,6 +27,7 @@ namespace eland
       protected void Application_Start()
       {
          RegisterRoutes(RouteTable.Routes);
+         ModelBinders.Binders[typeof(IPrincipal)] = new IPrincipalModelBinder();
          ControllerBuilder.Current.SetControllerFactory(typeof(ControllerFactory));
       }
 

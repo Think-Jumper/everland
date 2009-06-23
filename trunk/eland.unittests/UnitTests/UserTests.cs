@@ -12,24 +12,24 @@ namespace eland.unittests.UnitTests
     [TestFixture]
     public class UserTests
     {
-        private List<Guid> createdUsers;
-        private IDataContext dataContext;
+        private List<Guid> _createdUsers;
+        private IDataContext _dataContext;
 
         [TestFixtureSetUp]
         public void Setup_Tests()
         {
-            dataContext = IoC.Resolve<IDataContext>();
-            createdUsers = new List<Guid>();
+            _dataContext = IoC.Resolve<IDataContext>();
+            _createdUsers = new List<Guid>();
         }
 
         [TestFixtureTearDown]
         public void Teardown_Tests()
         {
-            using (var tran = dataContext.UserRepository.Session.BeginTransaction())
+            using (var tran = _dataContext.UserRepository.Session.BeginTransaction())
             {
-                foreach (var g in createdUsers)
+                foreach (var g in _createdUsers)
                 {
-                    dataContext.UserRepository.Delete(g);
+                    _dataContext.UserRepository.Delete(g);
                 }
 
                 tran.Commit();
@@ -39,7 +39,7 @@ namespace eland.unittests.UnitTests
         [Test]
         public void Get_Null_User_By_OpenId()
         {
-            var user = ((UserRepository)dataContext.UserRepository).FindByOpenId(TestDataHelper.OPEN_ID + "abcdef");
+            var user = ((UserRepository)_dataContext.UserRepository).FindByOpenId(TestDataHelper.OPEN_ID + "abcdef");
 
             Assert.AreEqual(null, user);
         }
@@ -47,7 +47,7 @@ namespace eland.unittests.UnitTests
         [Test]
         public void Get_User_By_OpenId()
         {
-            var user = ((UserRepository)dataContext.UserRepository).FindByOpenId(TestDataHelper.OPEN_ID);
+            var user = ((UserRepository)_dataContext.UserRepository).FindByOpenId(TestDataHelper.OPEN_ID);
 
             Assert.AreEqual(user.OpenId, TestDataHelper.OPEN_ID);
             Assert.AreEqual(user.FirstName, TestDataHelper.FIRST_NAME);

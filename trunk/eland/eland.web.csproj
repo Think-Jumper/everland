@@ -88,25 +88,22 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binders\IPrincipalModelBinder.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\GameController.cs" />
-    <Compile Include="UserControls\HomeController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Filters\AuthenticationAttribute.cs" />
+    <Compile Include="Filters\UserNameAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControls\User\UserDetails.ascx.cs">
-      <DependentUpon>UserDetails.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControls\User\UserDetails.ascx.designer.cs">
-      <DependentUpon>UserDetails.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Utilities\ControllerFactory.cs" />
     <Compile Include="Utilities\DataContext.cs" />
     <Compile Include="ViewData\Game\GameIndexData.cs" />
@@ -164,8 +161,8 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="UserControls\Game\GameDetails.ascx" />
-    <Content Include="UserControls\User\UserDetails.ascx" />
+    <Content Include="Views\Shared\Game\GameDetails.ascx" />
+    <Content Include="Views\Shared\User\UserDetails.ascx" />
     <Content Include="Views\Login\Login.aspx" />
     <Content Include="Views\User\Index.aspx" />
     <Content Include="Views\User\New.aspx" />

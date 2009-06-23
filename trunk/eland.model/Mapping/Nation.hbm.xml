@@ -12,6 +12,11 @@
     </property>
 
     <many-to-one name="Race" class="eland.model.Race, eland.model" unique="true" column="RaceId"/>
+
+    <bag name="Units" lazy="true" inverse="true" cascade="all">
+      <key column="NationId" />
+      <one-to-many class="eland.model.Units.Unit, eland.model"/>
+    </bag>
   </class>
 
 </hibernate-mapping>
