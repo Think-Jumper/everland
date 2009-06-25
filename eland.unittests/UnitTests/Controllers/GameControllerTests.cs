@@ -29,7 +29,7 @@ namespace eland.unittests.UnitTests.Controllers
          var mockedhttpContext = TestDataHelper.SetupHttpContextMocks(true, TestDataHelper.OPEN_ID);
          _gameController.ControllerContext = new ControllerContext(mockedhttpContext, new RouteData(), _gameController);
 
-         var res = _gameController.Index() as ViewResult;
+         var res = _gameController.Index(TestDataHelper.OPEN_ID) as ViewResult;
 
          Assert.AreEqual("Index", res.ViewName);
       }
@@ -40,7 +40,7 @@ namespace eland.unittests.UnitTests.Controllers
          var mockedhttpContext = TestDataHelper.SetupHttpContextMocks(true, TestDataHelper.OPEN_ID);
          _gameController.ControllerContext = new ControllerContext(mockedhttpContext, new RouteData(), _gameController);
 
-         var res = _gameController.Index() as ViewResult;
+         var res = _gameController.Index(TestDataHelper.OPEN_ID) as ViewResult;
 
          Assert.AreEqual(typeof(GameIndexData), res.ViewData.Model.GetType());
          Assert.AreEqual(typeof(GameSession), ((GameIndexData) res.ViewData.Model).GameSessionData.GetType());
