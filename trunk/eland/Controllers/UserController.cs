@@ -1,8 +1,6 @@
-﻿using System;
+using System;
 using System.Web.Mvc;
-
 using eland.api;
-using eland.api.Services;
 using eland.Filters;
 using eland.model;
 using eland.ViewData;
@@ -12,13 +10,9 @@ namespace eland.Controllers
     [Authentication]
     public class UserController : BaseController
     {
-
-        [UserName]
-        public ActionResult Index(String userName)
+        public ActionResult Index()
         {
-            var openId = userName;
-
-            if (((UserRepository)DataContext.UserRepository).Exists(openId))
+            if (((UserRepository)DataContext.UserRepository).Exists(HttpContext.User.Identity.Name))
             {
                 return RedirectToAction("ViewUser");
             }
@@ -27,24 +21,25 @@ namespace eland.Controllers
                 ViewData["Email"] = TempData["Email"];
                 ViewData["FirstName"] = TempData["Nickname"];
             }
-            return New(openId);
+            return RedirectToAction("New");
         }
 
-        public ActionResult New(String openId)
+        public ActionResult New()
         {
             return View("New");
         }
 
-        public ActionResult Create(string firstName, string lastName, string email)
+        [AcceptVerbs(HttpVerbs.Post)]
+        [UserName]
+        public ActionResult CreateUser(string firstName, string lastName, string email, string userName)
         {
             var user = new User();
-
             using (var tran = DataContext.UserRepository.Session.BeginTransaction())
             {
-                user.OpenId = HttpContext.User.Identity.Name;
                 user.FirstName = firstName;
                 user.LastName = lastName;
                 user.Email = email;
+                user.OpenId = userName;
 
                 DataContext.UserRepository.Save(user);
 
@@ -53,6 +48,8 @@ namespace eland.Controllers
 
             return RedirectToAction("ViewUser");
         }
+
+      
 
         public ActionResult Edit(String openId)
         {
@@ -63,14 +60,10 @@ namespace eland.Controllers
         public ActionResult ViewUser(string userName)
         {
             var openId = userName;
-            var viewUserData = new ViewUserData{ UserData = ((UserRepository)DataContext.UserRepository).FindByOpenId(openId) };
+            var viewUserData = new ViewUserData { UserData = ((UserRepository)DataContext.UserRepository).FindByOpenId(openId) };
 
-            viewUserData.GameSessionData = GameService.CreateSession(GameService.Create(WorldService.Create()), viewUserData.UserData);
-            
-            if (viewUserData.UserData == null)
-                return RedirectToAction("Index", "Home");
-            
             return View("ViewUser", viewUserData);
         }
+
     }
 }

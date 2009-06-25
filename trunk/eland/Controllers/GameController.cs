@@ -1,29 +1,52 @@
 ﻿using System.Web.Mvc;
-using eland.api.Services;
-using eland.ViewData;
 using eland.api;
+using eland.api.Services;
+using eland.Filters;
+using eland.ViewData;
 
 namespace eland.Controllers
 {
+    [Authentication]
     public class GameController : BaseController
     {
-        public ActionResult Index()
+        [UserName]
+        public ActionResult Index(string userName)
         {
             var gameIndexData = new GameIndexData
-                                              {
-                                                  GameSessionData =
-                                                      ((GameSessionRepository)DataContext.GameSessionRepository).
-                                                      FindByUserId(HttpContext.User.Identity.Name)
-                                              };
+                                    {
+                                        GameSessionData = ((GameSessionRepository) DataContext.GameSessionRepository).FindByUserId(userName)
+                                    };
 
-            return View("Index", gameIndexData);
+            return gameIndexData.GameSessionData == null ? New() : View(gameIndexData);
+        }
+
+        public ActionResult New()
+        {
+            return View();
+        }
+
+
+        [UserName]
+        public ActionResult Create(string userName)
+        {
+            var user = ((UserRepository) DataContext.UserRepository).FindByOpenId(userName);
+            var gameSession = GameService.CreateSession(user);
+
+            using (var tran = DataContext.WorldRepository.Session.BeginTransaction())
+            {
+                DataContext.WorldRepository.Save(gameSession.Game.GameWorld);
+                DataContext.RaceRepository.Save(gameSession.Nation.Race);
+                DataContext.GameSessionRepository.Save(gameSession);
+                tran.Commit();
+            }
+
+            return RedirectToAction("Index");
         }
 
         public ActionResult CreateUnit()
         {
             TempData["CreatedUnit"] = UnitService.Create();
-
-            return RedirectToAction("ViewUser", "User");
+            return RedirectToAction("ViewUser", "Users");
         }
 
 

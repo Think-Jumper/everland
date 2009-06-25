@@ -15,7 +15,7 @@
       <column name="LeftGame" />
     </property>
 
-    <many-to-one name="Game" class="eland.model.Game, eland.model" unique="true" column="GameId" cascade="save-update" />
+    <many-to-one name="Game" class="eland.model.Game, eland.model" unique="true" column="GameId"  cascade="save-update" />
     <many-to-one name="User" class="eland.model.User, eland.model" unique="true" column="UserId" cascade="save-update" />
     <many-to-one name="Nation" class="eland.model.Nation, eland.model" unique="true" column="NationId" cascade="all" />
 

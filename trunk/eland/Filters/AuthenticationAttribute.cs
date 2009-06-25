@@ -7,6 +7,8 @@ namespace eland.Filters
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            base.OnActionExecuting(filterContext);
+
             if (filterContext.HttpContext.User.Identity.IsAuthenticated) return;
             var redirectOnSuccess = filterContext.HttpContext.Request.Url.AbsolutePath;
             var redirectUrl = string.Format("?ReturnUrl={0}", redirectOnSuccess);
