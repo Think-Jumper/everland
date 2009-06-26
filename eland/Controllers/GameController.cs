@@ -1,36 +1,40 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using eland.api;
 using eland.api.Services;
 using eland.Filters;
+using eland.model;
 using eland.ViewData;
+using eland.ViewData.Game;
 
 namespace eland.Controllers
 {
     [Authentication]
     public class GameController : BaseController
     {
-        [UserName]
-        public ActionResult Index(string userName)
+        
+        public ActionResult Index()
         {
-            var gameIndexData = new GameIndexData
-                                    {
-                                        GameSessionData = ((GameSessionRepository) DataContext.GameSessionRepository).FindByUserId(userName)
-                                    };
+            var gameIndexData = new GameIndexData { GameSessionData = ((GameSessionRepository) DataContext.GameSessionRepository).FindByUserId(HttpContext.User.Identity.Name) };
+            if (gameIndexData.GameSessionData == null)
+                return RedirectToAction("New");
 
-            return gameIndexData.GameSessionData == null ? New() : View(gameIndexData);
+            return View(gameIndexData);
         }
 
         public ActionResult New()
         {
-            return View();
+            var races = DataContext.RaceRepository.FindAll();
+            var selectList = new SelectList(races, "Id", "Name");
+            return View(selectList);
         }
 
-
         [UserName]
-        public ActionResult Create(string userName)
+        public ActionResult Create(string userName, Guid raceId)
         {
             var user = ((UserRepository) DataContext.UserRepository).FindByOpenId(userName);
-            var gameSession = GameService.CreateSession(user);
+            var race = DataContext.RaceRepository.Get(raceId);
+            var gameSession = GameService.CreateSession(user, race);
 
             using (var tran = DataContext.WorldRepository.Session.BeginTransaction())
             {
@@ -43,10 +47,10 @@ namespace eland.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult CreateUnit()
+        public ActionResult ViewUnit(Guid id)
         {
-            TempData["CreatedUnit"] = UnitService.Create();
-            return RedirectToAction("ViewUser", "Users");
+            var unitData = new UnitData {Unit = DataContext.UnitRepository.Get(id)};
+            return View("ViewUnit", unitData);
         }
 
 

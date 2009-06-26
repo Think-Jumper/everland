@@ -4,13 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <div>  
-    
-         <% if (ViewData.Model == null) { %>
-               <%=Html.ActionLink("Create New", "Create") %>
-         <% } else {
-            Html.RenderPartial("~/Views/Shared/Game/GameDetails.ascx");
-         } %>
-        
+           <% Html.RenderPartial("~/Views/Shared/Game/GameDetails.ascx"); %>
     </div>
 
 </asp:Content>

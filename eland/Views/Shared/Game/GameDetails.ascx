@@ -10,8 +10,10 @@
     <div>Hexes : <%= ViewData.Model.GameSessionData.Game.GameWorld.Hexes.Count %></div>
     
     <div>
-        <% foreach (var unit in ViewData.Model.GameSessionData.Nation.Units) %>
-            <%=unit.GetType().ToString()%>
+        <% foreach (var unit in ViewData.Model.GameSessionData.Nation.Units) { %>
+            <div>Unit Type : <%=unit.GetType().ToString()%> : <%= Html.ActionLink("View Unit",  "ViewUnit", new { id = unit.Id } ) %></div>
+        <% } %>
+        
  
     </div>
 </div>

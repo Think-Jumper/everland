@@ -46,12 +46,12 @@ namespace eland.api
             return Session.Get<T>(id);
         }
 
-        public IList FindAll()
+        public IList<T> FindAll()
         {
             return FindByCriteria();
         }
 
-        public IList FindByCriteria(params ICriterion[] criterion)
+        public IList<T> FindByCriteria(params ICriterion[] criterion)
         {
             var criteria = Session.CreateCriteria(typeof(T));
 
@@ -60,7 +60,7 @@ namespace eland.api
                 criteria.Add(criterium);
             }
 
-            return criteria.List();
+            return criteria.List<T>();
         }
 
         public List<T> GetByExample(T exampleInstance, params string[] propertiesToExclude)

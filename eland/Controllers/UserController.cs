@@ -29,8 +29,7 @@ namespace eland.Controllers
             return View("New");
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        [UserName]
+        [AcceptVerbs(HttpVerbs.Post), UserName]
         public ActionResult CreateUser(string firstName, string lastName, string email, string userName)
         {
             var user = new User();
@@ -48,8 +47,6 @@ namespace eland.Controllers
 
             return RedirectToAction("ViewUser");
         }
-
-      
 
         public ActionResult Edit(String openId)
         {
