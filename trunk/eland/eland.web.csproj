@@ -106,34 +106,14 @@
     <Compile Include="Utilities\ControllerFactory.cs" />
     <Compile Include="Utilities\DataContext.cs" />
     <Compile Include="ViewData\Game\GameIndexData.cs" />
+    <Compile Include="ViewData\Game\UnitData.cs" />
     <Compile Include="ViewData\User\ViewUserData.cs" />
-    <Compile Include="Views\Home\About.aspx.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Home\About.aspx.designer.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Home\Index.aspx.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Home\Index.aspx.designer.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Views\Shared\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Shared\Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Login\Login.aspx.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Login\Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Users\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -151,20 +131,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\Logos\openid-16x16.gif" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Views\Game\Index.aspx" />
     <Content Include="Views\Game\New.aspx" />
+    <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Login\Login.aspx" />
     <Content Include="Views\Shared\Game\GameDetails.ascx" />
     <Content Include="Views\Shared\Users\UserDetails.ascx" />
-    <Content Include="Views\Login\Login.aspx" />
     <Content Include="Views\Users\Index.aspx" />
     <Content Include="Views\Users\New.aspx" />
     <Content Include="Views\Users\ViewUser.aspx" />
     <Content Include="Web.config" />
     <Content Include="Content\Site.css" />
-    <Content Include="Views\Home\About.aspx" />
-    <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Web.config" />
   </ItemGroup>

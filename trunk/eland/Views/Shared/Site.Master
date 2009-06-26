@@ -4,29 +4,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-UnitType" content="text/html; charset=iso-8859-1" />
-    <title><%= Html.Encode(ViewData["Title"]) %></title>
+    <title>
+        <%= Html.Encode(ViewData["Title"]) %></title>
     <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
 </head>
-
 <body>
     <div class="page">
-
         <div id="header">
             <ul id="menu">
                 <li>
-                    <%= Html.ActionLink("Login", "Index", "Users")%>
+                    <%= Html.ActionLink("User", "Index", "Users")%>
                 </li>
                 <li>
                     <%= Html.ActionLink("Game", "Index", "Game")%>
                 </li>
+                <% if (HttpContext.Current.User.Identity.IsAuthenticated) { %>
+                <li>
+                    <%=Html.ActionLink("Logout", "Logout", "Login")%>
+                </li>
+                <% } %>
             </ul>
         </div>
-
         <div id="main">
             <div id="content">
-            
                 <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-            
             </div>
             <div id="footer">
                 <p>
@@ -34,7 +35,6 @@
                 </p>
             </div>
         </div>
-
     </div>
 </body>
 </html>

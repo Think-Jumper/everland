@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Web.Mvc;
 
 using DotNetOpenId.RelyingParty;
@@ -11,6 +12,7 @@ namespace eland.Controllers
     {
         public ActionResult Login()
         {
+            // check for cookie
             return View("Login");
         }
 
@@ -33,36 +35,33 @@ namespace eland.Controllers
                     req.AddExtension(fields);
                     req.RedirectToProvider();
                 }
-                catch (Exception e)
-                {
-                    ViewData["Message"] = e.Message;
-                    return View("Login");
-                }
+                catch (ThreadAbortException) { }
+                catch (Exception e) { ViewData["Message"] = e.Message; }
+
+                return View("Login");
             }
-            else
+
+            switch (openid.Response.Status)
             {
-                switch (openid.Response.Status)
-                {
-                    case AuthenticationStatus.Authenticated:
+                case AuthenticationStatus.Authenticated:
 
-                        var fields = openid.Response.GetExtension(typeof(ClaimsResponse)) as ClaimsResponse;
+                    var fields = openid.Response.GetExtension(typeof(ClaimsResponse)) as ClaimsResponse;
 
-                        if (fields != null)
-                        {
-                            TempData["Email"] = fields.Email;
-                            TempData["Nickname"] = fields.Nickname;
-                        }
+                    if (fields != null)
+                    {
+                        TempData["Email"] = fields.Email;
+                        TempData["Nickname"] = fields.Nickname;
+                    }
 
-                        FormsAuthentication.RedirectFromLoginPage(openid.Response.ClaimedIdentifier, false);
+                    FormsAuthentication.RedirectFromLoginPage(openid.Response.ClaimedIdentifier, true);
 
-                        break;
-                    case AuthenticationStatus.Canceled:
-                        ViewData["Message"] = "Canceled at provider";
-                        return View("Login");
-                    case AuthenticationStatus.Failed:
-                        ViewData["Message"] = openid.Response.Exception.Message;
-                        return View("Login");
-                }
+                    break;
+                case AuthenticationStatus.Canceled:
+                    ViewData["Message"] = "Canceled at provider";
+                    return View("Login");
+                case AuthenticationStatus.Failed:
+                    ViewData["Message"] = openid.Response.Exception.Message;
+                    return View("Login");
             }
 
             // need this rather than returning an ActionResult.
