@@ -43,8 +43,9 @@ namespace eland.unittests.UnitTests
             using (var tran = _dataContext.WorldRepository.Session.BeginTransaction())
             {
                 _dataContext.GameSessionRepository.Delete(gameSession);
-
                 _dataContext.GameRepository.Delete(gameSession.Game);
+                _dataContext.RaceRepository.Delete(gameSession.Nation.Race);
+                _dataContext.UserRepository.Delete(gameSession.User);
                 _dataContext.WorldRepository.Delete(gameSession.Game.GameWorld);
 
                 tran.Commit();

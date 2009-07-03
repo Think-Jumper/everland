@@ -195,3 +195,36 @@ ul#menu li.selected a
 {
     clear: both;
 }
+
+
+
+
+.pane-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.pane-list li {
+	background: #FFFFFF;
+	padding: 10px 20px 10px;
+	border-top: solid 1px #42607F;
+	cursor: pointer;
+}
+.pane-list li:hover {
+	background: #42607F;
+	border-top: solid 1px #FFFFFF;
+	color: #FFFFFF;
+}
+
+.divDetails
+{
+    border: 1px solid #000000;
+    background-color : #FFFFFF;
+    padding: 5px;
+    width: 400px;
+ }
+ 
+ .hidden
+ {
+     visibility: hidden;
+ }

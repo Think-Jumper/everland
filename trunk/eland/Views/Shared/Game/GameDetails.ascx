@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<GameIndexData>" %>
+<%@ Import Namespace="eland.Controllers"%>
 <%@ Import Namespace="eland.ViewData"%>
 <%@ Import Namespace="eland.model"%>
 
@@ -11,7 +12,7 @@
     
     <div>
         <% foreach (var unit in ViewData.Model.GameSessionData.Nation.Units) { %>
-            <div>Unit Type : <%=unit.GetType().ToString()%> : <%= Html.ActionLink("View Unit",  "ViewUnit", new { id = unit.Id } ) %></div>
+            <div>Unit Type : <%=unit.GetType().ToString()%> : <%= Html.ActionLink("View", "ViewUnit", new { id = unit.Id} ) %></div>
         <% } %>
         
  

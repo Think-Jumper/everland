@@ -10,9 +10,7 @@ namespace eland.Filters
             base.OnActionExecuting(filterContext);
 
             if (filterContext.HttpContext.User.Identity.IsAuthenticated) return;
-            var redirectOnSuccess = filterContext.HttpContext.Request.Url.AbsolutePath;
-            var redirectUrl = string.Format("?ReturnUrl={0}", redirectOnSuccess);
-            var loginUrl = FormsAuthentication.LoginUrl + redirectUrl;
+            var loginUrl = FormsAuthentication.LoginUrl + "?ReturnUrl=/Users/Index/";
 
             filterContext.HttpContext.Response.Redirect(loginUrl, true);
         }
