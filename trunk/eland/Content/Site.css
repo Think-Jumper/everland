@@ -218,13 +218,32 @@ ul#menu li.selected a
 
 .divDetails
 {
-    border: 1px solid #000000;
-    background-color : #FFFFFF;
-    padding: 5px;
-    width: 400px;
+    width: 180px;
  }
  
  .hidden
  {
      visibility: hidden;
  }
+ 
+ #leftcolumn { 
+ color: #333;
+ border: 1px solid #ccc;
+ background: #F2F2E6;
+ margin: 10px 0px 10px 0px;
+ padding: 10px;
+ height: 500px;
+ float: left;
+}
+#rightcolumn { 
+ float: right;
+ color: #333;
+ border: 1px solid #ccc;
+ background: #E7DBD5;
+ margin: 10px 0px 10px 0px;
+ padding: 10px;
+ height: 500px;
+ width: 200px;
+ display: inline;
+ position: relative;
+}

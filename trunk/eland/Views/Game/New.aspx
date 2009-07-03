@@ -25,25 +25,31 @@
 </script>
 
 
-    <% using (Html.BeginForm("Create", "Game", FormMethod.Post)) { %>
-        <h2>New Game</h2>
-                
-        <div id="raceDetails" class="divDetails">
-            uiouio
-        </div>
-        
-        <label for="race">Select Race: </label>
-        
-        <% foreach(var race in ViewData.Model) { %>
-            <ul class="pane-list">
-                <li><input type="radio" id="<%= race.Name %>" name="raceId" value="<%= race.Id %>" />
-                <label for="<%= race.Name %>"><%= race.Name %></label><input type="hidden" value="<%= race.Description %>" />
-            </li>
-            </ul>
-        <% } %>
-        
-        <input type="submit" value="Create Game" />
     
-    <% } %>
+        <h2>New Game</h2>
+    <div id="wrapper">
+        <div id="leftcolumn">
+            <% using (Html.BeginForm("Create", "Game", FormMethod.Post)) { %>
+            
+              <label for="race">Select Race: </label>
+            
+            <% foreach(var race in ViewData.Model) { %>
+                <ul class="pane-list">
+                    <li><input type="radio" id="<%= race.Name %>" name="raceId" value="<%= race.Id %>" />
+                    <label for="<%= race.Name %>"><%= race.Name %></label><input type="hidden" value="<%= race.Description %>" />
+                </li>
+                </ul>
+            <% } %>
+            
+            <input type="submit" value="Create Game" />
+        
+        <% } %>
+        </div>
+        <div id="rightcolumn">
+            <div id="raceDetails" class="divDetails">
+                uiouio
+            </div>
+        </div>
+    </div>    
 
 </asp:Content>
