@@ -11,6 +11,14 @@
       <column name="Name" />
     </property>
 
+    <property name="Description" access="property" lazy="true">
+      <column name="Description" />
+    </property>
+
+    <property name="ImageFileName" access="property">
+      <column name="ImageFileName" />
+    </property>
+
   </class>
 
 </hibernate-mapping>

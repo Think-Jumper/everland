@@ -20,6 +20,20 @@ namespace eland.unittests.UnitTests
         {
             _dataContext = IoC.Resolve<IDataContext>();
             _createdUsers = new List<Guid>();
+            var user = new User
+            {
+                Email = TestDataHelper.EMAIL,
+                FirstName = TestDataHelper.FIRST_NAME,
+                LastName = TestDataHelper.LAST_NAME,
+                OpenId = TestDataHelper.OPEN_ID
+            };
+
+            using (var tran = _dataContext.UserRepository.Session.BeginTransaction())
+            {
+                _dataContext.UserRepository.Save(user);
+                tran.Commit();
+            }
+            _createdUsers.Add(user.Id);
         }
 
         [TestFixtureTearDown]
@@ -52,21 +66,6 @@ namespace eland.unittests.UnitTests
             Assert.AreEqual(user.OpenId, TestDataHelper.OPEN_ID);
             Assert.AreEqual(user.FirstName, TestDataHelper.FIRST_NAME);
             Assert.AreEqual(user.LastName, TestDataHelper.LAST_NAME);
-        }
-
-        [Test]
-        public void foo()
-        {
-            var gamesession = new GameSession();
-            var user = new User();
-            var game = new Game();
-            var nation = new Nation();
-
-            gamesession.Game = game;
-            gamesession.User = user;
-            gamesession.Nation = nation;
-            
-
         }
 
     }

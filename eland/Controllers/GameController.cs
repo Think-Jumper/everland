@@ -19,18 +19,17 @@ namespace eland.Controllers
             if (gameIndexData.GameSessionData == null)
                 return RedirectToAction("New");
 
-            return View(gameIndexData);
+            return View("Index", gameIndexData);
         }
 
         public ActionResult New()
         {
             var races = DataContext.RaceRepository.FindAll();
-            var selectList = new SelectList(races, "Id", "Name");
-            return View(selectList);
+            return View(races);
         }
 
-        [UserName]
-        public ActionResult Create(string userName, Guid raceId)
+        [AcceptVerbs(HttpVerbs.Post), UserName]
+        public ActionResult Create(string userName, Guid? raceId)
         {
             var user = ((UserRepository) DataContext.UserRepository).FindByOpenId(userName);
             var race = DataContext.RaceRepository.Get(raceId);
@@ -49,7 +48,7 @@ namespace eland.Controllers
 
         public ActionResult ViewUnit(Guid id)
         {
-            var unitData = new UnitData {Unit = DataContext.UnitRepository.Get(id)};
+            var unitData = new UnitData { Unit = DataContext.UnitRepository.Get(id) };
             return View("ViewUnit", unitData);
         }
 

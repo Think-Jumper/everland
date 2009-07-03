@@ -40,28 +40,24 @@ namespace eland.unittests.UnitTests.Controllers
         [Test]
         public void Index_Correct_View_Existing_User()
         {
-            HttpContextBase mockedhttpContext = TestDataHelper.SetupHttpContextMocks(true, TestDataHelper.OPEN_ID);
+            var mockedhttpContext = TestDataHelper.SetupHttpContextMocks(true, TestDataHelper.OPEN_ID);
             userController.ControllerContext = new ControllerContext(mockedhttpContext, new RouteData(), userController);
 
-            var result = userController.Index() as ViewResult;
+            var result = userController.Index() as RedirectToRouteResult;
 
-            Assert.AreEqual("ViewUser", result.ViewName);
-            Assert.AreEqual(TestDataHelper.OPEN_ID, ((ViewUserData)result.ViewData.Model).UserData.OpenId);
-            Assert.AreEqual(TestDataHelper.EMAIL, ((ViewUserData)result.ViewData.Model).UserData.Email);
-            Assert.AreEqual(TestDataHelper.FIRST_NAME, ((ViewUserData)result.ViewData.Model).UserData.FirstName);
-            Assert.AreEqual(TestDataHelper.LAST_NAME, ((ViewUserData)result.ViewData.Model).UserData.LastName);
+            Assert.AreEqual("ViewUser", result.RouteValues["action"]);
+
         }
 
         [Test]
         public void Index_Correct_View_Not_Authenticated()
         {
-            HttpContextBase mockedhttpContext = TestDataHelper.SetupHttpContextMocks(false, string.Empty);
+            var mockedhttpContext = TestDataHelper.SetupHttpContextMocks(false, string.Empty);
             userController.ControllerContext = new ControllerContext(mockedhttpContext, new RouteData(), userController);
 
             var result = userController.Index() as RedirectToRouteResult;
 
-            Assert.AreEqual("Home", result.RouteValues["Controller"]);
-            Assert.AreEqual( "Index", result.RouteValues[ "Action" ] );
+            Assert.AreEqual( "New", result.RouteValues[ "Action" ] );
         }
 
         [Test]

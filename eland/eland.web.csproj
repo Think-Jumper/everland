@@ -46,7 +46,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="DotNetOpenId, Version=2.3.0.8204, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DotNetOpenId, Version=2.5.5.9153, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\DotNetOpenId.dll</HintPath>
     </Reference>
@@ -132,6 +132,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Images\Logos\openid-16x16.gif" />
+    <Content Include="Content\jquery-1.3.2.min.js" />
+    <Content Include="Content\jquery-plugin-hoverintent.js" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Views\Game\Index.aspx" />

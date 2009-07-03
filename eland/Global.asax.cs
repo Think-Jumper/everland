@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
@@ -15,11 +16,8 @@ namespace eland
       {
          routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-         routes.MapRoute(
-             "Default",                                              // Route name
-             "{controller}/{action}/{id}",                           // URL with parameters
-             new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
-         );
+         routes.MapRoute( "GameViewUnit", "Game/ViewUnit/{id}", new { controller = "Game", action = "ViewUnit", id = new Guid() });
+         routes.MapRoute( "Default", "{controller}/{action}/{id}",  new { controller = "Home", action = "Index", id = "" } );
 
       }
 
