@@ -1,23 +1,16 @@
-using eland.model.Interfaces;
+
 
 namespace eland.model.Units
 {
-    public class Clubman : Unit, IHandToHandUnit
+    public sealed class Clubman : Unit
     {
-        public virtual void Attack()
+        public Clubman()
         {
-            throw new System.NotImplementedException();
-        }
+            MaximumHealth = Consts.UnitConsts.HealthNoncombatPeasantMax;
+            Health = Consts.UnitConsts.HealthNoncombatPeasantMax;
 
-        public virtual int AttackStrength
-        {
-            get { throw new System.NotImplementedException(); }
-            set { throw new System.NotImplementedException(); }
-        }
-
-        public virtual void Defend()
-        {
-            throw new System.NotImplementedException();
+            AttackState = new States.Attack.HandToHand();
+            MoveState = new States.Movement.Foot();
         }
     }
 }

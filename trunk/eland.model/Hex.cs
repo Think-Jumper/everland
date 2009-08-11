@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using eland.model.Enums;
 using eland.model.Units;
 
@@ -11,6 +12,7 @@ namespace eland.model
         public virtual int Y { get; set; }
         public virtual World World { get; set; }
         public virtual HexType HexType { get; set; }
+        public virtual IList<Unit> Units { get; set; }
 
         public virtual bool IsAdjacentTo(Hex hex)
         {
