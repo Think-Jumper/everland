@@ -100,7 +100,6 @@
     <Compile Include="UnitTests\Controllers\LoginControllerTests.cs" />
     <Compile Include="UnitTests\Units\PeasantTests.cs" />
     <Compile Include="UnitTests\UnitTests.cs" />
-    <Compile Include="UnitTests\UpgradeTests.cs" />
     <Compile Include="UnitTests\UserTests.cs" />
     <Compile Include="UnitTests\WorldTests.cs" />
   </ItemGroup>

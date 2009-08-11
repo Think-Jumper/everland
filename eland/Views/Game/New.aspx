@@ -6,27 +6,34 @@
 <script type="text/javascript">
     $(document).ready(function() {
 
+        var clicked = false;
+        var lastSelect = '';
+
         $(".pane-list li").click(function() {
-            $(this).children("input[type=radio]").click();
+            lastSelect = $(this).find('input:last').val();
+            $('#raceDetails').html(lastSelect);
+            $(this).find('input:first').attr("checked","checked");
+            clicked = true;
         });
 
         $(".pane-list li").hover(showDescription, hideDescription)
-
 
         function showDescription() {
             $('#raceDetails').html($(this).find('input:last').val());
         };
 
         function hideDescription() {
-            $('#raceDetails').html('');
+            if (clicked == false) {
+                $('#raceDetails').html('');
+            } else {
+                $('#raceDetails').html(lastSelect);
+            }
+
         };
 
     }); 
 </script>
 
-
-    
-        <h2>New Game</h2>
     <div id="wrapper">
         <div id="leftcolumn">
             <% using (Html.BeginForm("Create", "Game", FormMethod.Post)) { %>
@@ -46,7 +53,7 @@
         <% } %>
         </div>
         <div id="rightcolumn">
-            <div id="raceDetails" class="divDetails">
+            <div id="raceDetails">
                 uiouio
             </div>
         </div>

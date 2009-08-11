@@ -124,6 +124,7 @@ p#logo, h1#logo
 #main
 {
     padding: 30px 30px 15px 30px;
+    border: 1px solid #000000;
     background-color: #FFF;
     margin-bottom: 30px;
     _height: 1px; /* only IE6 applies CSS properties starting with an underscrore */
@@ -163,6 +164,7 @@ ul#menu li
 
 ul#menu li a
 {
+    border: 1px solid #000000;
     padding: 10px 20px;
     font-weight: bold;
     text-decoration: none;
@@ -216,34 +218,30 @@ ul#menu li.selected a
 	color: #FFFFFF;
 }
 
-.divDetails
-{
-    width: 180px;
- }
- 
+
  .hidden
  {
      visibility: hidden;
  }
  
  #leftcolumn { 
- color: #333;
  border: 1px solid #ccc;
- background: #F2F2E6;
+ background: #EFEFEF;
  margin: 10px 0px 10px 0px;
  padding: 10px;
- height: 500px;
+ width: 50%;
+ height: auto;
  float: left;
 }
+
 #rightcolumn { 
  float: right;
- color: #333;
  border: 1px solid #ccc;
- background: #E7DBD5;
+ background: #EFEFEF;
  margin: 10px 0px 10px 0px;
  padding: 10px;
- height: 500px;
- width: 200px;
+ height: 550px;
+ width: 40%;
  display: inline;
  position: relative;
 }

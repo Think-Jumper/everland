@@ -1,25 +1,16 @@
-using System;
-using eland.model.Interfaces;
 
 namespace eland.model.Units
 {
-    public class Archer : Unit, IRangedUnit
+    public sealed class Archer : Unit
     {
-        public virtual int Range
+        public Archer()
         {
-            get { return 0; }
-            set { throw new NotImplementedException(); }
-        }
+            MaximumHealth = Consts.UnitConsts.HealthNoncombatPeasantMax;
+            Health = Consts.UnitConsts.HealthNoncombatPeasantMax;
 
-        public virtual void Attack()
-        {
-            throw new System.NotImplementedException();
+            AttackState = new States.Attack.Ranged();
+            MoveState = new States.Movement.Foot();
         }
-
-        public virtual int AttackStrength
-        {
-            get { throw new System.NotImplementedException(); }
-            set { throw new System.NotImplementedException(); }
-        }
+      
     }
 }
