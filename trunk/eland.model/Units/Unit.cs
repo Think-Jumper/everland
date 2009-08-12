@@ -18,7 +18,11 @@ namespace eland.model.Units
             CurrentState.Handle(context);
         }
 
-        //public abstract void ChangeState(StateContext context);
+        public void ChangeState(State state)
+        {
+            CurrentState = state;
+            //ToDo : maybe notificationo or State.Enter / State.Exit?
+        }
     }
 
 

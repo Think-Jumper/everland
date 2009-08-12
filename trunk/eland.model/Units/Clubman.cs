@@ -9,7 +9,7 @@ namespace eland.model.Units
             MaximumHealth = Consts.UnitConsts.HealthNoncombatPeasantMax;
             Health = Consts.UnitConsts.HealthNoncombatPeasantMax;
 
-            CurrentState = new States.Movement.Movement();
+            CurrentState = new States.Idle();
         }
     }
 }
