@@ -58,11 +58,11 @@
     <Compile Include="queries\World.hbm.cs" />
     <Compile Include="Race.cs" />
     <Compile Include="Settlement.cs" />
-    <Compile Include="States\Attack\HandToHand.cs" />
-    <Compile Include="States\Attack\None.cs" />
-    <Compile Include="States\Attack\Ranged.cs" />
-    <Compile Include="States\Movement\Foot.cs" />
-    <Compile Include="States\Movement\None.cs" />
+    <Compile Include="States\Defend.cs" />
+    <Compile Include="States\Attack.cs" />
+    <Compile Include="States\Fortified.cs" />
+    <Compile Include="States\Idle.cs" />
+    <Compile Include="States\Movement.cs" />
     <Compile Include="States\State.cs" />
     <Compile Include="Units\Archer.cs" />
     <Compile Include="Units\Clubman.cs" />
@@ -99,10 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mapping\Unit.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="States\Build\" />
-    <Folder Include="States\Defence\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace eland.model.States.Movement
+﻿namespace eland.model.States
 {
-    public class Foot : State
+    public class Movement : State
     {
-        public override void Handle(StateContext context)
+        public void Handle(MoveStateContext context)
         {
             // totally naive, just move to target instantly! - need to plug in pathfinder etc
 

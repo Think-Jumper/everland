@@ -11,23 +11,14 @@ namespace eland.model.Units
         public virtual int MaximumHealth { get; set; }
         public virtual Nation Nation { get; set; }
 
-        public State AttackState { get; set; }
-        public State MoveState { get; set; }
-        public State BuildState { get; set; }
+        public State CurrentState { get; set; }
 
         public void ExecuteTurn(StateContext context)
         {
-            if (context is AttackStateContext)
-                AttackState.Handle(context);
-            if (context is MoveStateContext)
-                MoveState.Handle(context);
-            if (context is BuildStateContext)
-                BuildState.Handle(context);
-
-            // defend state
-            // etc
-
+            CurrentState.Handle(context);
         }
+
+        //public abstract void ChangeState(StateContext context);
     }
 
 

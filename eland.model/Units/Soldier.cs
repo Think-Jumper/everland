@@ -9,8 +9,7 @@ namespace eland.model.Units
             MaximumHealth = UnitConsts.AttackOffensiveSoldierMax;
             Health = UnitConsts.AttackOffensiveSoldierMax;
 
-            AttackState = new States.Attack.Ranged();
-            MoveState = new States.Movement.Foot();
+            CurrentState = new States.Movement.Movement();
         }
     }
 }
