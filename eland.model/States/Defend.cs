@@ -4,9 +4,9 @@ namespace eland.model.States
 {
     public class Defend : State
     {
-        public void Handle(AttackStateContext context)
+        public void Handle(DefendStateContext context)
         {
-            throw new NotImplementedException();
+            // some defensive stuff
         }
     }
 }

@@ -28,11 +28,11 @@ namespace eland.unittests.UnitTests
         }
 
         [Test]
-        public void Check_Unit_Movement()
+        public void Check_Unit_State_Transitions()
         {
             foreach (var unit in units)
             {
-                var context = new MoveStateContext
+                var moveStateContext = new MoveStateContext
                                   {
                                       Source = unit,
                                       Target =
@@ -47,22 +47,16 @@ namespace eland.unittests.UnitTests
                                               }
                                   };
 
-                var attackContext = new AttackStateContext();
+                var attackStateContext = new AttackStateContext { Source = moveStateContext.Source, Target = moveStateContext.Target };
 
-                if (unit is Soldier)
-                {
-                    unit.ExecuteTurn(context);
-                    Assert.AreEqual(999, unit.Location.X);
-                    Assert.AreEqual(888, unit.Location.Y);
+                Assert.IsTrue(unit.CurrentState is Idle);
+                unit.ExecuteTurn(moveStateContext);
+                Assert.IsTrue(unit.CurrentState is Movement);
+                unit.ExecuteTurn(attackStateContext);
+                Assert.IsTrue(unit.CurrentState is Attack);
 
-                    unit.ExecuteTurn(attackContext);
 
-                }
-                if (unit is Peasant)
-                {
-                    unit.ExecuteTurn(context);
-                    Assert.IsNull(unit.Location);
-                }
+              
 
             }
         }

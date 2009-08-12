@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using eland.model.Units;
 
@@ -13,15 +14,12 @@ namespace eland.model.States
         {
             Dispatch = new Dictionary<Int64, MethodInfo>();
 
-            foreach (var t in Assembly.GetCallingAssembly().GetTypes())
+            foreach (var t in Assembly.GetCallingAssembly().GetTypes().Where(t => t.IsSubclassOf(typeof(State))))
             {
-                if (!t.IsSubclassOf(typeof(State))) continue;
-                foreach (var mi in t.GetMethods())
+                foreach (var mi in t.GetMethods().Where(mi => mi.Name == "Handle" && mi.GetParameters().Length > 0))
                 {
-                    if (mi.Name != "Handle") continue;
-                    var pars = mi.GetParameters();
-                    if (pars.Length != 1) continue;
-                    var code = ((Int64)t.GetHashCode() << 32) + pars[0].ParameterType.GetHashCode();
+                    var code = ((Int64)t.GetHashCode() << 32) + mi.GetParameters()[0].ParameterType.GetHashCode();
+
                     Dispatch.Add(code, mi);
                 }
             }
@@ -36,12 +34,12 @@ namespace eland.model.States
             }
             else
             {
-                Console.WriteLine("Handling object " + context);
+                // the state doesn't explicitly handle this change, so for now use the idle state as a default transition
+                context.Source.ChangeState(new Idle());
+                context.Source.ExecuteTurn(context);
+                Console.WriteLine("Default State being used : " + context);
             }
         }
-
-
-
     }
 
 
@@ -71,7 +69,7 @@ namespace eland.model.States
     public class DefendStateContext : StateContext
     {
     }
-    
+
     public class BuildStateContext : StateContext
     {
     }
