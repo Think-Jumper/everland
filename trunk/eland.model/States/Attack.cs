@@ -1,14 +1,12 @@
-﻿using System;
-
-namespace eland.model.States.Attack
+﻿namespace eland.model.States
 {
-    public class Ranged : State
+    public class Attack : State
     {
-        public override void Handle(StateContext context)
+        public void Handle(AttackStateContext context)
         {
             //rubbish, but you get the idea
             if (context.Target.Units.Count == 0)
-                context.Source.ExecuteTurn(context as MoveStateContext);
+                context.Source.ExecuteTurn(new MoveStateContext {Source = context.Source, Target = context.Target});
             else if (context.Target.IsAdjacentTo(context.Source.Location))
             {
                 context.Source.Health -= 1;

@@ -47,11 +47,15 @@ namespace eland.unittests.UnitTests
                                               }
                                   };
 
+                var attackContext = new AttackStateContext();
+
                 if (unit is Soldier)
                 {
                     unit.ExecuteTurn(context);
                     Assert.AreEqual(999, unit.Location.X);
                     Assert.AreEqual(888, unit.Location.Y);
+
+                    unit.ExecuteTurn(attackContext);
 
                 }
                 if (unit is Peasant)
