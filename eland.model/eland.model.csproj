@@ -51,24 +51,16 @@
     <Compile Include="GameSession.cs" />
     <Compile Include="Hex.cs" />
     <Compile Include="Nation.cs" />
+    <Compile Include="Pathfinding\PathFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="queries\Game.hbm.cs" />
-    <Compile Include="queries\Hex.hbm.cs" />
-    <Compile Include="queries\HexType.hbm.cs" />
-    <Compile Include="queries\World.hbm.cs" />
     <Compile Include="Race.cs" />
     <Compile Include="Settlement.cs" />
-    <Compile Include="States\Defend.cs" />
-    <Compile Include="States\Attack.cs" />
-    <Compile Include="States\Fortified.cs" />
-    <Compile Include="States\Idle.cs" />
-    <Compile Include="States\Movement.cs" />
-    <Compile Include="States\State.cs" />
-    <Compile Include="Units\Archer.cs" />
-    <Compile Include="Units\Clubman.cs" />
-    <Compile Include="Units\Peasant.cs" />
-    <Compile Include="Units\Soldier.cs" />
-    <Compile Include="Units\Unit.cs" />
+    <Compile Include="States\Spearman.cs" />
+    <Compile Include="States\UnitState.cs" />
+    <Compile Include="Unit.cs" />
+    <Compile Include="UnitCommands\AttackCommand.cs" />
+    <Compile Include="UnitCommands\MovementCommand.cs" />
+    <Compile Include="UnitCommands\NullCommand.cs" />
     <Compile Include="User.cs" />
     <Compile Include="World.cs" />
   </ItemGroup>
@@ -99,6 +91,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mapping\Unit.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Mapping\UnitState.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Units\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

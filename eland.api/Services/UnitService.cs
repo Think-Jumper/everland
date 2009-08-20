@@ -1,4 +1,5 @@
-﻿using eland.model.Units;
+﻿
+using eland.model;
 
 namespace eland.api.Services
 {
@@ -6,7 +7,7 @@ namespace eland.api.Services
     {
         public static Unit Create()
         {
-            return new Archer();
+            return new Unit();
         }
     }
 }

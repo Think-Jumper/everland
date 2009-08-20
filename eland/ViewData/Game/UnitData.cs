@@ -1,4 +1,4 @@
-﻿using eland.model.Units;
+﻿using eland.model;
 
 namespace eland.ViewData.Game
 {

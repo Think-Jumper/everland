@@ -3,7 +3,6 @@ using System.Web;
 using System.Security.Principal;
 using eland.model;
 using eland.model.Enums;
-using eland.model.Units;
 using Moq;
 
 namespace eland.unittests.Helpers
@@ -46,10 +45,10 @@ namespace eland.unittests.Helpers
                 }
             }
 
-            nation.AddUnit(new Archer());
-            nation.AddUnit(new Soldier());
-            nation.AddUnit(new Peasant());
-            nation.AddUnit(new Clubman());
+            nation.AddUnit(new Unit());
+            nation.AddUnit(new Unit());
+            nation.AddUnit(new Unit());
+            nation.AddUnit(new Unit());
 
             return gameSession;
 
