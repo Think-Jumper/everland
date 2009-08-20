@@ -1,7 +1,6 @@
 ﻿using System;
 using eland.model;
 using eland.model.Enums;
-using eland.model.Units;
 
 namespace eland.api.Services
 {
@@ -27,10 +26,10 @@ namespace eland.api.Services
                 }
             }
 
-            nation.AddUnit(new Archer());
-            nation.AddUnit(new Soldier());
-            nation.AddUnit(new Peasant());
-            nation.AddUnit(new Clubman());
+            nation.AddUnit(new Unit());
+            nation.AddUnit(new Unit());
+            nation.AddUnit(new Unit());
+            nation.AddUnit(new Unit());
 
             return gameSession;
 

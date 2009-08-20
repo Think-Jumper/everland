@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:nhibernate-mapping-2.2">
+
+
+<class name="UnitState" table="Unit" lazy="false">
+
+  <id name="Id" column="Id" >
+    <generator class="foreign">
+      <param name="property">MainClass</param>
+    </generator>
+  </id>
+
+  <discriminator column="Kind" insert="false" />
+  <property name="Kind" access="property"/>
+
+  <property name="Description" column="Description" />
+
+  <one-to-one constrained="true" name="MainClass" access="property"/>
+
+  <subclass discriminator-value="0" name="FirstKind" >
+    <property name="FirstClassesExtraValue" access="property"/>
+  </subclass>
+
+  <subclass discriminator-value="1" name="SecondKind"/>
+
+</class>
+
+</hibernate-mapping>

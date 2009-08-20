@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace eland.model
 {
@@ -17,6 +18,11 @@ namespace eland.model
                 Hexes = new List<Hex>();
             child.World = this;
             Hexes.Add(child);
+        }
+
+        public virtual Hex GetHex(int x, int y)
+        {
+            return Hexes.Where(hex => hex.X == x && hex.Y == y).Single();
         }
     }
 }
