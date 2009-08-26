@@ -46,7 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Normalisation.cs" />
+    <Compile Include="MapParser\MapParser.cs" />
+    <Compile Include="Filters\Normalisation.cs" />
+    <Compile Include="Perlin\PerlinImproved.cs" />
+    <Compile Include="Perlin\Perlin.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
