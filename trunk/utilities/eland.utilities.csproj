@@ -48,8 +48,9 @@
   <ItemGroup>
     <Compile Include="MapParser\MapParser.cs" />
     <Compile Include="Filters\Normalisation.cs" />
-    <Compile Include="Perlin\PerlinImproved.cs" />
-    <Compile Include="Perlin\Perlin.cs" />
+    <Compile Include="TerrainGeneration\Noise\INoiseGenerator.cs" />
+    <Compile Include="TerrainGeneration\Noise\PerlinImproved.cs" />
+    <Compile Include="TerrainGeneration\Noise\Perlin.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -9,7 +9,7 @@ namespace unitstest
     {
         private IGridManager gridManager;
         private const double stroke_width = 0.5;
-        public static int grid_size = 8;
+        public static int grid_size = 6;
 
         private IGridShape start;
         private IGridShape end;
@@ -80,7 +80,7 @@ namespace unitstest
             var endTime = DateTime.Now;
             var span = new TimeSpan(endTime.Ticks - startTime.Ticks);
 
-            Log(String.Format("Seconds taken : {0}", span.TotalSeconds));
+            Log(String.Format("Seconds taken : {0}", span.TotalSeconds) + Environment.NewLine);
 
             //TODO: reverse iterate from end of list to draw actual path
 
