@@ -1,10 +1,13 @@
-﻿using System.Drawing;
-using eland.utilities.Perlin;
+﻿using System;
+using System.Drawing;
+using eland.utilities.TerrainGeneration.Noise;
 
 namespace eland.utilities
 {
     class Program
     {
+        private static INoiseGenerator _noiseGenerator;
+
         static void Main()
         {
             Run();
@@ -12,23 +15,32 @@ namespace eland.utilities
 
         private static void Run()
         {
-            var terrain = new double[40000];
-            var counter = 0;
-            var outputImage = new Bitmap(200,200);
-            var perlin = new PerlinImproved();
+            Console.Write("Please enter width in pixels : ");
+            var width = int.Parse(Console.ReadLine());
+            Console.Write("Please enter height in pixels : ");
+            var height = int.Parse(Console.ReadLine());
+            Console.Write("Press 1 to use Perlin, 2 to use Improved Perlin : ");
+            
+            if(int.Parse(Console.ReadLine()) == 1)
+                _noiseGenerator = new Perlin();
+            else
+                _noiseGenerator = new PerlinImproved();
 
-            for(var y=0; y<200; y++)
+            var terrain = new double[width * height];
+            var counter = 0;
+            var outputImage = new Bitmap(width, height);
+
+            for(var y=0; y<height; y++)
             {
-                for(var x=0; x<200; x++)
+                for(var x=0; x<width; x++)
                 {
-                    terrain[counter++] = perlin.Compute(x, y, 1);
+                    terrain[counter++] = _noiseGenerator.Compute(x, y);
                 }
             }
 
             var normalisedValues = Normalisation.CalculateInitialValues(terrain, 0, 255);
             var xx = 0;
             var yy = 0;
-
 
             foreach(var value in terrain)
             {
@@ -40,9 +52,6 @@ namespace eland.utilities
             }
 
             outputImage.Save(@"perlin.png");
-            
-            
-            
         }
     }
 }
