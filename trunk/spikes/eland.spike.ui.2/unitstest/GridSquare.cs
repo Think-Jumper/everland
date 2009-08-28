@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Windows;
 using unitstest.Interfaces;
 
@@ -28,6 +29,7 @@ namespace unitstest
 
         #region IGridShape Members
 
+        public IList<Point> Points { get; protected set; }
         public int Id { get; set; }
         public int X1 { get; set; }
         public int Y1 { get; set; }
@@ -43,10 +45,10 @@ namespace unitstest
             return ((X1 < point.X && point.X < X2) && (Y1 < point.Y && point.Y < Y2));
         }
 
-        public IGridShape Create(int x, int y, int size, int id, bool blocked, int row, int column)
-        {
-            return new GridSquare(x, y, size, id, blocked, row, column);
-        }
+        //public IGridShape Create(int x, int y, int size, int id, bool blocked, int row, int column)
+        //{
+        //    return new GridSquare(x, y, size, id, blocked, row, column);
+        //}
 
         #endregion
     }

@@ -10,7 +10,7 @@ using unitstest.Interfaces;
 namespace unitstest
 {
 
-    public class GridManager<T, K> : IGridManager where T : IGridShapeFactory<K> where K : IGridShape
+    public class GridSquareManager<T, TK> : IGridManager where T : IGridShapeFactory<TK> where TK : IGridShape
     {
         private readonly T _factory;
         private double _elementsX;
@@ -18,16 +18,16 @@ namespace unitstest
         private int _gridSize;
         private List<IGridShape> _grid;
 
-        public GridManager(T factory)
+        public GridSquareManager(T factory)
         {
-            this._factory = factory;
+            _factory = factory;
         }
 
         public List<IGridShape> GetNeighbours(IGridShape centreGridSquare)
         {
             var neighbours = new List<IGridShape>();
-            int currentColumn = centreGridSquare.Column;
-            int currentRow = centreGridSquare.Row;
+            var currentColumn = centreGridSquare.Column;
+            var currentRow = centreGridSquare.Row;
 
             neighbours.Add(_grid.Where(g => (g.Row == currentRow - 1) && (g.Column == currentColumn - 1)).SingleOrDefault());
             neighbours.Add(_grid.Where(g => (g.Row == currentRow - 1) && (g.Column == currentColumn)).SingleOrDefault());
@@ -50,14 +50,14 @@ namespace unitstest
             _grid = new List<IGridShape>();
             _gridSize = gridSize;
 
-            int id = 0;
+            var id = 0;
             var rnd = new Random(Environment.TickCount);
 
-            for (int y = 0; y < _elementsY; y++)
+            for (var y = 0; y < _elementsY; y++)
             {
-                for (int x = 0; x < _elementsX; x++)
+                for (var x = 0; x < _elementsX; x++)
                 {
-                    K g = _factory.Create(x, y, gridSize, id++, false, y, x);
+                    var g = _factory.Create(x, y, gridSize, id++, false, y, x);
 
                     if (randomiseBlockedAreas)
                         if (rnd.Next(0, 3) == 0)
@@ -74,22 +74,22 @@ namespace unitstest
             DrawGridLines(surface, strokeWidth);
         }
 
-        public void Block(Canvas surface, int X, int Y)
+        public void Block(Canvas surface, int x, int y)
         {
-            foreach (IGridShape g in _grid)
+            foreach (var g in _grid)
             {
-                if (!g.Intersects(new Point(X, Y))) continue;
+                if (!g.Intersects(new Point(x, y))) continue;
                 g.Blocked = true;
                 HighLight(surface, g, Colors.Blue);
                 return;
             }
         }
 
-        public IGridShape HighlightGridSquare(Canvas surface, int X, int Y)
+        public IGridShape HighlightGridSquare(Canvas surface, int x, int y)
         {
-            foreach (IGridShape g in _grid)
+            foreach (var g in _grid)
             {
-                if (!g.Intersects(new Point(X, Y))) continue;
+                if (!g.Intersects(new Point(x, y))) continue;
                 HighLight(surface, g, Colors.Green);
                 return g;
             }
@@ -99,7 +99,7 @@ namespace unitstest
 
         public void HighlightGridSquares(Canvas surface, List<IGridShape> squares)
         {
-            foreach (IGridShape g in squares)
+            foreach (var g in squares)
             {
                 HighLight(surface, g, Colors.Red);
             }
@@ -154,7 +154,7 @@ namespace unitstest
             surface.Children.Add(highlight);
         }
 
-        private void DrawGridLines(Panel surface, double StrokeWidth)
+        private void DrawGridLines(Panel surface, double strokeWidth)
         {
             for (int x = 0; x <= (_elementsX*Page.grid_size); x += Page.grid_size)
             {
@@ -165,7 +165,7 @@ namespace unitstest
                                 X2 = x,
                                 Y2 = Page.grid_size*_elementsY,
                                 Stroke = new SolidColorBrush(Colors.DarkGray),
-                                StrokeThickness = StrokeWidth
+                                StrokeThickness = strokeWidth
                             };
                 surface.Children.Add(l);
             }
@@ -179,7 +179,7 @@ namespace unitstest
                                 X2 = Page.grid_size*_elementsX,
                                 Y2 = y,
                                 Stroke = new SolidColorBrush(Colors.DarkGray),
-                                StrokeThickness = StrokeWidth
+                                StrokeThickness = strokeWidth
                             };
                 surface.Children.Add(l);
             }

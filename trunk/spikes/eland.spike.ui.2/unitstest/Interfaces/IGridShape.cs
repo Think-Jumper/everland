@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Windows;
 
 namespace unitstest.Interfaces
@@ -14,6 +15,7 @@ namespace unitstest.Interfaces
         int Row { get; set; }
         int Column { get; set; }
         bool Intersects(Point point);
-        IGridShape Create(int x, int y, int size, int id, bool blocked, int row, int column);
+        IList<Point> Points { get; }
+        //IGridShape Create(int x, int y, int size, int id, bool blocked, int row, int column);
     }
 }
