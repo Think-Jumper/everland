@@ -9,7 +9,7 @@ namespace unitstest
     {
         private IGridManager gridManager;
         private const double stroke_width = 0.5;
-        public static int grid_size = 6;
+        public static int grid_size = 10;
 
         private IGridShape start;
         private IGridShape end;
@@ -25,7 +25,7 @@ namespace unitstest
 
         private void Initialise()
         {
-            gridManager = new GridManager<GridSquareFactory, GridSquare>(new GridSquareFactory());
+            gridManager = new GridHexManager<GridHexFactory, GridHex>(new GridHexFactory());
         }
 
         private void Log(String text)
@@ -56,37 +56,37 @@ namespace unitstest
                 return;
             }
 
-            if (shiftKey)
-            {
-                var square = gridManager.HighlightGridSquare(cnvMain, (int) xPos, (int) yPos);
-                var neighbours = gridManager.GetNeighbours(square);
-                gridManager.HighlightGridSquares(cnvMain, neighbours);
-                return;
-            }
+            //if (shiftKey)
+            //{
+            //    var square = gridManager.HighlightGridSquare(cnvMain, (int) xPos, (int) yPos);
+            //    var neighbours = gridManager.GetNeighbours(square);
+            //    gridManager.HighlightGridSquares(cnvMain, neighbours);
+            //    return;
+            //}
 
-            if(start == null)
-            {
-                start = gridManager.HighlightGridSquare(cnvMain, (int)xPos, (int)yPos);
-                return;
-            }
+            //if(start == null)
+            //{
+            //    start = gridManager.HighlightGridSquare(cnvMain, (int)xPos, (int)yPos);
+            //    return;
+            //}
 
-            end = gridManager.HighlightGridSquare(cnvMain, (int)xPos, (int)yPos);
+            //end = gridManager.HighlightGridSquare(cnvMain, (int)xPos, (int)yPos);
 
-            // rough calculation of time spent
-            // can't use Diagnostics.Stopwatch in SL2.0 :(
+            //// rough calculation of time spent
+            //// can't use Diagnostics.Stopwatch in SL2.0 :(
 
-            var startTime = DateTime.Now;
-            var path = gridManager.CalculatePath(start, end);
-            var endTime = DateTime.Now;
-            var span = new TimeSpan(endTime.Ticks - startTime.Ticks);
+            //var startTime = DateTime.Now;
+            //var path = gridManager.CalculatePath(start, end);
+            //var endTime = DateTime.Now;
+            //var span = new TimeSpan(endTime.Ticks - startTime.Ticks);
 
-            Log(String.Format("Seconds taken : {0}", span.TotalSeconds) + Environment.NewLine);
+            //Log(String.Format("Seconds taken : {0}", span.TotalSeconds) + Environment.NewLine);
 
-            //TODO: reverse iterate from end of list to draw actual path
+            ////TODO: reverse iterate from end of list to draw actual path
 
 
 
-            gridManager.HighlightGridSquares(cnvMain, path);
+            //gridManager.HighlightGridSquares(cnvMain, path);
          
         }
 

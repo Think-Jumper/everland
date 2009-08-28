@@ -59,7 +59,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AStarPathCalculator.cs" />
-    <Compile Include="GridManager.cs" />
+    <Compile Include="GridHex.cs" />
+    <Compile Include="GridHexManager.cs" />
+    <Compile Include="GridSquareManager.cs" />
     <Compile Include="GridSquare.cs" />
     <Compile Include="Interfaces\IGridCalculation.cs" />
     <Compile Include="Interfaces\IGridShapeFactory.cs" />
