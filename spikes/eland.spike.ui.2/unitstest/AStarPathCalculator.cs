@@ -35,7 +35,8 @@ namespace unitstest
 
         private static int CalculateCost(PathNode currentNode, PathNode proposedNode)
         {
-            return  (IsMoveDiagonal(currentNode, proposedNode)) ? 10 : 14;
+            //return  (IsMoveDiagonal(currentNode, proposedNode)) ? 10 : 14;
+            return 10;
         }
 
         private static bool IsMoveDiagonal(PathNode current, PathNode next)

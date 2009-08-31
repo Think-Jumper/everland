@@ -7,10 +7,10 @@ namespace unitstest.Interfaces
     {
         List<IGridShape> GetNeighbours(IGridShape centreGridSquare);
         void Draw(Canvas surface, int gridSize, double strokeWidth, bool randomiseBlockedAreas);
-        void Block(Canvas surface, int X, int Y);
-        IGridShape HighlightGridSquare(Canvas surface, int X, int Y);
-        void HighlightGridSquares(Canvas surface, List<IGridShape> squares);
-        void HighlightGridSquares(Canvas surface, List<PathNode> squares);
+        void Block(Canvas surface, int x, int y);
+        IGridShape HighlightShape(Canvas surface, int x, int y);
+        void HighlightGridShape(Canvas surface, List<IGridShape> shapes);
+        void HighlightGridShape(Canvas surface, List<PathNode> nodes);
         List<PathNode> CalculatePath(IGridShape start, IGridShape end);
     }
 }

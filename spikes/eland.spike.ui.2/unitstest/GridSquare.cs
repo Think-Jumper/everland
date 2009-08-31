@@ -21,7 +21,6 @@ namespace unitstest
             Y1 = (size*y);
             Y2 = (size*(y + 1));
             Id = id;
-            Size = size;
             Blocked = blocked;
             Row = row;
             Column = column;
@@ -35,20 +34,21 @@ namespace unitstest
         public int Y1 { get; set; }
         public int X2 { get; set; }
         public int Y2 { get; set; }
-        public int Size { get; set; }
         public bool Blocked { get; set; }
         public int Row { get; set; }
         public int Column { get; set; }
+        public Point Center
+        {
+            get
+            {
+                return new Point();
+            }
+        }
 
         public bool Intersects(Point point)
         {
             return ((X1 < point.X && point.X < X2) && (Y1 < point.Y && point.Y < Y2));
         }
-
-        //public IGridShape Create(int x, int y, int size, int id, bool blocked, int row, int column)
-        //{
-        //    return new GridSquare(x, y, size, id, blocked, row, column);
-        //}
 
         #endregion
     }
