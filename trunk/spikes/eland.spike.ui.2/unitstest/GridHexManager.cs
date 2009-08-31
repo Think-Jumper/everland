@@ -41,8 +41,11 @@ namespace unitstest
 
         public void Draw(Canvas surface, int gridSize, double strokeWidth, bool randomiseBlockedAreas)
         {
-            _elementsX = 20;
-            _elementsY = 50;
+            _elementsX = 25;
+            _elementsY = 40;
+
+            double column = 0;
+            double row = 0;
 
             surface.Children.Clear();
             _grid = new List<IGridShape>();
@@ -52,6 +55,8 @@ namespace unitstest
 
             for (var y = 0; y < _elementsY; y++)
             {
+                row = (row + 2) % 2 == 0 ? 1 : 0;
+
                 for (var x = 0; x < _elementsX; x++)
                 {
                     var xx = ((x + 1) * (gridSize * 2));
@@ -59,10 +64,9 @@ namespace unitstest
                     {
                         xx = ((x + 1) * (gridSize * 2)) - gridSize;
                     }
-                  
 
                     var yy = (int)((y*gridSize) * 0.5);// +(gridSize);
-                    var g = _factory.Create(xx, yy, gridSize, id++, false, y, x);
+                    var g = _factory.Create(xx, yy, gridSize, id++, false, (int)Math.Floor(column), (int)row);
                     
                     var poly = new Polygon();
                     var points = new PointCollection();
@@ -76,8 +80,20 @@ namespace unitstest
                     poly.StrokeThickness = 1;
                     surface.Children.Add(poly);
 
+                    var tb = new TextBlock {Text = g.Column + "," + g.Row};
+                    tb.SetValue(Canvas.TopProperty, (double) g.Y1);
+                    tb.SetValue(Canvas.LeftProperty, (double) g.X1);
+
+
+                    //surface.Children.Add(tb);
+
                     _grid.Add(g);
+
+                    row += 2;
                 }
+               
+                column += 0.5;
+                
             }
 
         }
@@ -85,6 +101,8 @@ namespace unitstest
         public void Block(Canvas surface, int x, int y)
         {
             var selectedHex = _grid.Where(hex => hex.Intersects(new Point(x, y))).FirstOrDefault();
+            if (selectedHex == null) return;
+            selectedHex.Blocked = true;
 
             HighLight(surface, selectedHex, Colors.Blue);
 
@@ -103,25 +121,45 @@ namespace unitstest
 
             poly.Points = points;
             poly.Stroke = new SolidColorBrush(Colors.LightGray);
-            poly.Fill = new SolidColorBrush(Colors.Red);
+            poly.Fill = new SolidColorBrush(colour);
             poly.StrokeThickness = 1;
             surface.Children.Add(poly);
 
         }
 
-        public IGridShape HighlightGridSquare(Canvas surface, int X, int Y)
+        public IGridShape HighlightShape(Canvas surface, int x, int y)
         {
-            throw new NotImplementedException();
+            var shape = _grid.Where(hex => hex.Intersects(new Point(x, y))).SingleOrDefault();
+            if (shape == null) return null;
+           
+            HighLight(surface, shape, Colors.Red);
+            return shape;
         }
 
-        public void HighlightGridSquares(Canvas surface, List<IGridShape> squares)
+        public void HighlightGridShape(Canvas surface, List<IGridShape> shapes)
         {
-            throw new NotImplementedException();
         }
 
-        public void HighlightGridSquares(Canvas surface, List<PathNode> squares)
+        public void HighlightGridShape(Canvas surface, List<PathNode> nodes)
         {
-            throw new NotImplementedException();
+            //foreach (var g in nodes)
+            //    HighlightShape(surface, g.Position.X1+1, g.Position.Y1+1);
+
+            var currentNode = nodes[nodes.Count - 1];
+
+            while (true)
+            {
+                HighlightShape(surface, currentNode.Position.X1+1, currentNode.Position.Y1+1);
+
+                if (currentNode.Parent != null)
+                {
+                    currentNode = currentNode.Parent;
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
 
         public List<PathNode> CalculatePath(IGridShape start, IGridShape end)

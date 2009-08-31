@@ -85,7 +85,7 @@ namespace unitstest
             }
         }
 
-        public IGridShape HighlightGridSquare(Canvas surface, int x, int y)
+        public IGridShape HighlightShape(Canvas surface, int x, int y)
         {
             foreach (var g in _grid)
             {
@@ -97,20 +97,20 @@ namespace unitstest
             return null;
         }
 
-        public void HighlightGridSquares(Canvas surface, List<IGridShape> squares)
+        public void HighlightGridShape(Canvas surface, List<IGridShape> shapes)
         {
-            foreach (var g in squares)
+            foreach (var g in shapes)
             {
                 HighLight(surface, g, Colors.Red);
             }
         }
 
-        public void HighlightGridSquares(Canvas surface, List<PathNode> squares)
+        public void HighlightGridShape(Canvas surface, List<PathNode> nodes)
         {
-            foreach(var g in squares)
+            foreach(var g in nodes)
                 HighLight(surface, g, Colors.Orange);
 
-            var currentNode = squares[squares.Count - 1];
+            var currentNode = nodes[nodes.Count - 1];
 
             while(true)
             {
@@ -124,9 +124,6 @@ namespace unitstest
                     break;
                 }
             }
-
-            
-                
         }
 
         private static void HighLight(Panel surface, IGridShape rect, Color colour)

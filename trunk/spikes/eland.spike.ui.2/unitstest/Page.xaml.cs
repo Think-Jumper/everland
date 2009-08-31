@@ -58,35 +58,35 @@ namespace unitstest
 
             //if (shiftKey)
             //{
-            //    var square = gridManager.HighlightGridSquare(cnvMain, (int) xPos, (int) yPos);
+            //    var square = gridManager.HighlightShape(cnvMain, (int) xPos, (int) yPos);
             //    var neighbours = gridManager.GetNeighbours(square);
-            //    gridManager.HighlightGridSquares(cnvMain, neighbours);
+            //    gridManager.HighlightGridShape(cnvMain, neighbours);
             //    return;
             //}
 
-            //if(start == null)
-            //{
-            //    start = gridManager.HighlightGridSquare(cnvMain, (int)xPos, (int)yPos);
-            //    return;
-            //}
+            if (start == null)
+            {
+                start = gridManager.HighlightShape(cnvMain, (int)xPos, (int)yPos);
+                return;
+            }
 
-            //end = gridManager.HighlightGridSquare(cnvMain, (int)xPos, (int)yPos);
+            end = gridManager.HighlightShape(cnvMain, (int)xPos, (int)yPos);
 
-            //// rough calculation of time spent
-            //// can't use Diagnostics.Stopwatch in SL2.0 :(
+            // rough calculation of time spent
+            // can't use Diagnostics.Stopwatch in SL2.0 :(
 
-            //var startTime = DateTime.Now;
-            //var path = gridManager.CalculatePath(start, end);
-            //var endTime = DateTime.Now;
-            //var span = new TimeSpan(endTime.Ticks - startTime.Ticks);
+            var startTime = DateTime.Now;
+            var path = gridManager.CalculatePath(start, end);
+            var endTime = DateTime.Now;
+            var span = new TimeSpan(endTime.Ticks - startTime.Ticks);
 
-            //Log(String.Format("Seconds taken : {0}", span.TotalSeconds) + Environment.NewLine);
+            Log(String.Format("Seconds taken : {0}", span.TotalSeconds) + Environment.NewLine);
 
             ////TODO: reverse iterate from end of list to draw actual path
 
 
 
-            //gridManager.HighlightGridSquares(cnvMain, path);
+            gridManager.HighlightGridShape(cnvMain, path);
          
         }
 

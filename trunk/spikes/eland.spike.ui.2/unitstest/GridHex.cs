@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
 using unitstest.Interfaces;
 
@@ -12,8 +11,7 @@ namespace unitstest
             return new GridHex(x, y, size, id, blocked, row, column);
         }
     }
-
-
+    
     public class GridHex : IGridShape
     {
         public IList<Point> Points { get; protected set; }
@@ -62,19 +60,26 @@ namespace unitstest
             set { }
         }
 
-        public int Size { get; set; }
         public bool Blocked { get; set;}
         public int Row { get; set;}
         public int Column { get; set; }
        
         public bool Intersects(Point point)
         {
-            return ((X1 < point.X && point.X < X2) && (Y1 < point.Y && point.Y < Y2));
+            return IsWithinPolygon(6, (int)point.X, (int)point.Y);
         }
 
-        //public IGridShape Create(int x, int y, int size, int id, bool blocked, int row, int column)
-        //{
-        //    return new GridHex(x, y, size)
-        //}
+        private bool IsWithinPolygon(int nvert, float testx, float testy)
+        {
+            int i, j;
+            var c = false;
+            for (i = 0, j = nvert - 1; i < nvert; j = i++)
+            {
+                if (((Points[i].Y > testy) != (Points[j].Y > testy)) &&
+                 (testx < (Points[j].X - Points[i].X) * (testy - Points[i].Y) / (Points[j].Y - Points[i].Y) + Points[i].X))
+                    c = !c;
+            }
+            return c;
+        }
     }
 }
