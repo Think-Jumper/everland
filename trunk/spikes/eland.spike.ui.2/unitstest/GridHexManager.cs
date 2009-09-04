@@ -28,12 +28,23 @@ namespace unitstest
             var currentColumn = centreGridSquare.Column;
             var currentRow = centreGridSquare.Row;
 
-            neighbours.Add(_grid.Where(g => (g.Row == currentRow - 1) && (g.Column == currentColumn - 1)).SingleOrDefault());
-            neighbours.Add(_grid.Where(g => (g.Row == currentRow - 1) && (g.Column == currentColumn)).SingleOrDefault());
-            neighbours.Add(_grid.Where(g => (g.Row == currentRow - 1) && (g.Column == currentColumn + 1)).SingleOrDefault());
-            neighbours.Add(_grid.Where(g => (g.Row == currentRow) && (g.Column == currentColumn - 1)).SingleOrDefault());
-            neighbours.Add(_grid.Where(g => (g.Row == currentRow) && (g.Column == currentColumn + 1)).SingleOrDefault());
-            neighbours.Add(_grid.Where(g => (g.Row == currentRow + 1) && (g.Column == currentColumn)).SingleOrDefault());
+            if ((currentColumn + 2) % 2 == 0)
+            {
+                neighbours.Add(_grid.Where(g => (g.Row == currentRow) && (g.Column == currentColumn - 1)).SingleOrDefault());
+                neighbours.Add(_grid.Where(g => (g.Row == currentRow - 1) && (g.Column == currentColumn)).SingleOrDefault());
+                neighbours.Add(_grid.Where(g => (g.Row == currentRow) && (g.Column == currentColumn + 1)).SingleOrDefault());
+                neighbours.Add(_grid.Where(g => (g.Row == currentRow+1) && (g.Column == currentColumn - 1)).SingleOrDefault());
+                neighbours.Add(_grid.Where(g => (g.Row == currentRow+1) && (g.Column == currentColumn )).SingleOrDefault());
+                neighbours.Add(_grid.Where(g => (g.Row == currentRow + 1) && (g.Column == currentColumn +1)).SingleOrDefault());
+            }
+            else{
+                neighbours.Add(_grid.Where(g => (g.Row == currentRow - 1) && (g.Column == currentColumn - 1)).SingleOrDefault());
+                neighbours.Add(_grid.Where(g => (g.Row == currentRow - 1) && (g.Column == currentColumn)).SingleOrDefault());
+                neighbours.Add(_grid.Where(g => (g.Row == currentRow - 1) && (g.Column == currentColumn + 1)).SingleOrDefault());
+                neighbours.Add(_grid.Where(g => (g.Row == currentRow) && (g.Column == currentColumn - 1)).SingleOrDefault());
+                neighbours.Add(_grid.Where(g => (g.Row == currentRow) && (g.Column == currentColumn + 1)).SingleOrDefault());
+                neighbours.Add(_grid.Where(g => (g.Row == currentRow + 1) && (g.Column == currentColumn)).SingleOrDefault());
+            }
 
             return neighbours;
 
@@ -41,8 +52,8 @@ namespace unitstest
 
         public void Draw(Canvas surface, int gridSize, double strokeWidth, bool randomiseBlockedAreas)
         {
-            _elementsX = 25;
-            _elementsY = 40;
+            _elementsX = Math.Floor(surface.ActualWidth / (gridSize * 2));
+            _elementsY = Math.Floor(surface.ActualHeight / gridSize);
 
             double column = 0;
             double row = 0;
@@ -52,6 +63,7 @@ namespace unitstest
             _gridSize = gridSize;
 
             var id = 0;
+            var rnd = new Random(Environment.TickCount);
 
             for (var y = 0; y < _elementsY; y++)
             {
@@ -65,8 +77,17 @@ namespace unitstest
                         xx = ((x + 1) * (gridSize * 2)) - gridSize;
                     }
 
-                    var yy = (int)((y*gridSize) * 0.5);// +(gridSize);
+                    var yy = (int)((y*gridSize) * 0.5);
                     var g = _factory.Create(xx, yy, gridSize, id++, false, (int)Math.Floor(column), (int)row);
+
+                    if (randomiseBlockedAreas)
+                    {
+                        if (rnd.Next(0, 3) == 0)
+                        {
+                            g.Blocked = true;
+                            HighLight(surface, g, Colors.Blue);
+                        }
+                    }
                     
                     var poly = new Polygon();
                     var points = new PointCollection();
@@ -80,20 +101,19 @@ namespace unitstest
                     poly.StrokeThickness = 1;
                     surface.Children.Add(poly);
 
-                    var tb = new TextBlock {Text = g.Column + "," + g.Row};
-                    tb.SetValue(Canvas.TopProperty, (double) g.Y1);
-                    tb.SetValue(Canvas.LeftProperty, (double) g.X1);
+                    _grid.Add(g);
 
-
+                    //var tb = new TextBlock { Text = g.Row + "," + g.Column };
+                    //tb.FontSize = 8;
+                    //tb.SetValue(Canvas.TopProperty, (double)g.Y1);
+                    //tb.SetValue(Canvas.LeftProperty, (double)g.X1);
                     //surface.Children.Add(tb);
 
-                    _grid.Add(g);
 
                     row += 2;
                 }
                
                 column += 0.5;
-                
             }
 
         }
@@ -138,6 +158,10 @@ namespace unitstest
 
         public void HighlightGridShape(Canvas surface, List<IGridShape> shapes)
         {
+            foreach(var shape in shapes)
+            {
+                HighLight(surface, shape, Colors.Yellow);
+            }
         }
 
         public void HighlightGridShape(Canvas surface, List<PathNode> nodes)
@@ -149,7 +173,7 @@ namespace unitstest
 
             while (true)
             {
-                HighlightShape(surface, currentNode.Position.X1+1, currentNode.Position.Y1+1);
+                HighlightShape(surface, currentNode.Position.X1, currentNode.Position.Y1);
 
                 if (currentNode.Parent != null)
                 {

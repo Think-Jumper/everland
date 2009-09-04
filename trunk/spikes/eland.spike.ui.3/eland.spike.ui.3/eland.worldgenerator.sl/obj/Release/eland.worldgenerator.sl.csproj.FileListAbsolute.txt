@@ -1,0 +1,15 @@
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.worldgenerator.sl\Bin\Release\eland.worldgenerator.sl.dll
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.worldgenerator.sl\Bin\Release\eland.worldgenerator.sl.pdb
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.worldgenerator.sl\Bin\Release\System.Windows.Controls.dll
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.worldgenerator.sl\Bin\Release\System.Windows.Controls.xml
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.worldgenerator.sl\Bin\Release\de\System.Windows.Controls.resources.dll
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.worldgenerator.sl\Bin\Release\es\System.Windows.Controls.resources.dll
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.worldgenerator.sl\Bin\Release\fr\System.Windows.Controls.resources.dll
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.worldgenerator.sl\Bin\Release\it\System.Windows.Controls.resources.dll
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.worldgenerator.sl\Bin\Release\ja\System.Windows.Controls.resources.dll
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.worldgenerator.sl\Bin\Release\ko\System.Windows.Controls.resources.dll
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.worldgenerator.sl\Bin\Release\zh-Hans\System.Windows.Controls.resources.dll
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.worldgenerator.sl\Bin\Release\zh-Hant\System.Windows.Controls.resources.dll
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.worldgenerator.sl\obj\Release\ResolveAssemblyReference.cache
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.worldgenerator.sl\obj\Release\eland.worldgenerator.sl.dll
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.worldgenerator.sl\obj\Release\eland.worldgenerator.sl.pdb

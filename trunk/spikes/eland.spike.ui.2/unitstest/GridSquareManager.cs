@@ -153,27 +153,27 @@ namespace unitstest
 
         private void DrawGridLines(Panel surface, double strokeWidth)
         {
-            for (int x = 0; x <= (_elementsX*Page.grid_size); x += Page.grid_size)
+            for (int x = 0; x <= (_elementsX*Page.GridSize); x += Page.GridSize)
             {
                 var l = new Line
                             {
                                 X1 = x,
                                 Y1 = 0,
                                 X2 = x,
-                                Y2 = Page.grid_size*_elementsY,
+                                Y2 = Page.GridSize*_elementsY,
                                 Stroke = new SolidColorBrush(Colors.DarkGray),
                                 StrokeThickness = strokeWidth
                             };
                 surface.Children.Add(l);
             }
 
-            for (int y = 0; y <= (_elementsY*Page.grid_size); y += Page.grid_size)
+            for (int y = 0; y <= (_elementsY*Page.GridSize); y += Page.GridSize)
             {
                 var l = new Line
                             {
                                 X1 = 0,
                                 Y1 = y,
-                                X2 = Page.grid_size*_elementsX,
+                                X2 = Page.GridSize*_elementsX,
                                 Y2 = y,
                                 Stroke = new SolidColorBrush(Colors.DarkGray),
                                 StrokeThickness = strokeWidth
