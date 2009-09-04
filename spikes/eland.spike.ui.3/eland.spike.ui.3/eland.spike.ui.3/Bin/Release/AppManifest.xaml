@@ -1,0 +1,7 @@
+﻿<Deployment xmlns="http://schemas.microsoft.com/client/2007/deployment" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" EntryPointAssembly="eland.spike.ui.3" EntryPointType="eland.spike.ui._3.App" RuntimeVersion="2.0.31005.0">
+  <Deployment.Parts>
+    <AssemblyPart x:Name="eland.spike.ui.3" Source="eland.spike.ui.3.dll" />
+    <AssemblyPart x:Name="eland.terrain.sl" Source="eland.terrain.sl.dll" />
+    <AssemblyPart x:Name="eland.worldgenerator.sl" Source="eland.worldgenerator.sl.dll" />
+  </Deployment.Parts>
+</Deployment>

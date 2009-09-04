@@ -1,0 +1,16 @@
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.spike.ui.3\Bin\Debug\AppManifest.xaml
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.spike.ui.3\Bin\Debug\eland.spike.ui.3.dll
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.spike.ui.3\Bin\Debug\eland.spike.ui.3.pdb
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.spike.ui.3\Bin\Debug\eland.spike.ui.3.xap
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.spike.ui.3\Bin\Debug\TestPage.html
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.spike.ui.3\Bin\Debug\eland.terrain.sl.dll
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.spike.ui.3\Bin\Debug\eland.worldgenerator.sl.dll
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.spike.ui.3\Bin\Debug\eland.terrain.sl.pdb
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.spike.ui.3\Bin\Debug\eland.worldgenerator.sl.pdb
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.spike.ui.3\obj\Debug\ResolveAssemblyReference.cache
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.spike.ui.3\obj\Debug\App.g.cs
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.spike.ui.3\obj\Debug\Page.g.cs
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.spike.ui.3\obj\Debug\eland.spike.ui.3.g.resources
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.spike.ui.3\obj\Debug\eland.spike.ui.3.dll
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.spike.ui.3\obj\Debug\eland.spike.ui.3.pdb
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.spike.ui.3\obj\Debug\XapCacheFile.xml

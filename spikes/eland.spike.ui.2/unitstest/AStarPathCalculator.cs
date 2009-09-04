@@ -30,7 +30,7 @@ namespace unitstest
 
         private static int CalculateDistance(int a, int b)
         {
-            return Math.Abs(a/Page.grid_size - b/Page.grid_size);
+            return Math.Abs(a/Page.GridSize - b/Page.GridSize);
         }
 
         private static int CalculateCost(PathNode currentNode, PathNode proposedNode)
@@ -64,7 +64,7 @@ namespace unitstest
 
                 var current = _openList[0]; 
 
-                if (current.Position == end)
+                if (current.Position.Equals(end))
                     return _closedList;
 
                 _closedList.Add(current);
@@ -76,17 +76,20 @@ namespace unitstest
                 {
                     if (g == null) continue;
 
-                    var c1 = _closedList.Where(x => x.Position == g).FirstOrDefault();
+                    var c1 = _closedList.Where(x => x.Position.Equals(g)).FirstOrDefault();
 
                     if (!g.Blocked && (c1 == null))
                     {
                         var newNode = new PathNode { Position = g, Parent = current };
                         newNode = CalculateFGH(current, newNode, end);
 
-                        if(!_openList.Contains(newNode))
+                        if (!_openList.Contains(newNode))
+                        {
+                            newNode.Parent = current;
+                            newNode = CalculateFGH(current, newNode, end);
                             _openList.Add(newNode);
-
-                        if (_openList.Contains(newNode))
+                        }
+                        else
                         {
                             var existingNode = _openList.First(x => x.Position.Id == newNode.Position.Id);
                             if (newNode.G < existingNode.G)
@@ -95,12 +98,11 @@ namespace unitstest
                                 existingNode.Parent = current;
                                 existingNode = CalculateFGH(current, existingNode, end);
                                 _openList.Add(existingNode);
-                               
+                                _openList.Sort();
+
                             }
-                                
-
-
                         }
+
                     }
 
                     //if (!g.Blocked && (c1 != null))
@@ -114,6 +116,8 @@ namespace unitstest
                     //        _openList.Add(newNode);
                     //    }
                     //}
+
+                   
                 }
 
 

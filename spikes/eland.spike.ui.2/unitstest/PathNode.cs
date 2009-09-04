@@ -3,7 +3,7 @@ using unitstest.Interfaces;
 
 namespace unitstest
 {
-    public class PathNode : IComparable<PathNode>
+    public class PathNode : IComparable<PathNode>, IEquatable<PathNode>
     {
         public IGridShape Position { get; set; }
         public PathNode Parent { get; set; }
@@ -22,6 +22,11 @@ namespace unitstest
         #endregion
 
         # region Overridden Members
+
+        public bool Equals(PathNode other)
+        {
+            return Position.Id == other.Position.Id;
+        }
 
         public override bool Equals(object obj)
         {

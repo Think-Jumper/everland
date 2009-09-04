@@ -7,25 +7,25 @@ namespace unitstest
 {
     public partial class Page
     {
-        private IGridManager gridManager;
-        private const double stroke_width = 0.5;
-        public static int grid_size = 10;
+        private IGridManager _gridManager;
+        private const double StrokeWidth = 0.5;
+        public static int GridSize = 10;
 
-        private IGridShape start;
-        private IGridShape end;
+        private IGridShape _start;
+        private IGridShape _end;
 
-        private bool initialised;
+        private readonly bool _initialised;
 
         public Page()
         {
             InitializeComponent();
             Initialise();
-            initialised = true;
+            _initialised = true;
         }
 
         private void Initialise()
         {
-            gridManager = new GridHexManager<GridHexFactory, GridHex>(new GridHexFactory());
+            _gridManager = new GridHexManager<GridHexFactory, GridHex>(new GridHexFactory());
         }
 
         private void Log(String text)
@@ -36,9 +36,8 @@ namespace unitstest
 
         private void Redraw()
         {
-            var randomise = false;
-            randomise = (chkRandomise == null) ? randomise = true : chkRandomise.IsChecked.Value;
-            gridManager.Draw(cnvMain, grid_size, stroke_width, randomise);
+            var randomise = (chkRandomise == null) ? true : chkRandomise.IsChecked.Value;
+            _gridManager.Draw(cnvMain, GridSize, StrokeWidth, randomise);
         }
 
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -52,41 +51,41 @@ namespace unitstest
 
             if (controlKey)
             {
-                gridManager.Block(cnvMain, (int)xPos, (int)yPos);
+                _gridManager.Block(cnvMain, (int)xPos, (int)yPos);
                 return;
             }
 
-            //if (shiftKey)
-            //{
-            //    var square = gridManager.HighlightShape(cnvMain, (int) xPos, (int) yPos);
-            //    var neighbours = gridManager.GetNeighbours(square);
-            //    gridManager.HighlightGridShape(cnvMain, neighbours);
-            //    return;
-            //}
-
-            if (start == null)
+            if (shiftKey)
             {
-                start = gridManager.HighlightShape(cnvMain, (int)xPos, (int)yPos);
+                var square = _gridManager.HighlightShape(cnvMain, (int)xPos, (int)yPos);
+                var neighbours = _gridManager.GetNeighbours(square);
+                _gridManager.HighlightGridShape(cnvMain, neighbours);
                 return;
             }
 
-            end = gridManager.HighlightShape(cnvMain, (int)xPos, (int)yPos);
+            if (_start == null)
+            {
+                _start = _gridManager.HighlightShape(cnvMain, (int)xPos, (int)yPos);
+                return;
+            }
+
+            _end = _gridManager.HighlightShape(cnvMain, (int)xPos, (int)yPos);
 
             // rough calculation of time spent
             // can't use Diagnostics.Stopwatch in SL2.0 :(
 
             var startTime = DateTime.Now;
-            var path = gridManager.CalculatePath(start, end);
+            var path = _gridManager.CalculatePath(_start, _end);
             var endTime = DateTime.Now;
             var span = new TimeSpan(endTime.Ticks - startTime.Ticks);
 
             Log(String.Format("Seconds taken : {0}", span.TotalSeconds) + Environment.NewLine);
 
-            ////TODO: reverse iterate from end of list to draw actual path
+            ////TODO: reverse iterate from _end of list to draw actual path
 
 
 
-            gridManager.HighlightGridShape(cnvMain, path);
+            _gridManager.HighlightGridShape(cnvMain, path);
          
         }
 
@@ -97,7 +96,7 @@ namespace unitstest
 
         private void CheckBox_CheckedChanged(object sender, RoutedEventArgs e)
         {
-            if(initialised)
+            if(_initialised)
                 Redraw();
         }
 

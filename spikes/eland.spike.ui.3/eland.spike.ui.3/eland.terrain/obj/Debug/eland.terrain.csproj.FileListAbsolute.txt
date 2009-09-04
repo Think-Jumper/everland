@@ -1,0 +1,5 @@
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.terrain\bin\Debug\eland.terrain.dll
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.terrain\bin\Debug\eland.terrain.pdb
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.terrain\obj\Debug\ResolveAssemblyReference.cache
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.terrain\obj\Debug\eland.terrain.dll
+C:\code\everland\spikes\eland.spike.ui.3\eland.spike.ui.3\eland.terrain\obj\Debug\eland.terrain.pdb
