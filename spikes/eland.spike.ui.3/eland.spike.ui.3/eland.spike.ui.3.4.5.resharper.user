@@ -14,45 +14,52 @@
       <File id="4F68109E-2667-4AC4-8565-A4ACD8B64795/f:Default.aspx" caret="0" fromTop="0" />
       <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:App.xaml" caret="722" fromTop="16" />
       <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:EditableImage.cs" caret="3797" fromTop="15" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:PngEncoder.cs" caret="84" fromTop="0" />
-      <File id="CE196A6E-64ED-4A32-9D0E-B3E365B0F6F4/f:PerlinImproved.cs" caret="2051" fromTop="11" />
-      <File id="CE196A6E-64ED-4A32-9D0E-B3E365B0F6F4/f:INoiseGenerator.cs" caret="206" fromTop="6" />
       <File id="A4556D8F-4497-4398-84FD-B429CB52F624/f:Perlin.cs" caret="889" fromTop="31" />
-      <File id="CE196A6E-64ED-4A32-9D0E-B3E365B0F6F4/f:Program.cs" caret="939" fromTop="34" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1311" fromTop="14" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="755" fromTop="30" />
-      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/d:Interfaces/f:IGridManager.cs" caret="514" fromTop="13" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/d:Interfaces/f:IGridShapeFactory.cs" caret="197" fromTop="9" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/d:Interfaces/f:IGridShape.cs" caret="0" fromTop="0" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:ColorName.cs" caret="0" fromTop="0" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:ColorName.cs" caret="12610" fromTop="7" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHex.cs" caret="1176" fromTop="12" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/d:Interfaces/f:IGridManager.cs" caret="535" fromTop="13" />
+      <File id="CE196A6E-64ED-4A32-9D0E-B3E365B0F6F4/f:PerlinImproved.cs" caret="2959" fromTop="31" />
+      <File id="CE196A6E-64ED-4A32-9D0E-B3E365B0F6F4/f:INoiseGenerator.cs" caret="0" fromTop="0" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:PngEncoder.cs" caret="0" fromTop="0" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="195" fromTop="2" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="2181" fromTop="40" />
+      <File id="CE196A6E-64ED-4A32-9D0E-B3E365B0F6F4/f:Program.cs" caret="679" fromTop="9" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="4251" fromTop="13" />
     </RecentFiles>
     <RecentEdits>
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:EditableImage.cs" caret="2797" fromTop="28" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:EditableImage.cs" caret="3479" fromTop="35" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:EditableImage.cs" caret="2642" fromTop="0" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:EditableImage.cs" caret="4246" fromTop="21" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="404" fromTop="23" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="404" fromTop="37" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1654" fromTop="20" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="7664" fromTop="9" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1464" fromTop="8" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1622" fromTop="14" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="505" fromTop="4" />
-      <File id="CE196A6E-64ED-4A32-9D0E-B3E365B0F6F4/f:PerlinImproved.cs" caret="2051" fromTop="11" />
-      <File id="CE196A6E-64ED-4A32-9D0E-B3E365B0F6F4/f:INoiseGenerator.cs" caret="299" fromTop="8" />
-      <File id="A4556D8F-4497-4398-84FD-B429CB52F624/f:Perlin.cs" caret="778" fromTop="27" />
-      <File id="CE196A6E-64ED-4A32-9D0E-B3E365B0F6F4/f:Program.cs" caret="901" fromTop="23" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="194" fromTop="3" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="1532" fromTop="29" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="802" fromTop="16" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="1650" fromTop="29" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="350" fromTop="7" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1464" fromTop="17" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1622" fromTop="14" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1714" fromTop="19" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1382" fromTop="15" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="532" fromTop="17" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="21" fromTop="0" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="989" fromTop="33" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="1182" fromTop="39" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="755" fromTop="30" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHex.cs" caret="318" fromTop="11" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="6413" fromTop="44" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="6403" fromTop="26" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:ColorName.cs" caret="104" fromTop="16" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:ColorName.cs" caret="8655" fromTop="33" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:ColorName.cs" caret="0" fromTop="0" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:ColorName.cs" caret="88" fromTop="14" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:ColorName.cs" caret="12607" fromTop="46" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:ColorName.cs" caret="2263" fromTop="37" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:ColorName.cs" caret="13" fromTop="0" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="5230" fromTop="9" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="6247" fromTop="37" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="71" fromTop="2" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="5957" fromTop="25" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="5993" fromTop="26" />
+      <File id="CE196A6E-64ED-4A32-9D0E-B3E365B0F6F4/f:PerlinImproved.cs" caret="2854" fromTop="27" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1906" fromTop="4" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="407" fromTop="2" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1372" fromTop="16" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1580" fromTop="13" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1775" fromTop="12" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1688" fromTop="8" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="2169" fromTop="42" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="2175" fromTop="38" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="975" fromTop="33" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="3045" fromTop="9" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="208" fromTop="2" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="3909" fromTop="38" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="3045" fromTop="13" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="4633" fromTop="24" />
     </RecentEdits>
   </RecentFiles>
   <UnitTestRunner>
@@ -65,38 +72,60 @@
     <ItemStatistics item="Default">
       <Item value="public" priority="0" />
       <Item value="enum" priority="0" />
-      <Item value="int" priority="3" />
+      <Item value="int" priority="10" />
       <Item value="method" priority="0" />
       <Item value="Perlin" priority="0" />
-      <Item value="double" priority="3" />
-      <Item value="var" priority="8" />
-      <Item value="new" priority="6" />
+      <Item value="double" priority="4" />
+      <Item value="var" priority="11" />
+      <Item value="new" priority="8" />
       <Item value="List" priority="0" />
       <Item value="normalisedNoise" priority="1" />
-      <Item value="return" priority="0" />
+      <Item value="return" priority="7" />
       <Item value="INoiseGenerator" priority="0" />
       <Item value="terrain" priority="0" />
       <Item value="TerrainGenerator" priority="0" />
-      <Item value="cnvMain" priority="3" />
+      <Item value="cnvMain" priority="5" />
       <Item value="foreach" priority="0" />
       <Item value="in" priority="0" />
       <Item value="outputImage" priority="0" />
       <Item value="PngEncoder" priority="0" />
       <Item value="EditableImage" priority="0" />
       <Item value="width" priority="0" />
-      <Item value="byte" priority="1" />
+      <Item value="byte" priority="3" />
       <Item value="noiseValue" priority="3" />
-      <Item value="Color" priority="3" />
+      <Item value="Color" priority="7" />
       <Item value="color" priority="1" />
-      <Item value="imgMain" priority="0" />
+      <Item value="imgMain" priority="1" />
       <Item value="slPosition" priority="0" />
-      <Item value="private" priority="1" />
-      <Item value="void" priority="1" />
+      <Item value="private" priority="2" />
+      <Item value="void" priority="2" />
       <Item value="Run" priority="1" />
       <Item value="float" priority="0" />
       <Item value="LineSegment" priority="0" />
       <Item value="TextBlock" priority="0" />
       <Item value="gridManager" priority="0" />
+      <Item value="poly" priority="0" />
+      <Item value="SolidColorBrush" priority="0" />
+      <Item value="Colors" priority="4" />
+      <Item value="Height" priority="0" />
+      <Item value="height" priority="2" />
+      <Item value="IList" priority="1" />
+      <Item value="GetHeight" priority="0" />
+      <Item value="noise" priority="1" />
+      <Item value="x" priority="0" />
+      <Item value="gridSize" priority="0" />
+      <Item value="y" priority="0" />
+      <Item value="g" priority="5" />
+      <Item value="Interfaces" priority="0" />
+      <Item value="Visibility" priority="0" />
+      <Item value="hex" priority="6" />
+      <Item value="if" priority="3" />
+      <Item value="Brush" priority="0" />
+      <Item value="GetColoirByName" priority="0" />
+      <Item value="ColorName" priority="1" />
+      <Item value="GetColourByName" priority="0" />
+      <Item value="surface" priority="0" />
+      <Item value="ElementsY" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Collections.Generic.List`1">
       <Item value="Add" priority="0" />
@@ -105,15 +134,15 @@
       <Item value="Generate" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Controls.Canvas">
-      <Item value="ActualWidth" priority="0" />
-      <Item value="ActualHeight" priority="0" />
+      <Item value="ActualWidth" priority="1" />
+      <Item value="ActualHeight" priority="1" />
       <Item value="Children" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@eland.terrain.TerrainGenerationMethod">
       <Item value="PerlinImproved" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@System.Windows.Media.Color">
-      <Item value="FromArgb" priority="1" />
+      <Item value="FromArgb" priority="2" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Controls.Slider">
       <Item value="Value" priority="0" />
@@ -123,6 +152,44 @@
     </ItemStatistics>
     <ItemStatistics item="Qualified:unitstest.GridHexManager`2">
       <Item value="Draw" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Shapes.Polygon">
+      <Item value="Fill" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Windows.Media.Colors">
+      <Item value="Transparent" priority="0" />
+      <Item value="Blue" priority="1" />
+      <Item value="Yellow" priority="0" />
+      <Item value="Brown" priority="0" />
+      <Item value="Green" priority="0" />
+      <Item value="DarkGray" priority="0" />
+      <Item value="LightGray" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Windows.Controls.Canvas">
+      <Item value="SetZIndex" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:TK">
+      <Item value="Height" priority="3" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Random">
+      <Item value="Next" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Controls.Image">
+      <Item value="Visibility" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Windows.Visibility">
+      <Item value="Collapsed" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:unitstest.Interfaces.IGridShape">
+      <Item value="Height" priority="6" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@eland.worldgenerator.sl.ColorName">
+      <Item value="DarkBlue" priority="0" />
+      <Item value="LightYellow" priority="0" />
+      <Item value="LightGreen" priority="0" />
+      <Item value="LightGray" priority="0" />
+      <Item value="DarkGreen" priority="0" />
+      <Item value="Wheat" priority="0" />
     </ItemStatistics>
   </CompletionStatisticsManager>
 </Configuration>

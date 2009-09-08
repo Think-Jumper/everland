@@ -15,7 +15,6 @@ namespace unitstest
         private readonly T _factory;
         public double ElementsX;
         public double ElementsY;
-        private int _gridSize;
         public List<IGridShape> Grid;
 
         public GridHexManager(T factory)
@@ -51,7 +50,7 @@ namespace unitstest
 
         }
 
-        private int GetHeight(IList<double> noise, int x, int y, int width)
+        private static int GetHeight(IList<double> noise, int x, int y, int width)
         {
             return (int)noise[y*width + x];
         }
@@ -66,10 +65,8 @@ namespace unitstest
 
             surface.Children.Clear();
             Grid = new List<IGridShape>();
-            _gridSize = gridSize;
 
             var id = 0;
-            var rnd = new Random(Environment.TickCount);
 
             for (var y = 0; y < ElementsY; y++)
             {
@@ -86,15 +83,6 @@ namespace unitstest
                     var yy = (int)((y*gridSize) * 0.5);
                     var g = _factory.Create(xx, yy, gridSize, id++, false, (int)Math.Floor(column), (int)row, GetHeight(noise, xx, yy, (int)surface.ActualWidth) );
 
-                    if (randomiseBlockedAreas)
-                    {
-                        if (rnd.Next(0, 3) == 0)
-                        {
-                            g.Blocked = true;
-                            HighLight(surface, g, Colors.Blue);
-                        }
-                    }
-                    
                     var poly = new Polygon();
                     var points = new PointCollection();
 
@@ -104,18 +92,9 @@ namespace unitstest
 
                     poly.Points = points;
                     poly.Fill = new SolidColorBrush(GetHexColour(g));
-                    //poly.StrokeThickness = 0.5;
                     surface.Children.Add(poly);
 
                     Grid.Add(g);
-
-                    //var tb = new TextBlock { Text = g.Row + "," + g.Column };
-                    //tb.FontSize = 8;
-                    //tb.SetValue(Canvas.TopProperty, (double)g.Y1);
-                    //tb.SetValue(Canvas.LeftProperty, (double)g.X1);
-                    //surface.Children.Add(tb);
-
-
                     row += 2;
                 }
                
@@ -158,7 +137,6 @@ namespace unitstest
             return GetColourByName(ColorName.DarkGray);
 
         }
-
 
         public void Block(Canvas surface, int x, int y)
         {
