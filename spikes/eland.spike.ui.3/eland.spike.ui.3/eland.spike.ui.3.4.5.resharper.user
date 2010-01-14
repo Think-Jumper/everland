@@ -13,53 +13,50 @@
     <RecentFiles>
       <File id="4F68109E-2667-4AC4-8565-A4ACD8B64795/f:Default.aspx" caret="0" fromTop="0" />
       <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:App.xaml" caret="722" fromTop="16" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:EditableImage.cs" caret="3797" fromTop="15" />
-      <File id="A4556D8F-4497-4398-84FD-B429CB52F624/f:Perlin.cs" caret="889" fromTop="31" />
       <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/d:Interfaces/f:IGridShapeFactory.cs" caret="197" fromTop="9" />
       <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/d:Interfaces/f:IGridShape.cs" caret="0" fromTop="0" />
       <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:ColorName.cs" caret="0" fromTop="0" />
       <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:ColorName.cs" caret="12610" fromTop="7" />
       <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHex.cs" caret="1176" fromTop="12" />
       <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/d:Interfaces/f:IGridManager.cs" caret="535" fromTop="13" />
-      <File id="CE196A6E-64ED-4A32-9D0E-B3E365B0F6F4/f:PerlinImproved.cs" caret="2959" fromTop="31" />
-      <File id="CE196A6E-64ED-4A32-9D0E-B3E365B0F6F4/f:INoiseGenerator.cs" caret="0" fromTop="0" />
       <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:PngEncoder.cs" caret="0" fromTop="0" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="195" fromTop="2" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="2181" fromTop="40" />
-      <File id="CE196A6E-64ED-4A32-9D0E-B3E365B0F6F4/f:Program.cs" caret="679" fromTop="9" />
-      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="4251" fromTop="13" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:EditableImage.cs" caret="0" fromTop="0" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="5596" fromTop="55" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1452" fromTop="17" />
+      <File id="CE196A6E-64ED-4A32-9D0E-B3E365B0F6F4/f:TerrainGenerator.cs" caret="709" fromTop="25" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="1149" fromTop="16" />
     </RecentFiles>
     <RecentEdits>
-      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHex.cs" caret="318" fromTop="11" />
-      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="6413" fromTop="44" />
-      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="6403" fromTop="26" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:ColorName.cs" caret="104" fromTop="16" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:ColorName.cs" caret="8655" fromTop="33" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:ColorName.cs" caret="0" fromTop="0" />
       <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:ColorName.cs" caret="88" fromTop="14" />
       <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:ColorName.cs" caret="12607" fromTop="46" />
       <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:ColorName.cs" caret="2263" fromTop="37" />
       <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:ColorName.cs" caret="13" fromTop="0" />
-      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="5230" fromTop="9" />
-      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="6247" fromTop="37" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="4412" fromTop="9" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="5429" fromTop="37" />
       <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="71" fromTop="2" />
-      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="5957" fromTop="25" />
-      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="5993" fromTop="26" />
-      <File id="CE196A6E-64ED-4A32-9D0E-B3E365B0F6F4/f:PerlinImproved.cs" caret="2854" fromTop="27" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1906" fromTop="4" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="407" fromTop="2" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1372" fromTop="16" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1580" fromTop="13" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1775" fromTop="12" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1688" fromTop="8" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="5139" fromTop="25" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="5175" fromTop="26" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="2102" fromTop="4" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="406" fromTop="2" />
       <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="2169" fromTop="42" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="2175" fromTop="38" />
       <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="975" fromTop="33" />
-      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="3045" fromTop="9" />
-      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="208" fromTop="2" />
-      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="3909" fromTop="38" />
-      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="3045" fromTop="13" />
-      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="4633" fromTop="24" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="3020" fromTop="9" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="3791" fromTop="38" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="3020" fromTop="13" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="4161" fromTop="24" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="2600" fromTop="19" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="5598" fromTop="144" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="4246" fromTop="33" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="3929" fromTop="14" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="641" fromTop="18" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="3168" fromTop="15" />
+      <File id="0E58A3DB-3CE2-4779-8A6D-57F659AD5960/f:GridHexManager.cs" caret="493" fromTop="8" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="207" fromTop="3" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="2013" fromTop="21" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1961" fromTop="14" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml.cs" caret="2160" fromTop="45" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1839" fromTop="21" />
+      <File id="01167D3C-E961-48CA-98F7-09ABB9F2169F/f:Page.xaml" caret="1524" fromTop="21" />
     </RecentEdits>
   </RecentFiles>
   <UnitTestRunner>
@@ -126,6 +123,8 @@
       <Item value="GetColourByName" priority="0" />
       <Item value="surface" priority="0" />
       <Item value="ElementsY" priority="0" />
+      <Item value="MessageBox" priority="0" />
+      <Item value="CanvasClip" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Collections.Generic.List`1">
       <Item value="Add" priority="0" />
@@ -190,6 +189,15 @@
       <Item value="LightGray" priority="0" />
       <Item value="DarkGreen" priority="0" />
       <Item value="Wheat" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Windows.MessageBox">
+      <Item value="Show" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Media.RectangleGeometry">
+      <Item value="Bounds" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Rect">
+      <Item value="ToString" priority="0" />
     </ItemStatistics>
   </CompletionStatisticsManager>
 </Configuration>
