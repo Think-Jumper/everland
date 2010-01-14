@@ -9,9 +9,9 @@ namespace eland.api.Services
         //TODO: inject repository / datacontext
         //TODO: use service locator
 
-        public static World Create()
+        public static World Create(int height, int width)
         {
-            var world = new World { Height = 100, Width = 100, Name = "Default World" };
+            var world = new World { Height = height, Width = width, Name = "TestWorld" };
 
             for (var y = 1; y <= world.Width; y++)
             {

@@ -19,6 +19,8 @@ namespace eland.model.States
             return new MovementCommand(new MoveStateContext { Source = context.Source, Target = context.Target });
         }
 
+        // this should probably be IUnitCommand Handle(ProposedMoveContext) which would return null command if 
+        // the location wasn't traversable.
         public override bool CanTraverse(Hex hex)
         {
             return hex.HexType != HexType.Mountain;

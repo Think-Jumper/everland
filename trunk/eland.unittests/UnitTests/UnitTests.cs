@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using eland.api.Services;
 using eland.model;
 using eland.model.Enums;
 using eland.model.States;
@@ -13,20 +14,18 @@ namespace eland.unittests.UnitTests
         [Test]
         public void Check_Unit_State_Transitions()
         {
-            var spearMan = new Unit {CurrentUnitState = new Spearman()};
+            var world = WorldService.Create(200, 200);
+
+            var spearMan = new Unit
+                               {
+                                   CurrentUnitState = new Spearman(),
+                                   Location = world.GetHex(50, 50)
+                               };
 
             spearMan.ExecuteTurn(new MoveStateContext()
             {
                 Source = spearMan,
-                Target = new Hex()
-                {
-                    HexType = HexType.Grass,
-                    Id = Guid.NewGuid(),
-                    Units = null,
-                    World = null,
-                    X = 999,
-                    Y = 888
-                }
+                Target = world.GetHex(70,70)
             });
 
 
