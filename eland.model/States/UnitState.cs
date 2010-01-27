@@ -9,6 +9,7 @@ namespace eland.model.States
     public abstract class UnitState
     {
         private static readonly Dictionary<Int64, MethodInfo> Dispatch;
+        protected TurnContext CurrentContext { get; set; }
 
         static UnitState()
         {
@@ -27,9 +28,18 @@ namespace eland.model.States
 
         public virtual IUnitCommand Handle(TurnContext context)
         {
+            if (context.GetType() != typeof(ContinueStateContext))
+            {
+                CurrentContext = context;
+            } else
+            {
+                context = CurrentContext;
+            }
             var hash = ((Int64)GetType().GetHashCode() << 32) + context.GetType().GetHashCode();
             if (Dispatch.ContainsKey(hash))
+            {
                 return Dispatch[hash].Invoke(this, new[] { context }) as IUnitCommand;
+            }
 
             return new NullCommand();
         }
@@ -43,7 +53,7 @@ namespace eland.model.States
     {
         public Unit Source { get; set; }
         public Hex Target { get; set; }
-        //TODO: figure out what needs to go in here so that the state can do what it needs to!
+        //figure out what needs to go in here so that the state can do what it needs to!
     }
 
     public interface IUnitCommand
@@ -51,17 +61,15 @@ namespace eland.model.States
         void Execute();
     }
 
-    public class AttackStateContext : TurnContext
-    {
-    }
+    public class AttackStateContext : TurnContext {}
+
+    public class ContinueStateContext : TurnContext {}
 
     public class MoveStateContext : TurnContext
     {
-        public IList<Hex> Path { get; set; }
+        public Queue<Hex> Path { get; set; }
     }
 
-    public class BuildStateContext : TurnContext
-    {
-    }
+    public class BuildStateContext : TurnContext {}
    
 }

@@ -1,5 +1,4 @@
-﻿using eland.model.Pathfinding;
-using eland.model.States;
+﻿using eland.model.States;
 
 namespace eland.model.UnitCommands
 {
@@ -10,14 +9,21 @@ namespace eland.model.UnitCommands
         public MovementCommand(MoveStateContext movementContext)
         {
             _movementContext = movementContext;
-            _movementContext.Path = PathFinder.CalculatePath(movementContext.Source.Location, movementContext.Target);
         }
 
         #region IUnitCommand Members
 
         public void Execute()
         {
-            _movementContext.Source.Location = _movementContext.Target;
+            var range = 1; // _movementContext.Source.Range
+
+            for(var movementStep = 0; movementStep<range; movementStep++)
+            {
+                _movementContext.Source.Location = _movementContext.Path.Dequeue();
+                // need to actually do a .PerformMove here, checking for existence of enemy units, blocked terrain etc.
+            }
+
+
         }
 
         #endregion
