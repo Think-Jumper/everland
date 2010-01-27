@@ -19,9 +19,6 @@ namespace eland.model
             CurrentUnitState.Handle(context).Execute();
         }
 
-
-
-
         public bool CanTraverse(Hex hex)
         {
             return CurrentUnitState.CanTraverse(hex);
