@@ -9,6 +9,7 @@ namespace eland.api.Services
 
         public static IList<Hex> CalculatePath(Hex start, Hex end, Unit unit)
         {
+           // var pathFinder = IoC.Resolve<>()
             var currentHex = start;
             var path = new List<Hex>();
             while(!currentHex.IsAdjacentTo(end))
