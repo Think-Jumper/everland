@@ -35,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{CFD5B8FF-C2C
 		lib\Rhino.Mocks.dll = lib\Rhino.Mocks.dll
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eland.pathfinding", "eland.pathfinding\eland.pathfinding.csproj", "{EC505273-3ADC-4DAF-A89D-E2080DB8B00D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{90706B11-92D9-431C-9494-E4F9AE6B3C1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90706B11-92D9-431C-9494-E4F9AE6B3C1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90706B11-92D9-431C-9494-E4F9AE6B3C1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC505273-3ADC-4DAF-A89D-E2080DB8B00D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC505273-3ADC-4DAF-A89D-E2080DB8B00D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC505273-3ADC-4DAF-A89D-E2080DB8B00D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC505273-3ADC-4DAF-A89D-E2080DB8B00D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
