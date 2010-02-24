@@ -14,7 +14,7 @@ namespace eland.model
         public virtual HexType HexType { get; set; }
         public virtual IList<Unit> Units { get; set; }
 
-        public IEnumerable<Hex> SurroundingHexes
+        public virtual IEnumerable<Hex> SurroundingHexes
         {
             get
             {
@@ -38,7 +38,7 @@ namespace eland.model
             }
         }
 
-        public Hex FindClosestSurroundingHexTo(Hex targetHex)
+        public virtual Hex FindClosestSurroundingHexTo(Hex targetHex)
         {
             var currentDistance = DistanceTo(targetHex);
             return currentDistance == 0
@@ -48,12 +48,12 @@ namespace eland.model
                         : SurroundingHexes.OrderBy(hex => hex.DistanceTo(targetHex)).FirstOrDefault();
         }
 
-        public Hex FindFurthestSurroundingHexTo(Hex targetHex)
+        public virtual Hex FindFurthestSurroundingHexTo(Hex targetHex)
         {
             return SurroundingHexes.OrderByDescending(hex => hex.DistanceTo(targetHex)).FirstOrDefault();
         }
 
-        public int DistanceTo(Hex hex)
+        public virtual int DistanceTo(Hex hex)
         {
             return Math.Abs(X - hex.X) + Math.Abs(Y - hex.Y);
         }

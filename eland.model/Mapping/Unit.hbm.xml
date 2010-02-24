@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:nhibernate-mapping-2.2">
 
-  <class name="eland.model.Units.Unit, eland.model" table="Unit">
+  <class name="eland.model.Unit, eland.model" table="Unit">
 
     <id	name="Id" access="property"	column="Id"	type="Guid">
       <generator class="guid" />
     </id>
     
-    <discriminator column="Type" not-null="true" type="System.Int32"/>
+    <!--<discriminator column="Type" not-null="true" type="System.Int32"/>-->
     
     <property name="Health" access="property">
       <column name="Health" />
@@ -19,9 +19,9 @@
 
     <many-to-one name="Nation" class="eland.model.Nation, eland.model" unique="true" column="NationId"/>
 
-    <one-to-one name="UnitState" access="property" cascade="all-delete-orphan" />
+    <!-- <one-to-one name="UnitState" access="property" cascade="all-delete-orphan" />
 
-    <!--<subclass name="eland.model.Units.Archer, eland.model" discriminator-value="3" />
+    <subclass name="eland.model.Units.Archer, eland.model" discriminator-value="3" />
     <subclass name="eland.model.Units.Clubman, eland.model" discriminator-value="4" />
     <subclass name="eland.model.Units.Peasant, eland.model" discriminator-value="1" />
     <subclass name="eland.model.Units.Soldier, eland.model" discriminator-value="2" />-->
