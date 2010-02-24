@@ -30,14 +30,16 @@
         </Grid>
 
         <Border Grid.Row="1">
-            <Canvas Margin="10" x:Name="cnvMain" Background="Transparent" >
+                <Canvas Margin="10" x:Name="cnvMain" Background="Transparent" >
                 <Canvas.RenderTransform>
                     <ScaleTransform x:Name="CanvasScaleTransform" ScaleX="1" ScaleY="1"></ScaleTransform>
                 </Canvas.RenderTransform>
             </Canvas>
+
             <Border.Clip>
-                <RectangleGeometry x:Name="CanvasClip"  Rect="0, 0, 300, 300"/>
+                <RectangleGeometry x:Name="CanvasClip"  Rect="0, 0, 600, 450"/>
             </Border.Clip>
+               
         </Border>
 
         

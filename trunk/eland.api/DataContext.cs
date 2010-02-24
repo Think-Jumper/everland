@@ -1,8 +1,7 @@
-﻿using eland.api;
-using eland.api.Interfaces;
+﻿using eland.api.Interfaces;
 using eland.model;
 
-namespace eland.Utilities
+namespace eland.api
 {
     public class DataContext : IDataContext
     {

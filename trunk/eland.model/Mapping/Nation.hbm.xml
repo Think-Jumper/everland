@@ -15,7 +15,7 @@
 
     <bag name="Units" lazy="true" inverse="true" cascade="all">
       <key column="NationId" />
-      <one-to-many class="eland.model.Units.Unit, eland.model"/>
+      <one-to-many class="eland.model.Unit, eland.model"/>
     </bag>
   </class>
 

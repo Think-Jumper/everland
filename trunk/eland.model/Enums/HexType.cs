@@ -2,10 +2,14 @@
 {
     public enum HexType
     {
-        Plain = 1,
-        Grass = 2,
-        Hill = 3,
-        Mountain = 4
-
+        Ocean = 1,
+        Sea = 2,
+        Beach = 3,
+        Plain = 4,
+        Grass = 5,
+        Trees = 6,
+        Jungle = 7,
+        Hill = 8,
+        Mountain = 9
     }
 }

@@ -36,7 +36,7 @@ namespace unitstest
             Column = column;
             Height = height;
         }
-
+        
         public int Id { get; set; }
 
         public int X1

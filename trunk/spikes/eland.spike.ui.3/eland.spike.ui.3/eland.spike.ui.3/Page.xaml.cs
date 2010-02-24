@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Xml.Serialization;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using eland.terrain;
@@ -33,10 +34,7 @@ namespace eland.spike.ui._3
         private void GenerateHexes()
         {
             var gridManager = new GridHexManager<GridHexFactory, GridHex>(new GridHexFactory());
-
             gridManager.Draw(cnvMain, 2, 0.1, false, _noise);
-
-
         }
 
         private void GenerateNoise()

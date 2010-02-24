@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Castle\IoC.cs" />
+    <Compile Include="DataContext.cs" />
     <Compile Include="GameSessionRepository.cs" />
     <Compile Include="Helpers\NHibHelper.cs" />
     <Compile Include="Interfaces\IDataContext.cs" />
