@@ -87,10 +87,10 @@ namespace eland.utilities.TerrainGeneration.Noise
         {
             for (var i = 0; i < 256; i++) P[256 + i] = P[i] = Permutation[i];
 
-            Frequency = 0.01f;
-            Amplitude = 4.8f;
-            Persistence = 0.9f;
-            Octaves = 2;
+            Frequency = 0.0216f;
+            Amplitude = 1.22147f;
+            Persistence = 0.7643f;
+            Octaves = 15;
         }
 
 

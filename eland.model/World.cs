@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using eland.model.Enums;
 
 namespace eland.model
 {
@@ -24,5 +25,13 @@ namespace eland.model
         {
             return Hexes.Where(hex => hex.X == x && hex.Y == y).Single();
         }
+
+        public int TotalHexes { get { return Hexes.Count; } }
+       
+        public int TotalHexesOfType(HexType hexType)
+        {
+            return Hexes.Where(h => h.HexType == hexType).Count();
+        }
+
     }
 }
