@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
-using eland.api;
-using eland.api.Interfaces;
+using System.IO;
+using System.Xml.Serialization;
 using eland.model;
 using eland.model.Enums;
 using eland.utilities.TerrainGeneration.Noise;
@@ -31,9 +32,22 @@ namespace eland.utilities
             else
                 _noiseGenerator = new PerlinImproved();
 
+            //Console.Write("Please enter Frequency (0.01) : ");
+            //_noiseGenerator.Frequency = float.Parse(Console.ReadLine());
+            //Console.Write("Please enter Amplitude (4.8) : ");
+            //_noiseGenerator.Amplitude = float.Parse(Console.ReadLine());
+            //Console.Write("Please enter Persistence (0.9) : ");
+            //_noiseGenerator.Persistence = float.Parse(Console.ReadLine());
+            //Console.Write("Please enter Octaves (2) : ");
+            //_noiseGenerator.Octaves = int.Parse(Console.ReadLine());
+            
+
+
+
+
             var terrain = new double[width * height];
+            var normalisedTerrain = new double[width*height];
             var counter = 0;
-            var outputImage = new Bitmap(width, height);
 
             for(var y=0; y<height; y++)
             {
@@ -44,17 +58,22 @@ namespace eland.utilities
             }
 
             var normalisedValues = Normalisation.CalculateInitialValues(terrain, 0, 255);
-            var xx = 0;
-            var yy = 0;
+            var count = 0;
 
-            //foreach(var value in terrain)
-            //{
-            //    var normalisedValue = (int)Normalisation.Normalise(normalisedValues, value);
-            //    outputImage.SetPixel(xx++, yy, Color.FromArgb(normalisedValue, normalisedValue, normalisedValue));
-            //    if (xx != outputImage.Width) continue;
-            //    yy++;
-            //    xx = 0;
-            //}
+            var imageX = 0;
+            var imageY = 0;
+            var outputImage = new Bitmap(width, height);
+
+            foreach (var value in terrain)
+            {
+                var normalisedValue = (int)Normalisation.Normalise(normalisedValues, value);
+                normalisedTerrain[count++] = normalisedValue;
+
+                outputImage.SetPixel(imageX++, imageY, Color.FromArgb(normalisedValue, normalisedValue, normalisedValue));
+                if (imageX != outputImage.Width) continue;
+                imageY++;
+                imageX = 0;
+            }
 
             double row = 0;
             const int gridSize = 1;
@@ -66,16 +85,16 @@ namespace eland.utilities
 
                 for (var x = 0; x < width; x++)
                 {
-                    xx = ((x + 1) * (gridSize * 2));
+                    var xx = ((x + 1) * (gridSize * 2));
                     if ((y + 2) % 2 != 0)
                     {
                         xx = ((x + 1) * (gridSize * 2)) - gridSize;
                     }
 
-                    yy = (int)((y * gridSize) * 0.5);
+                    var yy = (int)((y * gridSize) * 0.5);
                     w.AddHex(new Hex()
                                 {
-                                    HexType = GetHexType(GetHeight(terrain, xx, yy, width)), 
+                                    HexType = GetHexType(GetHeight(normalisedTerrain, xx, yy, width)), 
                                     Id = Guid.NewGuid(),
                                     X = xx,
                                     Y = yy
@@ -85,22 +104,38 @@ namespace eland.utilities
 
                     row += 2;
                 }
-
-               // column += 0.5;
             }
 
-            var dataContext = IoC.Resolve<IDataContext>();
+            Console.WriteLine("Total Hexes : " + w.TotalHexes);
+            Console.WriteLine(GetCountForType(HexType.Ocean, w));
+            Console.WriteLine(GetCountForType(HexType.Sea, w));
+            Console.WriteLine(GetCountForType(HexType.Beach, w));
+            Console.WriteLine(GetCountForType(HexType.Plain, w));
+            Console.WriteLine(GetCountForType(HexType.Grass, w));
+            Console.WriteLine(GetCountForType(HexType.Trees, w));
+            Console.WriteLine(GetCountForType(HexType.Jungle, w));
+            Console.WriteLine(GetCountForType(HexType.Hill, w));
+            Console.WriteLine(GetCountForType(HexType.Mountain, w));
 
-            using(var tran = dataContext.WorldRepository.Session.BeginTransaction())
-            {
-                dataContext.WorldRepository.Save(w);
-                tran.Commit();
-            }
+            
+            outputImage.Save(@"c:\temp\map.jpg");
+            Process.Start(@"c:\temp\map.jpg");
 
 
-
-            //outputImage.Save(@"c:\perlin.png");
+            Console.ReadKey();
+            
         }
+
+        private static string GetCountForType(HexType hexType, World w)
+        {
+            const string stats = "Total {0} : {1} ({2}%)";
+            var totalHexesOfType = w.TotalHexesOfType(hexType);
+            var percentage = totalHexesOfType/(double)w.TotalHexes * 100;
+
+            return string.Format(stats, hexType, totalHexesOfType, percentage);
+        }
+
+       
 
         private static int GetHeight(double[] noise, int x, int y, int width)
         {
@@ -109,8 +144,7 @@ namespace eland.utilities
 
         private static HexType GetHexType(int height)
         {
-
-            if (height < 30)
+            if (height < 10)
                 return HexType.Ocean;
             if (height < 50)
                 return HexType.Sea;
